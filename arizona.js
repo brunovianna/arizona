@@ -228,6 +228,42 @@ var western_park_circle = new google.maps.Circle({
 	fillOpacity: 1
 });
 
+// CHURCHES behaviours
+
+google.maps.event.addListener(igreja_1_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_1_overlay, 'mouseout', igrejaMouseOut  );
+google.maps.event.addListener(igreja_2_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_2_overlay, 'mouseout', igrejaMouseOut  );
+google.maps.event.addListener(igreja_3_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_3_overlay, 'mouseout', igrejaMouseOut  );
+google.maps.event.addListener(igreja_4_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_4_overlay, 'mouseout', igrejaMouseOut  );
+google.maps.event.addListener(igreja_5_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_5_overlay, 'mouseout', igrejaMouseOut  );
+google.maps.event.addListener(igreja_6_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_6_overlay, 'mouseout', igrejaMouseOut  );
+google.maps.event.addListener(igreja_7_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_7_overlay, 'mouseout', igrejaMouseOut  );
+google.maps.event.addListener(igreja_8_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_8_overlay, 'mouseout', igrejaMouseOut  );
+google.maps.event.addListener(igreja_9_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_9_overlay, 'mouseout', igrejaMouseOut  );
+google.maps.event.addListener(igreja_10_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_10_overlay, 'mouseout', igrejaMouseOut  );
+google.maps.event.addListener(igreja_11_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_11_overlay, 'mouseout', igrejaMouseOut  );
+
+function igrejaMouseOver () {
+  document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Tour das </span><span  class=\"georgia-18\"><i>igrejas</i></span>";
+
+  document.getElementById('place_name_id').style.display = "inline";
+  document.getElementById('wrapper_wrapper_igrejas_id').style.display = "inline";
+}
+
+function igrejaMouseOut () {
+  document.getElementById('place_name_id').style.display = "none";
+  document.getElementById('wrapper_wrapper_igrejas_id').style.display = "none";
+}
 
 // HOUSES behaviours
 google.maps.event.addListener(casa_1_overlay, 'mouseover', function (event) {

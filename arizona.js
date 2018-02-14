@@ -230,33 +230,36 @@ var western_park_circle = new google.maps.Circle({
 
 // CHURCHES behaviours
 
-google.maps.event.addListener(igreja_1_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_1_overlay, 'mouseover', function() { igrejaMouseOver (igreja_1_overlay); }  );
 google.maps.event.addListener(igreja_1_overlay, 'mouseout', igrejaMouseOut  );
-google.maps.event.addListener(igreja_2_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_2_overlay, 'mouseover', function() { igrejaMouseOver (igreja_2_overlay); }   );
 google.maps.event.addListener(igreja_2_overlay, 'mouseout', igrejaMouseOut  );
-google.maps.event.addListener(igreja_3_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_3_overlay, 'mouseover', function() { igrejaMouseOver (igreja_3_overlay); }   );
 google.maps.event.addListener(igreja_3_overlay, 'mouseout', igrejaMouseOut  );
-google.maps.event.addListener(igreja_4_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_4_overlay, 'mouseover', function() { igrejaMouseOver (igreja_4_overlay); }   );
 google.maps.event.addListener(igreja_4_overlay, 'mouseout', igrejaMouseOut  );
-google.maps.event.addListener(igreja_5_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_5_overlay, 'mouseover', function() { igrejaMouseOver (igreja_5_overlay); }   );
 google.maps.event.addListener(igreja_5_overlay, 'mouseout', igrejaMouseOut  );
-google.maps.event.addListener(igreja_6_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_6_overlay, 'mouseover', function() { igrejaMouseOver (igreja_6_overlay); }   );
 google.maps.event.addListener(igreja_6_overlay, 'mouseout', igrejaMouseOut  );
-google.maps.event.addListener(igreja_7_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_7_overlay, 'mouseover', function() { igrejaMouseOver (igreja_7_overlay); }   );
 google.maps.event.addListener(igreja_7_overlay, 'mouseout', igrejaMouseOut  );
-google.maps.event.addListener(igreja_8_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_8_overlay, 'mouseover', function() { igrejaMouseOver (igreja_8_overlay); }   );
 google.maps.event.addListener(igreja_8_overlay, 'mouseout', igrejaMouseOut  );
-google.maps.event.addListener(igreja_9_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_9_overlay, 'mouseover', function() { igrejaMouseOver (igreja_9_overlay); }   );
 google.maps.event.addListener(igreja_9_overlay, 'mouseout', igrejaMouseOut  );
-google.maps.event.addListener(igreja_10_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_10_overlay, 'mouseover', function() { igrejaMouseOver (igreja_10_overlay); }   );
 google.maps.event.addListener(igreja_10_overlay, 'mouseout', igrejaMouseOut  );
-google.maps.event.addListener(igreja_11_overlay, 'mouseover', igrejaMouseOver  );
+google.maps.event.addListener(igreja_11_overlay, 'mouseover', function() { igrejaMouseOver (igreja_11_overlay); }   );
 google.maps.event.addListener(igreja_11_overlay, 'mouseout', igrejaMouseOut  );
 
-function igrejaMouseOver () {
+function igrejaMouseOver (my_overlay) {
   document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Tour das </span><span  class=\"georgia-18\"><i>igrejas</i></span>";
-
   document.getElementById('place_name_id').style.display = "inline";
+
+  var r = get_mapthing_bounds(my_overlay) ;
+  document.getElementById('wrapper_wrapper_igrejas_id').style.left = (r.right)+"px";
+  document.getElementById('wrapper_wrapper_igrejas_id').style.top = (r.bottom)+"px";
   document.getElementById('wrapper_wrapper_igrejas_id').style.display = "inline";
 }
 
@@ -266,6 +269,53 @@ function igrejaMouseOut () {
 }
 
 // HOUSES behaviours
+
+google.maps.event.addListener(casa_1_overlay, 'mouseover', function () { casaMouseOver(casa_1_overlay, 'wrapper_wrapper_casa_1_id','Casa dos ','Hanny');});
+google.maps.event.addListener(casa_1_overlay, 'mouseout', function () { casaMouseOut(casa_1_overlay, 'wrapper_wrapper_casa_1_id');});
+google.maps.event.addListener(casa_2_overlay, 'mouseover', function () { casaMouseOver(casa_2_overlay, 'wrapper_wrapper_casa_2_id','Casa dos ','Corbin');});
+google.maps.event.addListener(casa_2_overlay, 'mouseout', function () { casaMouseOut(casa_2_overlay, 'wrapper_wrapper_casa_2_id');});
+google.maps.event.addListener(casa_3_overlay, 'mouseover', function () { casaMouseOver(casa_3_overlay, 'wrapper_wrapper_casa_3_id','Casa dos ','Kirsten');});
+google.maps.event.addListener(casa_3_overlay, 'mouseout', function () { casaMouseOut(casa_3_overlay, 'wrapper_wrapper_casa_3_id');});
+google.maps.event.addListener(casa_4_overlay, 'mouseover', function () { casaMouseOver(casa_4_overlay, 'wrapper_wrapper_casa_4_id','Casa dos ','Cait');});
+google.maps.event.addListener(casa_4_overlay, 'mouseout', function () { casaMouseOut(casa_4_overlay, 'wrapper_wrapper_casa_4_id');});
+google.maps.event.addListener(casa_5_overlay, 'mouseover', function () { casaMouseOver(casa_5_overlay, 'wrapper_wrapper_casa_5_id','Casa dos ','Casillas');});
+google.maps.event.addListener(casa_5_overlay, 'mouseout', function () { casaMouseOut(casa_5_overlay, 'wrapper_wrapper_casa_5_id');});
+google.maps.event.addListener(casa_6_overlay, 'mouseover', function () { casaMouseOver(casa_6_overlay, 'wrapper_wrapper_casa_6_id','Casa dos ','Jan');});
+google.maps.event.addListener(casa_6_overlay, 'mouseout', function () { casaMouseOut(casa_6_overlay, 'wrapper_wrapper_casa_6_id');});
+
+function casaMouseOver(me, id, text_1, text_2) {
+  me.setOptions({
+		fillColor: '#ff9100',
+	});
+
+  document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">"+text_1+"</span><span  class=\"georgia-18\"><i>"+text_2+"</i></span>";
+  document.getElementById('place_name_id').style.display = "inline";
+
+
+  //if ((id.width + id.left) > me.right ) {
+  //  id.left = me.right + 30;
+  //}
+
+  //id.left = me.right;
+  //id.top = me.bottom;
+
+  var r = get_mapthing_bounds(me) ;
+  document.getElementById(id).style.left = (r.right)+"px";
+  document.getElementById(id).style.top = (r.bottom)+"px";
+  document.getElementById(id).style.display = "inline";
+
+  };
+
+function casaMouseOut (me, id) {
+  me.setOptions({
+		fillColor:'#ffcf2f',
+	});
+
+  document.getElementById('place_name_id').style.display = "none";
+  document.getElementById(id).style.display = "none";
+}
+
+/*
 google.maps.event.addListener(casa_1_overlay, 'mouseover', function (event) {
 	this.setOptions({
 		fillColor: '#ff9100',
@@ -388,7 +438,7 @@ google.maps.event.addListener(casa_6_overlay, 'mouseout', function (event) {
   document.getElementById('wrapper_wrapper_casa_6_id').style.display = "none";
 });
 
-
+*/
 // SCHOOL behaviours
 google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (event) {
 	// Within the event listener, "this" refers to the polygon which
@@ -406,6 +456,11 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (ev
 
   document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Skyland </span><span  class=\"georgia-18\"><i>Highschool</i></span>";
   document.getElementById('place_name_id').style.display = "inline";
+
+  var r = get_mapthing_bounds(skyland_highschool_rect) ;
+  document.getElementById('wrapper_wrapper_school_id').style.left = (r.right)+"px";
+  document.getElementById('wrapper_wrapper_school_id').style.top = (r.bottom)+"px";
+
   document.getElementById('wrapper_wrapper_school_id').style.display = "inline";
 
 });
@@ -433,6 +488,12 @@ google.maps.event.addListener(gym_rect, 'mouseover', function (event) {
 
   document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Academia </span><span  class=\"georgia-18\"><i>do Ryan</i></span>";
   document.getElementById('place_name_id').style.display = "inline";
+
+  //move the video to near the icon
+  var r = get_mapthing_bounds(gym_rect) ;
+  document.getElementById('wrapper_wrapper_gym_id').style.left = (r.right)+"px";
+  document.getElementById('wrapper_wrapper_gym_id').style.top = (r.bottom)+"px";
+
   document.getElementById('wrapper_wrapper_gym_id').style.display = "inline";
 
 });
@@ -456,6 +517,12 @@ google.maps.event.addListener(shooting_range_rect, 'mouseover', function (event)
 	});
   document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Shooting </span><span  class=\"georgia-18\"><i>Range</i></span>";
   document.getElementById('place_name_id').style.display = "inline";
+
+  //move the video to near the icon
+  var r = get_mapthing_bounds(shooting_range_rect) ;
+  document.getElementById('wrapper_wrapper_shootingrange_id').style.left = (r.right)+"px";
+  document.getElementById('wrapper_wrapper_shootingrange_id').style.top = (r.bottom)+"px";
+
   document.getElementById('wrapper_wrapper_shootingrange_id').style.display = "inline";
 });
 
@@ -475,6 +542,12 @@ google.maps.event.addListener(retirement_rect, 'mouseover', function (event) {
 
   document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Retirement </span><span  class=\"georgia-18\"><i>Home</i></span>";
   document.getElementById('place_name_id').style.display = "inline";
+
+  //move the video to near the icon
+  var r = get_mapthing_bounds(retirement_rect) ;
+  document.getElementById('wrapper_wrapper_retirement_id').style.left = (r.right)+"px";
+  document.getElementById('wrapper_wrapper_retirement_id').style.top = (r.bottom)+"px";
+
   document.getElementById('wrapper_wrapper_retirement_id').style.display = "inline";
 
 });
@@ -499,6 +572,13 @@ google.maps.event.addListener(rodeo_rect, 'mouseover', function (event) {
 
   document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Rodeo</span>";
   document.getElementById('place_name_id').style.display = "inline";
+
+
+    //move the video to near the icon
+    var r = get_mapthing_bounds(rodeo_rect) ;
+    document.getElementById('wrapper_wrapper_rodeo_id').style.left = (r.right)+"px";
+    document.getElementById('wrapper_wrapper_rodeo_id').style.top = (r.bottom)+"px";
+
   document.getElementById('wrapper_wrapper_rodeo_id').style.display = "inline";
 
 });
@@ -523,6 +603,12 @@ google.maps.event.addListener(western_park_circle, 'mouseover',function (event) 
 
 document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Western </span><span  class=\"georgia-18\"><i>Park</i></span>";
 document.getElementById('place_name_id').style.display = "inline";
+
+//move the video to near the icon
+var r = get_mapthing_bounds(western_park_circle) ;
+document.getElementById('wrapper_wrapper_westernpark_id').style.left = (r.right)+"px";
+document.getElementById('wrapper_wrapper_westernpark_id').style.top = (r.bottom)+"px";
+
 document.getElementById('wrapper_wrapper_westernpark_id').style.left = "300px";
 document.getElementById('wrapper_wrapper_westernpark_id').style.display = "inline";
 
@@ -596,24 +682,17 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseout', function (eve
 
 }
 
+function get_mapthing_bounds (mymapthing) {
+  var mapthing_topright = mymapthing.getBounds().getNorthEast();
+  var mapthing_bottomleft = mymapthing.getBounds().getSouthWest();
+  var xy_topright = overlay.getProjection().fromLatLngToContainerPixel(mapthing_topright);
+  var xy_bottomleft = overlay.getProjection().fromLatLngToContainerPixel(mapthing_bottomleft);
 
-//from lat lng to pixel x, pixel y
-function copy_map_rectangle_position (my_div, myrectangle ) {
+  var r = {'left': xy_bottomleft.x, 'top':xy_topright.y, 'right': xy_topright.x, 'bottom': xy_bottomleft.y};
 
-  var ll_topright = myrectangle.getBounds().getNorthEast();
-  var ll_bottomleft = myrectangle.getBounds().getSouthWest();
-
-  var xy_topright = overlay.getProjection().fromLatLngToContainerPixel(ll_topright);
-  var xy_bottomleft = overlay.getProjection().fromLatLngToContainerPixel(ll_bottomleft);
-
-  //console.log(xy.x);
-  my_div.style.left = xy_bottomleft.x+'px';
-  my_div.style.top = xy_topright.y+'px';
-  my_div.style.width = (xy_topright.x-xy_bottomleft.x)+'px';
-  my_div.style.height = (xy_bottomleft.y-xy_topright.y)+'px';
+  return r;
 
 }
-
 
 //from lat lng to pixel x, pixel y
 function copy_map_rectangle_position (my_div, mymapthing ) {
@@ -623,6 +702,8 @@ function copy_map_rectangle_position (my_div, mymapthing ) {
 
   var xy_topright = overlay.getProjection().fromLatLngToContainerPixel(ll_topright);
   var xy_bottomleft = overlay.getProjection().fromLatLngToContainerPixel(ll_bottomleft);
+
+
 
   //console.log(xy.x);
   my_div.style.left = xy_bottomleft.x+'px';

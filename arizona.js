@@ -492,6 +492,7 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseout', function (eve
 	this.setOptions({
 	fillColor: '#ffcf2f',
 	});
+  reset_videos(player_array);
   document.getElementById('place_name_id').style.display = "none";
   document.getElementById('wrapper_wrapper_school_id').style.display = "none";
 
@@ -522,6 +523,7 @@ google.maps.event.addListener(gym_rect, 'mouseout', function (event) {
 	this.setOptions({
 	fillColor: '#ffcf2f',
 	});
+  reset_videos(player_array);
   document.getElementById('place_name_id').style.display = "none";
   document.getElementById('wrapper_wrapper_gym_id').style.display = "none";
 
@@ -550,6 +552,7 @@ google.maps.event.addListener(shooting_range_rect, 'mouseout', function (event) 
 	this.setOptions({
 	fillColor: '#ffcf2f',
 	});
+  reset_videos(player_array);
   document.getElementById('place_name_id').style.display = "none";
   document.getElementById('wrapper_wrapper_shootingrange_id').style.display = "none";
 });
@@ -577,6 +580,7 @@ google.maps.event.addListener(retirement_rect, 'mouseout', function (event) {
 	this.setOptions({
 	fillColor: '#ffcf2f',
 	});
+  reset_videos(player_array);
   document.getElementById('place_name_id').style.display = "none";
   document.getElementById('wrapper_wrapper_retirement_id').style.display = "none";
 
@@ -607,6 +611,7 @@ google.maps.event.addListener(rodeo_rect, 'mouseout', function (event) {
 	this.setOptions({
 	fillColor: '#ffcf2f',
 	});
+  reset_videos(player_array);
   document.getElementById('place_name_id').style.display = "none";
   document.getElementById('wrapper_wrapper_rodeo_id').style.display = "none";
 
@@ -639,6 +644,7 @@ google.maps.event.addListener(western_park_circle, 'mouseout', function (event) 
 	this.setOptions({
 	fillColor: '#ffcf2f',
 	});
+  reset_videos(player_array);
   document.getElementById('place_name_id').style.display = "none";
   document.getElementById('wrapper_wrapper_westernpark_id').style.display = "none";
 

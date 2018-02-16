@@ -62,8 +62,22 @@ google.maps.event.addListener(map, 'center_changed', function() {
 
     // not valid anymore => return to last valid position
     map.panTo(lastValidCenter);
-    console.log("yeah");
+    //console.log("yeah");
 });
+
+
+//video objects
+var player_array = [];
+
+//console.log("iframes "+document.querySelectorAll('#body .iframe').length);
+//document.getElementsByTagName('iFrame').length
+var iFrames = document.getElementsByTagName('iFrame');
+for (i = 0; i< iFrames.length; i++ ) {
+  if  (iFrames[i].src.includes("vimeo")) {
+    player_array.push(new Vimeo.Player(iFrames[i]));
+  }
+}
+
 
 
 
@@ -294,7 +308,8 @@ function casaMouseOver(me, id, text_1, text_2) {
   document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">"+text_1+"</span><span  class=\"georgia-18\"><i>"+text_2+"</i></span>";
   document.getElementById('place_name_id').style.display = "inline";
 
-  player.setCurrentTime(30.456);
+  //player_1.setCurrentTime(0).then(function(seconds) {console.log(seconds);});
+
 
   //if ((id.width + id.left) > me.right ) {
   //  id.left = me.right + 30;
@@ -317,6 +332,7 @@ function casaMouseOut (me, id) {
 
   document.getElementById('place_name_id').style.display = "none";
   document.getElementById(id).style.display = "none";
+  reset_videos(player_array);
 }
 
 /*
@@ -807,6 +823,11 @@ return (" src=\"https://player.vimeo.com/video/"+id+"?title=0&byline=0&backgroun
 
 }
 
+function reset_videos(video_array) {
+  for (i=0;i<video_array.length;i++) {
+    video_array[i].setCurrentTime(0);
+  }
+}
 
 var form_responses_videos = [
   [],

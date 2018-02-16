@@ -39,6 +39,34 @@ overlay = new google.maps.OverlayView();
 overlay.draw = function () {};
 overlay.setMap(map);
 
+
+
+
+// bounds of the mesa area -- no panning beyond this
+allowedBounds = new google.maps.LatLngBounds(
+     new google.maps.LatLng(31.18, -112),
+     new google.maps.LatLng(33.45, -111.7)
+);
+lastValidCenter = map.getCenter();
+
+google.maps.event.addListener(map, 'center_changed', function() {
+    //console.log(map.getCenter().lat()+ " "+map.getCenter().lng());
+    //console.log(allowedBounds+ " "+map.getCenter().lng());
+
+    if (allowedBounds.contains(map.getCenter())) {
+        // still within valid bounds, so save the last valid position
+        console.log("center");
+        lastValidCenter = map.getCenter();
+        return;
+    }
+
+    // not valid anymore => return to last valid position
+    map.panTo(lastValidCenter);
+    console.log("yeah");
+});
+
+
+
 //reservation overlay
 var reservationBounds = {
   north: 33.512,
@@ -126,31 +154,6 @@ var volta_overlay = new google.maps.GroundOverlay('images/icone_estrada.png', vo
 volta_overlay.setMap(map);
 
 
-
-
-
-// bounds of the mesa area -- no panning beyond this
-allowedBounds = new google.maps.LatLngBounds(
-     new google.maps.LatLng(31.18, -112),
-     new google.maps.LatLng(33.45, -111.7)
-);
-lastValidCenter = map.getCenter();
-
-google.maps.event.addListener(map, 'center_changed', function() {
-    //console.log(map.getCenter().lat()+ " "+map.getCenter().lng());
-    //console.log(allowedBounds+ " "+map.getCenter().lng());
-
-    if (allowedBounds.contains(map.getCenter())) {
-        // still within valid bounds, so save the last valid position
-        console.log("center");
-        lastValidCenter = map.getCenter();
-        return;
-    }
-
-    // not valid anymore => return to last valid position
-    map.panTo(lastValidCenter);
-    console.log("yeah");
-});
 
 
 document.getElementById('highschool').onmouseout = function(){document.getElementById('highschool').style.display="none";};
@@ -291,6 +294,7 @@ function casaMouseOver(me, id, text_1, text_2) {
   document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">"+text_1+"</span><span  class=\"georgia-18\"><i>"+text_2+"</i></span>";
   document.getElementById('place_name_id').style.display = "inline";
 
+  player.setCurrentTime(30.456);
 
   //if ((id.width + id.left) > me.right ) {
   //  id.left = me.right + 30;

@@ -1,0 +1,120 @@
+@charset "utf-8";
+/* CSS Document */
+ /* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+#map {
+	height: 100%;
+
+}
+
+/* Optional: Makes the sample page fill the window. */
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: #ffcf2f;
+
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 0;
+  padding: 0;
+	position: absolute;
+	width: 80%;
+	height: 70%;
+	margin: auto;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.form-header {
+  text-align: center;
+  grid-column: 1 / span 2;
+	border: 1px solid #000000;
+}
+
+.form-left {
+	grid-row: 2 / span 10;
+	padding: 30px;
+	border-left: 1px solid #000000;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+
+.form-right, .confirma {
+	padding: 10px;
+	border-right: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+
+.confirma {
+		cursor: pointer;
+		padding: 10px;
+		border-right: 1px solid #000000;
+		border-bottom: 1px solid #000000;
+}
+
+span.futura-18 {
+	font-family: 'Oswald', sans-serif;
+	font-size: 18px;
+}
+
+span.futura-18-bold {
+	font-family: 'Oswald', sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+}
+
+span.georgia-18 {
+	font-family: 'Georgia', sans-serif;
+	font-size: 18px;
+}
+
+span.futura-22-bold {
+	font-family: 'Oswald', sans-serif;
+	font-weight: 700;
+	font-size: 22px;
+}
+
+span.heebo-24-black {
+	font-family: 'Heebo', sans-serif;
+	font-weight: 900;
+	font-size: 24px;
+}
+
+
+/* checkboxes */
+input[type=checkbox].css-checkbox {
+							position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+						}
+
+						input[type=checkbox].css-checkbox + label.css-label {
+							padding-left:20px;
+							height:15px;
+							display:inline-block;
+							line-height:100%;
+							background-repeat:no-repeat;
+							background-position: 0 0;
+							font-size:15px;
+							vertical-align:middle;
+							cursor:pointer;
+
+						}
+
+						input[type=checkbox].css-checkbox:checked + label.css-label {
+							background-position: 0 -15px;
+						}
+						label.css-label {
+							  font-family: 'Oswald', sans-serif;
+							background-image:url("../images/checkbox.png");
+							-webkit-touch-callout: none;
+							-webkit-user-select: none;
+							-khtml-user-select: none;
+							-moz-user-select: none;
+							-ms-user-select: none;
+							user-select: none;
+						}

@@ -1,7 +1,7 @@
 // JavaScript Document
 var map;
 
-var current_form_page = 0;
+
 
 var panPath = [];   // An array of points the current panning action will use
 var panQueue = [];  // An array of subsequent panTo actions to take
@@ -834,33 +834,6 @@ function reset_videos(video_array) {
     video_array[i].setCurrentTime(0);
   }
 }
-
-var form_responses_videos = [
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  [],
-  []
-];
-
-var form_responses_questions = [
-  [["Qual a sua idade?"], ["Até 25 anos", "De 25 a 40 anos", "De 40 a 55 anos", "Mais de 55 anos"]],
-  [["Preferência clima"], ["Quatro estações", "Calor","Inverno",""]],
-  [["Transporte"],["Carro individual", "Transporte público", "Bicicleta e/ou caminhado", "Possuo mais de dois carros"]],
-  [["Pensando em política hoje, qual a sua posição?"],["Socialmente liberal, economicamente conservador","Liberal","Conservador","Moderado/Neutro"]],
-  [["Qual a importância da religião em sua vida?"],["Muito", "Importante","Pouco","Nada"]],
-  [["Prioridades e valores"],["Famĺia","Vida Saudável","Trabalho e reconhecimento","Vida financeira estável"]],
-  [["Impostos"],["Consumo, pagar pelos serviços que uso","Imposto relativo ao que possui","Primary","Taxar grandes fortunas"]],
-  [["Armamento civil"],["A favor","Contra", "A favor mas com restrições","Não ligo"]],
-  [["Qual solução os países devem adotar em relação a imigrantes?"],["Acho a ideia de um muro boa","Aceitar todos e dar cidadania, com direitos e deveres","Deportar imigrantes ilegais",""]],
-  [["Mudanças"],["Não gosto de mudanças.","Adoro mudanças e inovações ","Não gosto de mudanças abruptas","Aceito quando necessário"]]
-];
-
 
 
 var map_style = [

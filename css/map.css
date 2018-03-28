@@ -228,15 +228,17 @@ div.confirma {
 }
 
 div.screenplay {
-		color: white;
-		background-color: #5a5a5a;
+		color:  #5a5a5a;
+		background-color: white;
 		position: fixed;
-		width: 300px;
+		width: 350px;
 		height: 100%;
 		top:0;
 		bottom: 0;
-		left: -300px;
-		right: 0;
+		/*left: -300px;*/
+		left: 0;
+		/* right: 0; */
+		margin: 0
 
 		transition:         left 500ms ease;
 		-moz-transition:    left 500ms ease;
@@ -247,61 +249,27 @@ div.screenplay {
 }
 
 div.screenplay_wrapper_left {
-	width: 230px;
+	width: 270px;
 	padding: 20px;
+	border-right: 1px solid black;
+	height: inherit;
 
 }
 
 div.screenplay_title {
 
-	font-size: 24px;
-	font-family: 'Oswald', sans-serif;
-	font-weight: 700;
-
 
 	position: absolute;
-	width: 30px;
+	width: 40px;
 	top: 40%;
-	right: 10px;
-	/* FF3.5+ */
--moz-transform:  rotate(90.0deg);
-/* Opera 10.5 */
--o-transform: rotate(90.0deg);
-/* Saf3.1+, Chrome */
--webkit-transform: rotate(90.0deg);
-/* IE6,IE7 */
-filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.083);
-/* IE8 */
--ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)";
-/* Standard */
-transform: rotate (90.0deg);*/
+	right: 0;
+	padding: 5px;
 
-	vertical-align: middle;
+display: block;
 
-}
+margin-right: -15px;
 
-div.screenplay_close {
 
-	font-size: 24px;
-	font-family: 'Oswald', sans-serif;
-	font-weight: 700;
-		/* FF3.5+ */
-	-moz-transform: rotate(90.0deg);
-	/* Opera 10.5 */
-	-o-transform: rotate(90.0deg);
-	/* Saf3.1+, Chrome */
-	-webkit-transform: rotate(90.0deg);
-	/* IE6,IE7 */
-	filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.083);
-	/* IE8 */
-	-ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)";
-	/* Standard */
-
-	position: absolute;
-	right: 10px;
-	bottom: 5px;
-	transform: translate(-50%, 0) rotate (90.0deg);
-	cursor: pointer;
 }
 
 div.screenplay_header {

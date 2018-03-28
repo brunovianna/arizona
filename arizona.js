@@ -769,7 +769,11 @@ function confirm() {
 }
 
 function screenplay_close() {
+    if (document.getElementById('screenplay_id').style.left == "-310px") {
+      document.getElementById('screenplay_id').style.left = "0";
+    } else {
       document.getElementById('screenplay_id').style.left = "-310px";
+    }
 }
 
 

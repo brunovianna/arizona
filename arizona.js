@@ -173,11 +173,12 @@ volta_overlay.setMap(map);
 document.getElementById('highschool').onmouseout = function(){document.getElementById('highschool').style.display="none";};
 document.getElementById('wrapper_wrapper_gym_id').style.display="none";
 
+/*
 document.getElementById('rectangle_above_id').onmouseout = function () {
   document.getElementById('wrapper_wrapper_gym_id').style.display="none";
   this.style.display="none";
 }
-
+*/
 
 //polygons!
 var skyland_highschool_rect = new google.maps.Rectangle({
@@ -768,7 +769,7 @@ function confirm() {
 }
 
 function screenplay_close() {
-      document.getElementById('screenplay_id').style.left = "-250px";
+      document.getElementById('screenplay_id').style.left = "-310px";
 }
 
 

@@ -91,29 +91,45 @@ div.rectangle_above {
 }
 
 div.wrapper_wrapper {
-	width: 480px;
-	height: 270pxpx;
+	width: 200px;
+	height: 136px;
+	background-color: #5a5a5a;
 	position: absolute;
 	top:220px;
 	bottom: 0;
 	left: 40px;
 	right: 0;
 	margin: 0;
+	padding: 0;
 	display: none;
 
 }
 
+div.video_title {
+	color: white;
+	font-size: 12px;
+	font-family: 'Oswald', sans-serif;
+	font-weight: 400;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	text-align: center;
+}
+
 div.video_wrapper {
 	position: relative;
-	top: 50%;
+	height: 112px;
+	margin-top: -18px;
+	/*top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+		margin: auto;*/
+  top: 24px;
 
-
-	padding-bottom: 43%;
+	padding-bottom: 0;
   padding-top: 0;
 
-	margin: auto;
+
 
 	background-color: #CD5E12;
 	/*display: none;*/
@@ -236,7 +252,7 @@ div.screenplay {
 		top:0;
 		bottom: 0;
 		/*left: -300px;*/
-		left: 0;
+		left: -310px;
 		/* right: 0; */
 		margin: 0
 

@@ -325,10 +325,6 @@ function casaMouseOver(me, id, text_1, text_2) {
   me.set('url', 'images/arizona_icone_quadrado-amarelo.png');
   me.setMap(map);
 
-  document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">"+text_1+"</span><span  class=\"georgia-18\"><i>"+text_2+"</i></span>";
-  document.getElementById('place_name_id').style.display = "inline";
-
-
   var r = get_mapthing_bounds(me) ;
   var center_h = Math.round((r.right + r.left)/2);
 
@@ -347,7 +343,6 @@ function casaMouseOut (me, id) {
   me.set('url', 'images/arizona_icone_quadrado-cinza.png');
   me.setMap(map);
 
-  document.getElementById('place_name_id').style.display = "none";
   document.getElementById(id).style.display = "none";
   reset_videos(player_array);
 }
@@ -367,8 +362,6 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (ev
 
   //these lines below bring ot the video preview and the
 
-  document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Skyland </span><span  class=\"georgia-18\"><i>Highschool</i></span>";
-  document.getElementById('place_name_id').style.display = "inline";
 
   var r = get_mapthing_bounds(skyland_highschool_rect) ;
   var center_h = Math.round((r.right + r.left)/2);
@@ -389,7 +382,6 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseout', function (eve
 	fillColor: '#969696',
 	});
   reset_videos(player_array);
-  document.getElementById('place_name_id').style.display = "none";
   document.getElementById('wrapper_wrapper_school_id').style.display = "none";
 
 });
@@ -402,9 +394,6 @@ google.maps.event.addListener(gym_rect, 'mouseover', function (event) {
 		fillColor: '#ffcf2f',
 	});
 
-
-  document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Academia </span><span  class=\"georgia-18\"><i>do Ryan</i></span>";
-  document.getElementById('place_name_id').style.display = "inline";
 
   //move the video to near the icon
   var r = get_mapthing_bounds(gym_rect) ;
@@ -422,7 +411,6 @@ google.maps.event.addListener(gym_rect, 'mouseout', function (event) {
 	fillColor: '#969696',
 	});
   reset_videos(player_array);
-  document.getElementById('place_name_id').style.display = "none";
   document.getElementById('wrapper_wrapper_gym_id').style.display = "none";
 
 });
@@ -435,8 +423,6 @@ google.maps.event.addListener(shooting_range_rect, 'mouseover', function (event)
 	this.setOptions({
 		fillColor: '#ffcf2f',
 	});
-  document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Shooting </span><span  class=\"georgia-18\"><i>Range</i></span>";
-  document.getElementById('place_name_id').style.display = "inline";
 
   //move the video to near the icon
   var r = get_mapthing_bounds(shooting_range_rect) ;
@@ -452,7 +438,6 @@ google.maps.event.addListener(shooting_range_rect, 'mouseout', function (event) 
 	fillColor: '#969696',
 	});
   reset_videos(player_array);
-  document.getElementById('place_name_id').style.display = "none";
   document.getElementById('wrapper_wrapper_shootingrange_id').style.display = "none";
 });
 
@@ -462,8 +447,6 @@ google.maps.event.addListener(retirement_rect, 'mouseover', function (event) {
 		fillColor: '#ffcf2f',
 	});
 
-  document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Retirement </span><span  class=\"georgia-18\"><i>Home</i></span>";
-  document.getElementById('place_name_id').style.display = "inline";
 
   //move the video to near the icon
   var r = get_mapthing_bounds(retirement_rect) ;
@@ -481,7 +464,6 @@ google.maps.event.addListener(retirement_rect, 'mouseout', function (event) {
 	fillColor: '#969696',
 	});
   reset_videos(player_array);
-  document.getElementById('place_name_id').style.display = "none";
   document.getElementById('wrapper_wrapper_retirement_id').style.display = "none";
 
 });
@@ -494,8 +476,6 @@ google.maps.event.addListener(rodeo_rect, 'mouseover', function (event) {
 		fillColor: '#ffcf2f',
 	});
 
-  document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Rodeo</span>";
-  document.getElementById('place_name_id').style.display = "inline";
 
 
     //move the video to near the icon
@@ -513,7 +493,6 @@ google.maps.event.addListener(rodeo_rect, 'mouseout', function (event) {
 	fillColor: '#969696',
 	});
   reset_videos(player_array);
-  document.getElementById('place_name_id').style.display = "none";
   document.getElementById('wrapper_wrapper_rodeo_id').style.display = "none";
 
 });
@@ -526,9 +505,6 @@ google.maps.event.addListener(western_park_circle, 'mouseover',function (event) 
   this.setOptions({
     fillColor: '#ffcf2f',
   });
-
-document.getElementById('place_name_id').innerHTML = "<span class=\"futura-18\">Western </span><span  class=\"georgia-18\"><i>Park</i></span>";
-document.getElementById('place_name_id').style.display = "inline";
 
 //move the video to near the icon
 var r = get_mapthing_bounds(western_park_circle) ;
@@ -546,7 +522,6 @@ google.maps.event.addListener(western_park_circle, 'mouseout', function (event) 
 	fillColor: '#969696',
 	});
   reset_videos(player_array);
-  document.getElementById('place_name_id').style.display = "none";
   document.getElementById('wrapper_wrapper_westernpark_id').style.display = "none";
 
 });

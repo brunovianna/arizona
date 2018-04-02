@@ -24,8 +24,13 @@ map = new google.maps.Map(document.getElementById('map'), {
   mapType: "roadmap",
   mapTypeControl: false,
   streetViewControl: false,
+  scaleControl: false,
+  scrollwheel: false,
+  navigationControl: false,
+  streetViewControl: false,
+  disableDefaultUI: true,
   minZoom: 12,
-  maxZoom: 14
+  maxZoom: 12
 });
 
 map.setOptions({styles: map_style});

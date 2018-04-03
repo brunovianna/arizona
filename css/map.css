@@ -32,14 +32,6 @@ div.title {
 	background-color: #ffcf2f;
 }
 
-div.place_name {
-	position: absolute;
-	bottom: 5px;
-	width: 100%;
-	text-align: center;
-	display: none;
-}
-
 span.futura-18 {
 	font-family: 'Oswald', sans-serif;
 	font-size: 18px;
@@ -102,6 +94,32 @@ div.wrapper_wrapper {
 	margin: 0;
 	padding: 0;
 	display: none;
+
+}
+
+div.wrapper_seta_fronteira {
+	position: absolute;
+	bottom: 0px;
+	padding: 5px;
+	width: 100%;
+	text-align: center;
+	cursor: pointer;
+}
+
+div.wrapper_fronteira {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: auto;
+
+	display: none;
+}
+
+div.video_fronteira {
+	position: relative;
+	height: 360px;
+	top: 0;
 
 }
 

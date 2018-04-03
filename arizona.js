@@ -13,6 +13,7 @@ var reservationOverlay;
 var videoWidth = 200;
 var videoHeight = 112;
 var videoUp = 61;
+var goingToMexico = false;
 
 function initMap() {
 // Create the map with no initial style specified.
@@ -57,23 +58,27 @@ allowedBounds = new google.maps.LatLngBounds(
 );
 lastValidCenter = map.getCenter();
 
+/*
 google.maps.event.addListener(map, 'center_changed', function() {
     //console.log(map.getCenter().lat()+ " "+map.getCenter().lng());
     //console.log(allowedBounds+ " "+map.getCenter().lng());
+    console.log("center changed");
+    // check if we're doing the pan to mexico
+    if (false) {
+      if (allowedBounds.contains(map.getCenter())) {
+          // still within valid bounds, so save the last valid position
+          console.log("center");
+          lastValidCenter = map.getCenter();
+          return;
+      }
 
-    if (allowedBounds.contains(map.getCenter())) {
-        // still within valid bounds, so save the last valid position
-        console.log("center");
-        lastValidCenter = map.getCenter();
-        return;
+      // not valid anymore => return to last valid position
+      map.panTo(lastValidCenter);
+      //console.log("yeah");
     }
-
-    // not valid anymore => return to last valid position
-    map.panTo(lastValidCenter);
-    //console.log("yeah");
 });
 
-
+*/
 //video objects
 var player_array = [];
 
@@ -528,28 +533,19 @@ google.maps.event.addListener(western_park_circle, 'mouseout', function (event) 
 
 
 //erase me!!!
-//document.getElementById('wrapper_wrapper_school_id').style.display = "inline";
+//document.getElementById('wrapper_wrapper_fronteira_id').style.display = "inline";
 //for debugging only
 
-/*
-below is the code to pan the map to the border. not needed right now
 
-google.maps.event.addListener(skyland_highschool_rect, 'click', function (event) {
-	//alert('clicked polygon!');
-//		new google.maps.LatLng(31.299159,-112.280684),
-//		new google.maps.LatLng(33.828641,-109.180738));
+document.getElementById('wrapper_wrapper_seta_fronteira_id').addEventListener('click', function (event) {
+  goingToMexico=true;
+  map.set('minZoom',0);
+  map.set('maxZoom',18);
+  panTo(32.5,-111.5,8,900,4);
 
-	var mexico_border = new google.maps.LatLngBounds(
-		new google.maps.LatLng(29, -113.7),
-		new google.maps.LatLng(34.1, -109.2));
-
-
-	//map.fitBounds ({north: 33.5, south: 31.5, west: -113.7, east: -109.2}); //32.301141, -114.749028
-  //map.setZoom(8);
-	//map.panTo(new google.maps.LatLng(32.5,-111.5));
-  panTo(32.5,-111.5,8);
-  //map.setZoom(8);
 });
+
+/*
 
 google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (event) {
 	// Within the event listener, "this" refers to the polygon which
@@ -657,21 +653,20 @@ function screenplay_close() {
 
 
 //to smoothly pan the map
-function panTo(newLat, newLng, newZoom) {
-  if (panPath.length > 0) {
-    // We are already panning...queue this up for next move
-    panQueue.push([newLat, newLng, newZoom]);
-  } else {
+function panTo(newLat, newLng, newZoom, d, steps) {
+
     // Lets compute the points we'll use
+    console.log("panto ");
+
     panPath.push("LAZY SYNCRONIZED LOCK");  // make length non-zero - 'release' this before calling setTimeout
     var curLat = map.getCenter().lat();
     var curLng = map.getCenter().lng();
     var curZoom = map.getZoom();
-    var dLat = (newLat - curLat)/STEPS;
-    var dLng = (newLng - curLng)/STEPS;
-    var dZoom = (newZoom - curZoom)/STEPS;
+    var dLat = (newLat - curLat)/steps;
+    var dLng = (newLng - curLng)/steps;
+    var dZoom = (newZoom - curZoom)/steps;
 
-    for (var i=0; i < STEPS; i++) {
+    for (var i=0; i < steps; i++) {
       panPath.push([curLat + dLat * i, curLng + dLng * i, curZoom + dZoom * i]);
     }
     panPath.push([newLat, newLng, newZoom]);
@@ -680,43 +675,59 @@ function panTo(newLat, newLng, newZoom) {
     var first = panPath.shift();
     //setTimeout(doPan, 100);
 
-    doPan();
-  }
+    doPan(d,steps);
+
 }
 
-
-function doPan() {
+function doPan(d,steps) {
+  console.log("do pan");
 
   var next = panPath.shift();
+
+
   if (next != null) {
     // Continue our current pan action
-
+    console.log(map.getBounds()+ " "+ next[2]);
     map.panTo( new google.maps.LatLng(next[0], next[1]));
     map.setZoom(Math.round(next[2]));
-    setTimeout(doPan, 100);
+    setTimeout(function(){doPan(d,steps);}, d);
 
 
   } else {
-    // We are finished with this pan - check if there are any queue'd up locations to pan to
+    // We are finished with this pan -
     pan_started = 0;
-    map.setZoom(8);
-    var queued = panQueue.shift();
-    if (queued != null) {
-      panTo(queued[0], queued[1],queued[2]);
-    }
+
+    //after 2 seconds, begin the movie
+    setTimeout(showFronteira, 2000);
   }
-}
-
-function vimeo_format(id) {
-
-return (" src=\"https://player.vimeo.com/video/"+id+"?title=0&byline=0&background=1\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen>");
 
 }
+
 
 function reset_videos(video_array) {
   for (i=0;i<video_array.length;i++) {
     video_array[i].setCurrentTime(0);
   }
+}
+
+function showFronteira() {
+  document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "none";
+  document.getElementById('wrapper_wrapper_fronteira_id').style.display = "inline";
+
+  //when the movie is finishedm return to main screen
+  setTimeout(endFronteira, 60000);
+
+}
+
+function endFronteira() {
+  goingToMexico=false;
+    document.getElementById('wrapper_wrapper_fronteira_id').style.display = "none";
+    map.panTo ({lat: 33.37, lng: -111.8});
+    map.setZoom(12);
+    map.set('minZoom',12);
+    map.set('maxZoom',12);
+    document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "inline";
+
 }
 
 

@@ -287,8 +287,29 @@ google.maps.event.addListener(igreja_11_overlay, 'mouseout', function() { igreja
 
 function igrejaMouseOver (my_overlay) {
 
-  my_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
-  my_overlay.setMap(map);
+  igreja_1_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
+  igreja_2_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
+  igreja_3_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
+  igreja_4_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
+  igreja_5_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
+  igreja_6_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
+  igreja_7_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
+  igreja_8_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
+  igreja_9_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
+  igreja_10_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
+  igreja_11_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
+
+  igreja_1_overlay.setMap(map);
+  igreja_2_overlay.setMap(map);
+  igreja_3_overlay.setMap(map);
+  igreja_4_overlay.setMap(map);
+  igreja_5_overlay.setMap(map);
+  igreja_6_overlay.setMap(map);
+  igreja_7_overlay.setMap(map);
+  igreja_8_overlay.setMap(map);
+  igreja_9_overlay.setMap(map);
+  igreja_10_overlay.setMap(map);
+  igreja_11_overlay.setMap(map);
 
   var r = get_mapthing_bounds(my_overlay) ;
   var center_h = Math.round((r.right + r.left)/2);
@@ -301,6 +322,29 @@ function igrejaMouseOver (my_overlay) {
 function igrejaMouseOut (out_overlay) {
   document.getElementById('wrapper_wrapper_igrejas_id').style.display = "none";
 
+  igreja_1_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
+  igreja_2_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
+  igreja_3_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
+  igreja_4_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
+  igreja_5_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
+  igreja_6_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
+  igreja_7_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
+  igreja_8_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
+  igreja_9_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
+  igreja_10_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
+  igreja_11_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
+
+  igreja_1_overlay.setMap(map);
+  igreja_2_overlay.setMap(map);
+  igreja_3_overlay.setMap(map);
+  igreja_4_overlay.setMap(map);
+  igreja_5_overlay.setMap(map);
+  igreja_6_overlay.setMap(map);
+  igreja_7_overlay.setMap(map);
+  igreja_8_overlay.setMap(map);
+  igreja_9_overlay.setMap(map);
+  igreja_10_overlay.setMap(map);
+  igreja_11_overlay.setMap(map);
 
   out_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
   out_overlay.setMap(map);
@@ -351,6 +395,30 @@ function casaMouseOut (me, id) {
   document.getElementById(id).style.display = "none";
   reset_videos(player_array);
 }
+
+// VOLTA behaviours
+google.maps.event.addListener(volta_overlay, 'mouseover', function (event) {
+    volta_overlay.set('url', 'images/icone_estrada-amarelo.png');
+
+    var r = get_mapthing_bounds(volta_overlay) ;
+    var center_h = Math.round((r.right + r.left)/2);
+
+    document.getElementById('wrapper_wrapper_volta_id').style.left = (center_h-videoWidth/2)+"px";
+    document.getElementById('wrapper_wrapper_volta_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+
+
+    document.getElementById('wrapper_wrapper_volta_id').style.display = "inline";
+
+});
+
+google.maps.event.addListener(volta_overlay, 'mouseout', function (event) {
+
+  volta_overlay.set('url', 'images/icone_estrada.png');
+  reset_videos(player_array);
+  document.getElementById('wrapper_wrapper_volta_id').style.display = "none";
+
+});
+
 
 // SCHOOL behaviours
 google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (event) {
@@ -721,7 +789,8 @@ function showFronteira() {
 
 function endFronteira() {
   goingToMexico=false;
-    document.getElementById('wrapper_wrapper_fronteira_id').style.display = "none";
+    document.getElementById('wrapper_wrapper_fronteira_id').style.display = "inline";
+
     map.panTo ({lat: 33.37, lng: -111.8});
     map.setZoom(12);
     map.set('minZoom',12);

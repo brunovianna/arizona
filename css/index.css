@@ -38,7 +38,7 @@ html, body {
 }
 
 .form-left {
-	grid-row: 2 / span 10;
+	grid-row: 2 / span 5;
 	padding: 30px;
 	border-left: 1px solid #000000;
 	border-right: 1px solid #000000;

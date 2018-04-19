@@ -8,16 +8,18 @@ function confirm() {
   document.getElementById('question').innerHTML = form_responses_questions[current_form_page][0];
   document.getElementById('question-count').innerHTML = (current_form_page+1);
 
+  document.getElementById('form-left-0').style.gridRow = "2 / span "+(form_responses_questions[current_form_page][1].length + 1);
+  console.log(form_responses_questions[current_form_page][1][0]+" "+form_responses_questions[current_form_page][1].length );
+  console.log(current_form_page);
 
   for (j=0;j<9;j++) {
 
 
     if (form_responses_questions[current_form_page][1][j]==undefined) {
-      console.log(current_form_page+" "+j);
-      document.getElementById('label'+j).style.display="none";
+      document.getElementById('form-right-'+j).style.display="none";
       document.getElementById('form-right-'+j).style.borderBottom="none";
     } else {
-      document.getElementById('label'+j).style.display="block";
+      document.getElementById('form-right-'+j).style.display="block";
       document.getElementById('label'+j).innerHTML = form_responses_questions[current_form_page][1][j];
       document.getElementById('form-right-'+j).style.borderBottom="1px solid #000000";
     }
@@ -30,6 +32,17 @@ function confirm() {
     document.getElementById('screenplay_id').style.left = 0;
 
 }
+}
+
+function cleanForm(checkboxNum) {
+  for (i=0;i<9;i++) {
+      if ((form_responses_questions[current_form_page][1][i]!=undefined)&&(i!=checkboxNum)) {
+        document.getElementById('checkboxG'+i).checked=false;
+
+      }
+
+  }
+
 }
 
 var form_responses_videos = [

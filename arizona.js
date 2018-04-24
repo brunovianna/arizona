@@ -14,6 +14,8 @@ var videoWidth = 200;
 var videoHeight = 112;
 var videoUp = 61;
 var goingToMexico = false;
+var returningToMesa = false;
+var vimeo_fronteira;
 
 function initMap() {
 // Create the map with no initial style specified.
@@ -53,21 +55,27 @@ overlay.setMap(map);
 
 // bounds of the mesa area -- no panning beyond this
 allowedBounds = new google.maps.LatLngBounds(
-     new google.maps.LatLng(31.18, -112),
+     new google.maps.LatLng(33.2, -112),
+     //new google.maps.LatLng(31.18, -112),
      new google.maps.LatLng(33.45, -111.7)
 );
 lastValidCenter = map.getCenter();
 
-/*
+
 google.maps.event.addListener(map, 'center_changed', function() {
     //console.log(map.getCenter().lat()+ " "+map.getCenter().lng());
     //console.log(allowedBounds+ " "+map.getCenter().lng());
-    console.log("center changed");
+    //console.log("center changed");
     // check if we're doing the pan to mexico
-    if (false) {
+    if (!goingToMexico) {
+      if ((!returningToMesa)&&(map.getCenter().lat() < 33.25)) {
+        //show border arrow
+        document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "inline";
+
+      }
       if (allowedBounds.contains(map.getCenter())) {
           // still within valid bounds, so save the last valid position
-          console.log("center");
+          //console.log("center");
           lastValidCenter = map.getCenter();
           return;
       }
@@ -78,7 +86,7 @@ google.maps.event.addListener(map, 'center_changed', function() {
     }
 });
 
-*/
+
 //video objects
 var player_array = [];
 
@@ -90,6 +98,8 @@ for (i = 0; i< iFrames.length; i++ ) {
     player_array.push(new Vimeo.Player(iFrames[i]));
   }
 }
+
+vimeo_fronteira = new Vimeo.Player(document.getElementById("video_fronteira"));
 
 
 
@@ -719,7 +729,7 @@ function screenplay_close() {
 function panTo(newLat, newLng, newZoom, d, steps) {
 
     // Lets compute the points we'll use
-    console.log("panto ");
+    //console.log("panto ");
 
     panPath.push("LAZY SYNCRONIZED LOCK");  // make length non-zero - 'release' this before calling setTimeout
     var curLat = map.getCenter().lat();
@@ -743,14 +753,14 @@ function panTo(newLat, newLng, newZoom, d, steps) {
 }
 
 function doPan(d,steps) {
-  console.log("do pan");
+  //console.log("do pan");
 
   var next = panPath.shift();
 
 
   if (next != null) {
     // Continue our current pan action
-    console.log(map.getBounds()+ " "+ next[2]);
+    //console.log(map.getBounds()+ " "+ next[2]);
     map.panTo( new google.maps.LatLng(next[0], next[1]));
     map.setZoom(Math.round(next[2]));
     setTimeout(function(){doPan(d,steps);}, d);
@@ -761,7 +771,11 @@ function doPan(d,steps) {
     pan_started = 0;
 
     //after 2 seconds, begin the movie
-    setTimeout(showFronteira, 2000);
+    if (goingToMexico) {
+      setTimeout(showFronteira, 1000);
+    } else {
+      returningToMesa=false;
+    }
   }
 
 }
@@ -778,19 +792,27 @@ function showFronteira() {
   document.getElementById('wrapper_wrapper_fronteira_id').style.display = "inline";
 
   //when the movie is finishedm return to main screen
-  setTimeout(endFronteira, 60000);
+
+  vimeo_fronteira.setCurrentTime(0);
+  vimeo_fronteira.on('ended', endFronteira );
 
 }
 
-function endFronteira() {
-  goingToMexico=false;
-    document.getElementById('wrapper_wrapper_fronteira_id').style.display = "inline";
 
-    map.panTo ({lat: 33.37, lng: -111.8});
-    map.setZoom(13);
-    map.set('minZoom',13);
-    map.set('maxZoom',13);
-    document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "inline";
+
+var endFronteira = function () {
+
+    vimeo_fronteira.off('ended', endFronteira);
+    document.getElementById('wrapper_wrapper_fronteira_id').style.display = "none";
+    document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "none";
+
+
+    setTimeout(function() {
+      goingToMexico=false;
+      returningToMesa=true;
+      panTo(33.37, -111.8, 13, 900, 4);
+      }
+      , 1000);
 
 }
 

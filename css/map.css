@@ -104,6 +104,7 @@ div.wrapper_seta_fronteira {
 	width: 100%;
 	text-align: center;
 	cursor: pointer;
+		display: none;
 }
 
 div.wrapper_fronteira {

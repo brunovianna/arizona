@@ -20,7 +20,7 @@ function initMap() {
 // It therefore has default styling.
 map = new google.maps.Map(document.getElementById('map'), {
   center: {lat: 33.37, lng: -111.8},
-  zoom: 12,
+  zoom: 13,
   format: "png",
   mapType: "roadmap",
   mapTypeControl: false,
@@ -30,8 +30,8 @@ map = new google.maps.Map(document.getElementById('map'), {
   navigationControl: false,
   streetViewControl: false,
   disableDefaultUI: true,
-  minZoom: 12,
-  maxZoom: 12
+  minZoom: 13,
+  maxZoom: 13
 });
 
 map.setOptions({styles: map_style});
@@ -792,9 +792,9 @@ function endFronteira() {
     document.getElementById('wrapper_wrapper_fronteira_id').style.display = "inline";
 
     map.panTo ({lat: 33.37, lng: -111.8});
-    map.setZoom(12);
-    map.set('minZoom',12);
-    map.set('maxZoom',12);
+    map.setZoom(13);
+    map.set('minZoom',13);
+    map.set('maxZoom',13);
     document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "inline";
 
 }

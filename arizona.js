@@ -151,17 +151,17 @@ var igreja_9_bounds = {  north: 33.327,   south: 33.322,   east: -111.779,  west
 var igreja_10_bounds = { north: 33.321,   south: 33.316,  east: -111.697,  west: -111.703 };
 var igreja_11_bounds = {  north: 33.298,   south: 33.293,   east: -111.797,  west: -111.803 };
 
-var igreja_1_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', igreja_1_bounds);
-var igreja_2_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', igreja_2_bounds);
-var igreja_3_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', igreja_3_bounds);
-var igreja_4_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', igreja_4_bounds);
-var igreja_5_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', igreja_5_bounds);
-var igreja_6_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', igreja_6_bounds);
-var igreja_7_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', igreja_7_bounds);
-var igreja_8_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', igreja_8_bounds);
-var igreja_9_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', igreja_9_bounds);
-var igreja_10_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', igreja_10_bounds);
-var igreja_11_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', igreja_11_bounds);
+var igreja_1_overlay = new google.maps.GroundOverlay('images/arizona_icone_triangulo-cinza.png', igreja_1_bounds);
+var igreja_2_overlay = new google.maps.GroundOverlay('images/arizona_icone_triangulo-cinza.png', igreja_2_bounds);
+var igreja_3_overlay = new google.maps.GroundOverlay('images/arizona_icone_triangulo-cinza.png', igreja_3_bounds);
+var igreja_4_overlay = new google.maps.GroundOverlay('images/arizona_icone_triangulo-cinza.png', igreja_4_bounds);
+var igreja_5_overlay = new google.maps.GroundOverlay('images/arizona_icone_triangulo-cinza.png', igreja_5_bounds);
+var igreja_6_overlay = new google.maps.GroundOverlay('images/arizona_icone_triangulo-cinza.png', igreja_6_bounds);
+var igreja_7_overlay = new google.maps.GroundOverlay('images/arizona_icone_triangulo-cinza.png', igreja_7_bounds);
+var igreja_8_overlay = new google.maps.GroundOverlay('images/arizona_icone_triangulo-cinza.png', igreja_8_bounds);
+var igreja_9_overlay = new google.maps.GroundOverlay('images/arizona_icone_triangulo-cinza.png', igreja_9_bounds);
+var igreja_10_overlay = new google.maps.GroundOverlay('images/arizona_icone_triangulo-cinza.png', igreja_10_bounds);
+var igreja_11_overlay = new google.maps.GroundOverlay('images/arizona_icone_triangulo-cinza.png', igreja_11_bounds);
 
 igreja_1_overlay.setMap(map);
 igreja_2_overlay.setMap(map);
@@ -194,57 +194,52 @@ document.getElementById('rectangle_above_id').onmouseout = function () {
 */
 
 //polygons!
-var skyland_highschool_rect = new google.maps.Rectangle({
+var skyland_highschool_rect = new google.maps.Circle({
 	map: map,
-	bounds:
-  new google.maps.LatLngBounds(
-    new google.maps.LatLng(33.388,-111.753),
-    new google.maps.LatLng(33.393, -111.740)),
+	center:
+    new google.maps.LatLng(33.390,-111.746),
+  radius: 300,
 	strokeWeight: 0,
 //	fillColor: '#ffcf2f',
 fillColor: '#969696',
 	fillOpacity: 1
 });
 
-var gym_rect = new google.maps.Rectangle({
+var gym_rect = new google.maps.Circle({
 	map: map,
-	bounds:
-  new google.maps.LatLngBounds(
-    new google.maps.LatLng(33.438,-111.718),
-    new google.maps.LatLng(33.4425,  -111.7125)),
+	center:
+    new google.maps.LatLng(33.44,-111.715),
+radius: 300,
 	strokeWeight: 0,
   fillColor: '#969696',
 	fillOpacity: 1
 });
 
-var shooting_range_rect = new google.maps.Rectangle({
+var shooting_range_rect = new google.maps.Circle({
 	map: map,
-	bounds:
-  new google.maps.LatLngBounds(
-    new google.maps.LatLng(33.424,-111.656),
-    new google.maps.LatLng(33.431,  -111.642)),
+	center:
+    new google.maps.LatLng(33.427,-111.649),
+  radius: 300,
 	strokeWeight: 0,
   fillColor: '#969696',
 	fillOpacity: 1
 });
 
-var retirement_rect = new google.maps.Rectangle({
+var retirement_rect = new google.maps.Circle({
 	map: map,
-	bounds:
-  new google.maps.LatLngBounds(
-    new google.maps.LatLng(33.3215,-111.823),
-    new google.maps.LatLng(33.328,  -111.8085)),
+	center:
+    new google.maps.LatLng(33.3245,-111.8157),
+  radius: 300,
 	strokeWeight: 0,
   fillColor: '#969696',
 	fillOpacity: 1
 });
 
-var rodeo_rect = new google.maps.Rectangle({
+var rodeo_rect = new google.maps.Circle({
 	map: map,
-	bounds:
-  new google.maps.LatLngBounds(
-    new google.maps.LatLng(33.337,-111.704),
-    new google.maps.LatLng(33.350,  -111.688)),
+	center:
+    new google.maps.LatLng(33.343,-111.696),
+  radius: 300,
 	strokeWeight: 0,
   fillColor: '#969696',
 	fillOpacity: 1
@@ -287,17 +282,17 @@ google.maps.event.addListener(igreja_11_overlay, 'mouseout', function() { igreja
 
 function igrejaMouseOver (my_overlay) {
 
-  igreja_1_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
-  igreja_2_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
-  igreja_3_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
-  igreja_4_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
-  igreja_5_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
-  igreja_6_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
-  igreja_7_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
-  igreja_8_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
-  igreja_9_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
-  igreja_10_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
-  igreja_11_overlay.set('url', 'images/arizona_icone_cruz-amarelo.png');
+  igreja_1_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+  igreja_2_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+  igreja_3_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+  igreja_4_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+  igreja_5_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+  igreja_6_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+  igreja_7_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+  igreja_8_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+  igreja_9_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+  igreja_10_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+  igreja_11_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
 
   igreja_1_overlay.setMap(map);
   igreja_2_overlay.setMap(map);
@@ -322,17 +317,17 @@ function igrejaMouseOver (my_overlay) {
 function igrejaMouseOut (out_overlay) {
   document.getElementById('wrapper_wrapper_igrejas_id').style.display = "none";
 
-  igreja_1_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
-  igreja_2_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
-  igreja_3_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
-  igreja_4_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
-  igreja_5_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
-  igreja_6_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
-  igreja_7_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
-  igreja_8_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
-  igreja_9_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
-  igreja_10_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
-  igreja_11_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
+  igreja_1_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+  igreja_2_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+  igreja_3_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+  igreja_4_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+  igreja_5_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+  igreja_6_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+  igreja_7_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+  igreja_8_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+  igreja_9_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+  igreja_10_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+  igreja_11_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
 
   igreja_1_overlay.setMap(map);
   igreja_2_overlay.setMap(map);
@@ -346,7 +341,7 @@ function igrejaMouseOut (out_overlay) {
   igreja_10_overlay.setMap(map);
   igreja_11_overlay.setMap(map);
 
-  out_overlay.set('url', 'images/arizona_icone_cruz-cinza.png');
+  out_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
   out_overlay.setMap(map);
 
 }

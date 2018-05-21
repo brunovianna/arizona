@@ -9,8 +9,8 @@ function confirm() {
   document.getElementById('question-count').innerHTML = (current_form_page+1);
 
   document.getElementById('form-left-0').style.gridRow = "2 / span "+(form_responses_questions[current_form_page][1].length + 1);
-  console.log(form_responses_questions[current_form_page][1][0]+" "+form_responses_questions[current_form_page][1].length );
-  console.log(current_form_page);
+  //console.log(form_responses_questions[current_form_page][1][0]+" "+form_responses_questions[current_form_page][1].length );
+  //console.log(current_form_page);
 
   for (j=0;j<9;j++) {
 
@@ -22,6 +22,7 @@ function confirm() {
       document.getElementById('form-right-'+j).style.display="block";
       document.getElementById('label'+j).innerHTML = form_responses_questions[current_form_page][1][j];
       document.getElementById('form-right-'+j).style.borderBottom="1px solid #000000";
+      cleanForm();
     }
   }
 

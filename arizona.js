@@ -185,6 +185,37 @@ igreja_9_overlay.setMap(map);
 igreja_10_overlay.setMap(map);
 igreja_11_overlay.setMap(map);
 
+/*
+33.263942, -111.947513
+33.228106, -111.907209
+33.220066, -111.859775
+33.202503, -111.792365
+33.194429, -111.753308
+33.217652, -111.724291
+*/
+
+var cruz_1_bounds = {  north: 33.267,   south: 33.264,   east: -111.947,  west: -111.950 };
+var cruz_2_bounds = {  north: 33.231,   south: 33.228,   east: -111.907,  west: -111.910 };
+var cruz_3_bounds = {  north: 33.223,   south: 33.220,   east: -111.860,  west: -111.863 };
+var cruz_4_bounds = { north: 33.205,   south: 33.202,  east: -111.792,  west: -111.795 };
+var cruz_5_bounds = {  north: 33.197,   south: 33.194,   east: -111.753,  west: -111.756 };
+var cruz_6_bounds = {  north: 33.221,   south: 33.218,   east: -111.724,  west: -111.727 };
+
+var cruz_1_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', cruz_1_bounds);
+var cruz_2_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', cruz_2_bounds);
+var cruz_3_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', cruz_3_bounds);
+var cruz_4_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', cruz_4_bounds);
+var cruz_5_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', cruz_5_bounds);
+var cruz_6_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', cruz_6_bounds);
+
+cruz_1_overlay.setMap(map);
+cruz_2_overlay.setMap(map);
+cruz_3_overlay.setMap(map);
+cruz_4_overlay.setMap(map);
+cruz_5_overlay.setMap(map);
+cruz_6_overlay.setMap(map);
+
+
 //volta width .004 height .004
 var volta_bounds = {  north: 33.392,   south: 33.388,   east: -111.947,  west: -111.951 };
 var volta_overlay = new google.maps.GroundOverlay('images/icone_estrada.png', volta_bounds);
@@ -358,7 +389,7 @@ function igrejaMouseOut (out_overlay) {
 
 // HOUSES behaviours
 
-google.maps.event.addListener(casa_1_overlay, 'mouseover', function () { casaMouseOver(casa_1_overlay, 'wrapper_wrapper_casa_1_id','Casa dos ','Hanny');});
+google.maps.event.addListener(cruz_1_overlay, 'mouseover', function () { casaMouseOver(casa_1_overlay, 'wrapper_wrapper_casa_1_id','Casa dos ','Hanny');});
 google.maps.event.addListener(casa_1_overlay, 'mouseout', function () { casaMouseOut(casa_1_overlay, 'wrapper_wrapper_casa_1_id');});
 google.maps.event.addListener(casa_2_overlay, 'mouseover', function () { casaMouseOver(casa_2_overlay, 'wrapper_wrapper_casa_2_id','Casa dos ','Corbin');});
 google.maps.event.addListener(casa_2_overlay, 'mouseout', function () { casaMouseOut(casa_2_overlay, 'wrapper_wrapper_casa_2_id');});

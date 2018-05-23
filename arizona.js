@@ -16,7 +16,7 @@ var videoUp = 61;
 var goingToMexico = false;
 var returningToMesa = false;
 var vimeo_fronteira;
-var currentVideoId = 0;
+var currentVideoId = -1;
 
 var layerOverlapFlag = false;
 
@@ -357,6 +357,8 @@ google.maps.event.addListener(igreja_11_overlay, 'mouseout', function() { igreja
 
 function igrejaMouseOver (my_overlay) {
 
+  video_id = 6; //line 29
+
   igreja_1_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
   igreja_2_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
   igreja_3_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
@@ -384,13 +386,21 @@ function igrejaMouseOver (my_overlay) {
   var r = get_mapthing_bounds(my_overlay) ;
   var center_h = Math.round((r.right + r.left)/2);
 
-  document.getElementById('wrapper_wrapper_igrejas_id').style.left = (center_h-videoWidth/2)+"px";
-  document.getElementById('wrapper_wrapper_igrejas_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
-  document.getElementById('wrapper_wrapper_igrejas_id').style.display = "inline";
+  document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
+  document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+  document.getElementById('wrapper_vimeo_id').style.display = "inline";
+    document.getElementById("video_title_id").innerHTML = "Tour das Igrejas";
+
+    //the callback function 'timeupdate' will make the video frame visible when it resets
+    if (currentVideoId != video_id){
+      document.getElementById("vimeo_id").style.display = "none";
+      currentVideoId = video_id;
+      change_video(videos[video_id][0]);
+    }
 }
 
 function igrejaMouseOut (out_overlay) {
-  document.getElementById('wrapper_wrapper_igrejas_id').style.display = "none";
+  document.getElementById('wrapper_vimeo_id').style.display = "none";
 
   igreja_1_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
   igreja_2_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
@@ -423,7 +433,7 @@ function igrejaMouseOut (out_overlay) {
 
 // HOUSES behaviours
 
-google.maps.event.addListener(cruz_1_overlay, 'mouseover', function () { casaMouseOver(casa_1_overlay, 'wrapper_vimeo_id',0, 'Casa dos ','Hanny');});
+google.maps.event.addListener(casa_1_overlay, 'mouseover', function () { casaMouseOver(casa_1_overlay, 'wrapper_vimeo_id',0, 'Casa dos ','Hanny');});
 google.maps.event.addListener(casa_1_overlay, 'mouseout', function () { casaMouseOut(casa_1_overlay, 'wrapper_vimeo_id');});
 google.maps.event.addListener(casa_2_overlay, 'mouseover', function () { casaMouseOver(casa_2_overlay, 'wrapper_vimeo_id',1,'Casa do ','Corbin');});
 google.maps.event.addListener(casa_2_overlay, 'mouseout', function () { casaMouseOut(casa_2_overlay, 'wrapper_vimeo_id');});
@@ -441,9 +451,6 @@ function casaMouseOver(me, id, video_id, text_1, text_2) {
 		fillColor: '#ff9100',
 	});
 
-
-
-
   me.set('url', 'images/arizona_icone_quadrado-amarelo.png');
   me.setMap(map);
 
@@ -455,7 +462,7 @@ function casaMouseOver(me, id, video_id, text_1, text_2) {
   document.getElementById(id).style.top = (r.bottom-videoHeight-videoUp)+"px";
   document.getElementById(id).style.display = "inline";
 
-  //if thethe callback function 'timeupdate' will make the video frame visible when it resets
+  //the callback function 'timeupdate' will make the video frame visible when it resets
   if (currentVideoId != video_id){
     document.getElementById("vimeo_id").style.display = "none";
     currentVideoId = video_id;
@@ -479,15 +486,27 @@ function casaMouseOut (me, id) {
 
 // VOLTA behaviours
 google.maps.event.addListener(volta_overlay, 'mouseover', function (event) {
+
+  //line 30
+   video_id = 7;
+
     volta_overlay.set('url', 'images/icone_estrada-amarelo.png');
 
     var r = get_mapthing_bounds(volta_overlay) ;
     var center_h = Math.round((r.right + r.left)/2);
 
-    document.getElementById('wrapper_wrapper_volta_id').style.left = (center_h-videoWidth/2)+"px";
-    document.getElementById('wrapper_wrapper_volta_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+    document.getElementById("video_title_id").innerHTML = "Volta por Mesa";
+    document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
+    document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+    document.getElementById('wrapper_vimeo_id').style.display = "inline";
 
-    document.getElementById('wrapper_wrapper_volta_id').style.display = "inline";
+    //the callback function 'timeupdate' will make the video frame visible when it resets
+    if (currentVideoId != video_id){
+      document.getElementById("vimeo_id").style.display = "none";
+      currentVideoId = video_id;
+      change_video(videos[video_id][0]);
+    }
+
 
 });
 
@@ -495,7 +514,7 @@ google.maps.event.addListener(volta_overlay, 'mouseout', function (event) {
 
   volta_overlay.set('url', 'images/icone_estrada.png');
   reset_videos(player_array);
-  document.getElementById('wrapper_wrapper_volta_id').style.display = "none";
+  document.getElementById('wrapper_vimeo_id').style.display = "none";
 
 });
 
@@ -505,6 +524,9 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (ev
 	// Within the event listener, "this" refers to the polygon which
 	// received the event.
   //
+
+  //line 31
+  video_id = 8;
 
 	this.setOptions({
 		fillColor: '#ffcf2f',
@@ -519,11 +541,17 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (ev
   var r = get_mapthing_bounds(skyland_highschool_rect) ;
   var center_h = Math.round((r.right + r.left)/2);
 
-  document.getElementById('wrapper_wrapper_school_id').style.left = (center_h-videoWidth/2)+"px";
-  document.getElementById('wrapper_wrapper_school_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+  document.getElementById("video_title_id").innerHTML = "Skyland Highschool";
+  document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
+  document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+  document.getElementById('wrapper_vimeo_id').style.display = "inline";
 
-
-  document.getElementById('wrapper_wrapper_school_id').style.display = "inline";
+  //the callback function 'timeupdate' will make the video frame visible when it resets
+  if (currentVideoId != video_id){
+    document.getElementById("vimeo_id").style.display = "none";
+    currentVideoId = video_id;
+    change_video(videos[video_id][0]);
+  }
 
 });
 
@@ -535,7 +563,7 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseout', function (eve
 	fillColor: '#969696',
 	});
   reset_videos(player_array);
-  document.getElementById('wrapper_wrapper_school_id').style.display = "none";
+  document.getElementById('wrapper_vimeo_id').style.display = "none";
 
 });
 
@@ -547,15 +575,23 @@ google.maps.event.addListener(gym_rect, 'mouseover', function (event) {
 		fillColor: '#ffcf2f',
 	});
 
+  //line 31
+  video_id = 10;
 
   //move the video to near the icon
   var r = get_mapthing_bounds(gym_rect) ;
   var center_h = Math.round((r.right + r.left)/2);
-  document.getElementById('wrapper_wrapper_gym_id').style.left = (center_h-videoWidth/2)+"px";
-  document.getElementById('wrapper_wrapper_gym_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+  document.getElementById("video_title_id").innerHTML = "Gym";
+  document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
+  document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+  document.getElementById('wrapper_vimeo_id').style.display = "inline";
 
-
-  document.getElementById('wrapper_wrapper_gym_id').style.display = "inline";
+  //the callback function 'timeupdate' will make the video frame visible when it resets
+  if (currentVideoId != video_id){
+    document.getElementById("vimeo_id").style.display = "none";
+    currentVideoId = video_id;
+    change_video(videos[video_id][0]);
+  }
 
 });
 
@@ -564,7 +600,7 @@ google.maps.event.addListener(gym_rect, 'mouseout', function (event) {
 	fillColor: '#969696',
 	});
   reset_videos(player_array);
-  document.getElementById('wrapper_wrapper_gym_id').style.display = "none";
+  document.getElementById('wrapper_vimeo_id').style.display = "none";
 
 });
 
@@ -577,13 +613,25 @@ google.maps.event.addListener(shooting_range_rect, 'mouseover', function (event)
 		fillColor: '#ffcf2f',
 	});
 
+  //line 32
+  video_id = 9;
+
   //move the video to near the icon
   var r = get_mapthing_bounds(shooting_range_rect) ;
   var center_h = Math.round((r.right + r.left)/2);
-  document.getElementById('wrapper_wrapper_shootingrange_id').style.left = (center_h-videoWidth/2)+"px";
-  document.getElementById('wrapper_wrapper_shootingrange_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+  document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
+  document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
 
-  document.getElementById('wrapper_wrapper_shootingrange_id').style.display = "inline";
+  document.getElementById("video_title_id").innerHTML = "Shooting Range";
+  document.getElementById('wrapper_vimeo_id').style.display = "inline";
+
+  //the callback function 'timeupdate' will make the video frame visible when it resets
+  if (currentVideoId != video_id){
+    document.getElementById("vimeo_id").style.display = "none";
+    currentVideoId = video_id;
+    change_video(videos[video_id][0]);
+  }
+
 });
 
 google.maps.event.addListener(shooting_range_rect, 'mouseout', function (event) {
@@ -591,13 +639,14 @@ google.maps.event.addListener(shooting_range_rect, 'mouseout', function (event) 
 	fillColor: '#969696',
 	});
   reset_videos(player_array);
-  document.getElementById('wrapper_wrapper_shootingrange_id').style.display = "none";
+  document.getElementById('wrapper_vimeo_id').style.display = "none";
 });
 
 // RETIREMENT behaviours
 google.maps.event.addListener(retirement_rect, 'mouseover', function (e) {
 
 
+  video_id = 11; //line 34
 
   this.setOptions({
 		fillColor: '#ffcf2f',
@@ -607,12 +656,19 @@ google.maps.event.addListener(retirement_rect, 'mouseover', function (e) {
   //move the video to near the icon
   var r = get_mapthing_bounds(retirement_rect) ;
   var center_h = Math.round((r.right + r.left)/2);
-  document.getElementById('wrapper_wrapper_retirement_id').style.left = (center_h-videoWidth/2)+"px";
-  document.getElementById('wrapper_wrapper_retirement_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+  document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
+  document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+  document.getElementById("video_title_id").innerHTML = "Retirement Home";
+  document.getElementById('wrapper_vimeo_id').style.display = "inline";
 
-  document.getElementById('wrapper_wrapper_retirement_id').style.display = "inline";
+  //the callback function 'timeupdate' will make the video frame visible when it resets
+  if (currentVideoId != video_id){
+    document.getElementById("vimeo_id").style.display = "none";
+    currentVideoId = video_id;
+    change_video(videos[video_id][0]);
+  }
 
-}, false);
+});
 
 google.maps.event.addListener(retirement_rect, 'mouseout', function (event) {
 
@@ -626,7 +682,7 @@ google.maps.event.addListener(retirement_rect, 'mouseout', function (event) {
       fillColor: '#969696',
       });
       reset_videos(player_array);
-      document.getElementById('wrapper_wrapper_retirement_id').style.display = "none";
+      document.getElementById('wrapper_vimeo_id').style.display = "none";
       layerOverlapFlag = false;
     }
   }, 300);
@@ -657,6 +713,8 @@ document.getElementById('video_retirement_id').addEventListener('mouseover', fun
 // RODEO behaviours
 google.maps.event.addListener(rodeo_rect, 'mouseover', function (event) {
 
+  video_id = 12; //line 35
+
 	this.setOptions({
 		fillColor: '#ffcf2f',
 	});
@@ -666,10 +724,17 @@ google.maps.event.addListener(rodeo_rect, 'mouseover', function (event) {
     //move the video to near the icon
     var r = get_mapthing_bounds(rodeo_rect) ;
     var center_h = Math.round((r.right + r.left)/2);
-    document.getElementById('wrapper_wrapper_rodeo_id').style.left = (center_h-videoWidth/2)+"px";
-    document.getElementById('wrapper_wrapper_rodeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+    document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
+    document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+    document.getElementById("video_title_id").innerHTML = "Retirement Home";
+    document.getElementById('wrapper_vimeo_id').style.display = "inline";
 
-  document.getElementById('wrapper_wrapper_rodeo_id').style.display = "inline";
+    //the callback function 'timeupdate' will make the video frame visible when it resets
+    if (currentVideoId != video_id){
+      document.getElementById("vimeo_id").style.display = "none";
+      currentVideoId = video_id;
+      change_video(videos[video_id][0]);
+    }
 
 });
 
@@ -678,7 +743,7 @@ google.maps.event.addListener(rodeo_rect, 'mouseout', function (event) {
 	fillColor: '#969696',
 	});
   reset_videos(player_array);
-  document.getElementById('wrapper_wrapper_rodeo_id').style.display = "none";
+  document.getElementById('wrapper_vimeo_id').style.display = "none";
 
 });
 
@@ -686,19 +751,27 @@ google.maps.event.addListener(rodeo_rect, 'mouseout', function (event) {
 // WESTERN PARK behaviours
 google.maps.event.addListener(western_park_circle, 'mouseover',function (event)  {
 
+  video_id = 13; //line 35
 
   this.setOptions({
     fillColor: '#ffcf2f',
   });
 
-//move the video to near the icon
-var r = get_mapthing_bounds(western_park_circle) ;
-var center_h = Math.round((r.right + r.left)/2);
-document.getElementById('wrapper_wrapper_westernpark_id').style.left = (center_h-videoWidth/2)+"px";
-document.getElementById('wrapper_wrapper_westernpark_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+  //move the video to near the icon
+  var r = get_mapthing_bounds(western_park_circle) ;
+  var center_h = Math.round((r.right + r.left)/2);
+  document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
+  document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+  document.getElementById("video_title_id").innerHTML = "Western Park";
+  document.getElementById('wrapper_vimeo_id').style.display = "inline";
 
+  //the callback function 'timeupdate' will make the video frame visible when it resets
+  if (currentVideoId != video_id){
+    document.getElementById("vimeo_id").style.display = "none";
+    currentVideoId = video_id;
+    change_video(videos[video_id][0]);
+  }
 
-  document.getElementById('wrapper_wrapper_westernpark_id').style.display = "inline";
 });
 
 
@@ -707,7 +780,7 @@ google.maps.event.addListener(western_park_circle, 'mouseout', function (event) 
 	fillColor: '#969696',
 	});
   reset_videos(player_array);
-  document.getElementById('wrapper_wrapper_westernpark_id').style.display = "none";
+  document.getElementById('wrapper_vimeo_id').style.display = "none";
 
 });
 
@@ -889,9 +962,9 @@ function doPan(d,steps) {
 
 
 function reset_videos(video_array) {
-  for (i=0;i<video_array.length;i++) {
-    video_array[i].setCurrentTime(0);
-  }
+  //for (i=0;i<video_array.length;i++) {
+  //  video_array[i].setCurrentTime(0);
+  //}
 }
 
 function showFronteira() {

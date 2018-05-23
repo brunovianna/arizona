@@ -16,6 +16,25 @@ var videoUp = 61;
 var goingToMexico = false;
 var returningToMesa = false;
 var vimeo_fronteira;
+var currentVideoId = 0;
+
+var layerOverlapFlag = false;
+
+var videos  = [[226354540, "Casa dos Hanny"],
+  [226353399, "Casa do Corbin"],
+  [226353447, "Casa da Kristen"],
+  [226353387, "Casa da Cait"],
+  [226353434, "Casa dos Casillas"],
+  [226368841, "Casa da Jan"],
+  [226354563, "Tour das Igrejas"],
+  [253042771, "Volta por Mesa"],
+  [225001757, "Skyland Highschool"],
+  [226357094, "Shooting Range"],
+  [225001970, "Gym"],
+  [225002041, "Retirement Home"],
+  [226364472, "Rodeo"],
+  [226354643, "Western Park"]];
+
 
 function initMap() {
 // Create the map with no initial style specified.
@@ -101,8 +120,23 @@ for (i = 0; i< iFrames.length; i++ ) {
 
 vimeo_fronteira = new Vimeo.Player(document.getElementById("video_fronteira"));
 
+vimeo_player = new Vimeo.Player(document.getElementById("vimeo_id"));
 
 
+vimeo_player.on('timeupdate', function(data) {
+    // data is an object containing properties specific to that event
+    if (document.getElementById("vimeo_id").style.display == "none") {
+      console.log("hidden "+data.seconds);
+
+      if (data.seconds < 0.5 ){
+        document.getElementById("vimeo_id").style.display="block";
+        console.log("showing "+data.seconds);
+
+      }
+    } else {
+      console.log("timeupdate "+data.seconds);
+    }
+});
 
 //reservation overlay
 var reservationBounds = {
@@ -197,7 +231,7 @@ igreja_11_overlay.setMap(map);
 var cruz_1_bounds = {  north: 33.267,   south: 33.264,   east: -111.947,  west: -111.950 };
 var cruz_2_bounds = {  north: 33.231,   south: 33.228,   east: -111.907,  west: -111.910 };
 var cruz_3_bounds = {  north: 33.223,   south: 33.220,   east: -111.860,  west: -111.863 };
-var cruz_4_bounds = { north: 33.205,   south: 33.202,  east: -111.792,  west: -111.795 };
+var cruz_4_bounds = {  north: 33.205,   south: 33.202,  east: -111.792,  west: -111.795 };
 var cruz_5_bounds = {  north: 33.197,   south: 33.194,   east: -111.753,  west: -111.756 };
 var cruz_6_bounds = {  north: 33.221,   south: 33.218,   east: -111.724,  west: -111.727 };
 
@@ -224,8 +258,8 @@ volta_overlay.setMap(map);
 
 
 
-document.getElementById('highschool').onmouseout = function(){document.getElementById('highschool').style.display="none";};
-document.getElementById('wrapper_wrapper_gym_id').style.display="none";
+//document.getElementById('highschool').onmouseout = function(){document.getElementById('highschool').style.display="none";};
+//document.getElementById('wrapper_wrapper_gym_id').style.display="none";
 
 /*
 document.getElementById('rectangle_above_id').onmouseout = function () {
@@ -389,23 +423,26 @@ function igrejaMouseOut (out_overlay) {
 
 // HOUSES behaviours
 
-google.maps.event.addListener(cruz_1_overlay, 'mouseover', function () { casaMouseOver(casa_1_overlay, 'wrapper_wrapper_casa_1_id','Casa dos ','Hanny');});
-google.maps.event.addListener(casa_1_overlay, 'mouseout', function () { casaMouseOut(casa_1_overlay, 'wrapper_wrapper_casa_1_id');});
-google.maps.event.addListener(casa_2_overlay, 'mouseover', function () { casaMouseOver(casa_2_overlay, 'wrapper_wrapper_casa_2_id','Casa dos ','Corbin');});
-google.maps.event.addListener(casa_2_overlay, 'mouseout', function () { casaMouseOut(casa_2_overlay, 'wrapper_wrapper_casa_2_id');});
-google.maps.event.addListener(casa_3_overlay, 'mouseover', function () { casaMouseOver(casa_3_overlay, 'wrapper_wrapper_casa_3_id','Casa dos ','Kirsten');});
-google.maps.event.addListener(casa_3_overlay, 'mouseout', function () { casaMouseOut(casa_3_overlay, 'wrapper_wrapper_casa_3_id');});
-google.maps.event.addListener(casa_4_overlay, 'mouseover', function () { casaMouseOver(casa_4_overlay, 'wrapper_wrapper_casa_4_id','Casa dos ','Cait');});
-google.maps.event.addListener(casa_4_overlay, 'mouseout', function () { casaMouseOut(casa_4_overlay, 'wrapper_wrapper_casa_4_id');});
-google.maps.event.addListener(casa_5_overlay, 'mouseover', function () { casaMouseOver(casa_5_overlay, 'wrapper_wrapper_casa_5_id','Casa dos ','Casillas');});
-google.maps.event.addListener(casa_5_overlay, 'mouseout', function () { casaMouseOut(casa_5_overlay, 'wrapper_wrapper_casa_5_id');});
-google.maps.event.addListener(casa_6_overlay, 'mouseover', function () { casaMouseOver(casa_6_overlay, 'wrapper_wrapper_casa_6_id','Casa dos ','Jan');});
-google.maps.event.addListener(casa_6_overlay, 'mouseout', function () { casaMouseOut(casa_6_overlay, 'wrapper_wrapper_casa_6_id');});
+google.maps.event.addListener(cruz_1_overlay, 'mouseover', function () { casaMouseOver(casa_1_overlay, 'wrapper_vimeo_id',0, 'Casa dos ','Hanny');});
+google.maps.event.addListener(casa_1_overlay, 'mouseout', function () { casaMouseOut(casa_1_overlay, 'wrapper_vimeo_id');});
+google.maps.event.addListener(casa_2_overlay, 'mouseover', function () { casaMouseOver(casa_2_overlay, 'wrapper_vimeo_id',1,'Casa do ','Corbin');});
+google.maps.event.addListener(casa_2_overlay, 'mouseout', function () { casaMouseOut(casa_2_overlay, 'wrapper_vimeo_id');});
+google.maps.event.addListener(casa_3_overlay, 'mouseover', function () { casaMouseOver(casa_3_overlay, 'wrapper_vimeo_id',2,'Casa da ','Kirsten');});
+google.maps.event.addListener(casa_3_overlay, 'mouseout', function () { casaMouseOut(casa_3_overlay, 'wrapper_vimeo_id');});
+google.maps.event.addListener(casa_4_overlay, 'mouseover', function () { casaMouseOver(casa_4_overlay, 'wrapper_vimeo_id',3,'Casa da ','Cait');});
+google.maps.event.addListener(casa_4_overlay, 'mouseout', function () { casaMouseOut(casa_4_overlay, 'wrapper_vimeo_id');});
+google.maps.event.addListener(casa_5_overlay, 'mouseover', function () { casaMouseOver(casa_5_overlay, 'wrapper_vimeo_id',4,'Casa dos ','Casillas');});
+google.maps.event.addListener(casa_5_overlay, 'mouseout', function () { casaMouseOut(casa_5_overlay, 'wrapper_vimeo_id');});
+google.maps.event.addListener(casa_6_overlay, 'mouseover', function () { casaMouseOver(casa_6_overlay, 'wrapper_vimeo_id',5,'Casa da ','Jan');});
+google.maps.event.addListener(casa_6_overlay, 'mouseout', function () { casaMouseOut(casa_6_overlay, 'wrapper_vimeo_id');});
 
-function casaMouseOver(me, id, text_1, text_2) {
+function casaMouseOver(me, id, video_id, text_1, text_2) {
   me.setOptions({
 		fillColor: '#ff9100',
 	});
+
+
+
 
   me.set('url', 'images/arizona_icone_quadrado-amarelo.png');
   me.setMap(map);
@@ -413,9 +450,17 @@ function casaMouseOver(me, id, text_1, text_2) {
   var r = get_mapthing_bounds(me) ;
   var center_h = Math.round((r.right + r.left)/2);
 
+  document.getElementById("video_title_id").innerHTML = text_1+text_2;
   document.getElementById(id).style.left = (center_h-videoWidth/2)+"px";
   document.getElementById(id).style.top = (r.bottom-videoHeight-videoUp)+"px";
   document.getElementById(id).style.display = "inline";
+
+  //if thethe callback function 'timeupdate' will make the video frame visible when it resets
+  if (currentVideoId != video_id){
+    document.getElementById("vimeo_id").style.display = "none";
+    currentVideoId = video_id;
+    change_video(videos[video_id][0]);
+  }
 
   };
 
@@ -441,7 +486,6 @@ google.maps.event.addListener(volta_overlay, 'mouseover', function (event) {
 
     document.getElementById('wrapper_wrapper_volta_id').style.left = (center_h-videoWidth/2)+"px";
     document.getElementById('wrapper_wrapper_volta_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
-
 
     document.getElementById('wrapper_wrapper_volta_id').style.display = "inline";
 
@@ -551,8 +595,11 @@ google.maps.event.addListener(shooting_range_rect, 'mouseout', function (event) 
 });
 
 // RETIREMENT behaviours
-google.maps.event.addListener(retirement_rect, 'mouseover', function (event) {
-	this.setOptions({
+google.maps.event.addListener(retirement_rect, 'mouseover', function (e) {
+
+
+
+  this.setOptions({
 		fillColor: '#ffcf2f',
 	});
 
@@ -565,18 +612,47 @@ google.maps.event.addListener(retirement_rect, 'mouseover', function (event) {
 
   document.getElementById('wrapper_wrapper_retirement_id').style.display = "inline";
 
-});
+}, false);
 
 google.maps.event.addListener(retirement_rect, 'mouseout', function (event) {
 
-	this.setOptions({
-	fillColor: '#969696',
-	});
-  reset_videos(player_array);
-  document.getElementById('wrapper_wrapper_retirement_id').style.display = "none";
+  console.log("bola mouseout");
+  mythis = this;
+
+  setTimeout(function () {
+    console.log("time out");
+    if (!layerOverlapFlag) {
+      mythis.setOptions({
+      fillColor: '#969696',
+      });
+      reset_videos(player_array);
+      document.getElementById('wrapper_wrapper_retirement_id').style.display = "none";
+      layerOverlapFlag = false;
+    }
+  }, 300);
 
 });
+/*
+document.getElementById('wrapper_wrapper_retirement_id').addEventListener('mouseover', function () {
+    console.log("wrapper mouseover");
+    layerOverlapFlag = true;
+});
 
+document.getElementById('wrapper_wrapper_retirement_id').addEventListener('mouseout', function () {
+    console.log("wrapper mouseout");
+    retirement_rect.setOptions({
+    fillColor: '#969696',
+    });
+    layerOverlapFlag = false;
+    reset_videos(player_array);
+    document.getElementById('wrapper_wrapper_retirement_id').style.display = "none";
+});
+
+document.getElementById('video_retirement_id').addEventListener('mouseover', function () {
+    console.log("video mouseover");
+
+});
+*/
 
 // RODEO behaviours
 google.maps.event.addListener(rodeo_rect, 'mouseover', function (event) {
@@ -845,6 +921,39 @@ var endFronteira = function () {
       }
       , 1000);
 
+}
+
+
+
+function change_video (new_id) {
+  vimeo_player.loadVideo(new_id).then(function() {
+      // the video successfully loaded
+      console.log("finally");
+      vimeo_player.play();
+
+  }).catch(function(error) {
+      switch (error.name) {
+          case 'TypeError':
+              // the id was not a number
+              console.log("type error");
+              break;
+
+          case 'PasswordError':
+              // the video is password-protected and the viewer needs to enter the
+              // password first
+              console.log("pass error");
+              break;
+
+          case 'PrivacyError':
+              // the video is password-protected or private
+              break;
+
+          default:
+              // some other error occurred
+              console.log("default");
+              break;
+      }
+  });
 }
 
 

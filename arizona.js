@@ -106,18 +106,6 @@ google.maps.event.addListener(map, 'center_changed', function() {
 });
 
 
-//video objects
-var player_array = [];
-
-//console.log("iframes "+document.querySelectorAll('#body .iframe').length);
-//document.getElementsByTagName('iFrame').length
-var iFrames = document.getElementsByTagName('iFrame');
-for (i = 0; i< iFrames.length; i++ ) {
-  if  (iFrames[i].src.includes("vimeo")) {
-    player_array.push(new Vimeo.Player(iFrames[i]));
-  }
-}
-
 vimeo_fronteira = new Vimeo.Player(document.getElementById("video_fronteira"));
 
 vimeo_player = new Vimeo.Player(document.getElementById("vimeo_id"));
@@ -126,15 +114,15 @@ vimeo_player = new Vimeo.Player(document.getElementById("vimeo_id"));
 vimeo_player.on('timeupdate', function(data) {
     // data is an object containing properties specific to that event
     if (document.getElementById("vimeo_id").style.display == "none") {
-      console.log("hidden "+data.seconds);
+      //console.log("hidden "+data.seconds);
 
       if (data.seconds < 0.5 ){
         document.getElementById("vimeo_id").style.display="block";
-        console.log("showing "+data.seconds);
+        //console.log("showing "+data.seconds);
 
       }
     } else {
-      console.log("timeupdate "+data.seconds);
+      //console.log("timeupdate "+data.seconds);
     }
 });
 
@@ -255,18 +243,6 @@ var volta_bounds = {  north: 33.392,   south: 33.388,   east: -111.947,  west: -
 var volta_overlay = new google.maps.GroundOverlay('images/icone_estrada.png', volta_bounds);
 volta_overlay.setMap(map);
 
-
-
-
-//document.getElementById('highschool').onmouseout = function(){document.getElementById('highschool').style.display="none";};
-//document.getElementById('wrapper_wrapper_gym_id').style.display="none";
-
-/*
-document.getElementById('rectangle_above_id').onmouseout = function () {
-  document.getElementById('wrapper_wrapper_gym_id').style.display="none";
-  this.style.display="none";
-}
-*/
 
 //polygons!
 var skyland_highschool_rect = new google.maps.Circle({
@@ -481,7 +457,7 @@ function casaMouseOut (me, id) {
   me.setMap(map);
 
   document.getElementById(id).style.display = "none";
-  reset_videos(player_array);
+
 }
 
 // VOLTA behaviours
@@ -513,7 +489,6 @@ google.maps.event.addListener(volta_overlay, 'mouseover', function (event) {
 google.maps.event.addListener(volta_overlay, 'mouseout', function (event) {
 
   volta_overlay.set('url', 'images/icone_estrada.png');
-  reset_videos(player_array);
   document.getElementById('wrapper_vimeo_id').style.display = "none";
 
 });
@@ -562,7 +537,7 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseout', function (eve
 	this.setOptions({
 	fillColor: '#969696',
 	});
-  reset_videos(player_array);
+
   document.getElementById('wrapper_vimeo_id').style.display = "none";
 
 });
@@ -599,7 +574,7 @@ google.maps.event.addListener(gym_rect, 'mouseout', function (event) {
 	this.setOptions({
 	fillColor: '#969696',
 	});
-  reset_videos(player_array);
+
   document.getElementById('wrapper_vimeo_id').style.display = "none";
 
 });
@@ -638,7 +613,7 @@ google.maps.event.addListener(shooting_range_rect, 'mouseout', function (event) 
 	this.setOptions({
 	fillColor: '#969696',
 	});
-  reset_videos(player_array);
+
   document.getElementById('wrapper_vimeo_id').style.display = "none";
 });
 
@@ -672,7 +647,7 @@ google.maps.event.addListener(retirement_rect, 'mouseover', function (e) {
 
 google.maps.event.addListener(retirement_rect, 'mouseout', function (event) {
 
-  console.log("bola mouseout");
+  console.log("bola mouseleave");
   mythis = this;
 
   setTimeout(function () {
@@ -681,34 +656,34 @@ google.maps.event.addListener(retirement_rect, 'mouseout', function (event) {
       mythis.setOptions({
       fillColor: '#969696',
       });
-      reset_videos(player_array);
+
       document.getElementById('wrapper_vimeo_id').style.display = "none";
       layerOverlapFlag = false;
     }
-  }, 300);
+  }, 500);
 
 });
-/*
-document.getElementById('wrapper_wrapper_retirement_id').addEventListener('mouseover', function () {
-    console.log("wrapper mouseover");
+
+document.getElementById('wrapper_vimeo_id').addEventListener('mouseenter', function () {
+    console.log("wrapper mouseenter");
     layerOverlapFlag = true;
 });
 
-document.getElementById('wrapper_wrapper_retirement_id').addEventListener('mouseout', function () {
-    console.log("wrapper mouseout");
+document.getElementById('wrapper_vimeo_id').addEventListener('mouseleave', function () {
+    console.log("wrapper mouseleave");
     retirement_rect.setOptions({
     fillColor: '#969696',
     });
     layerOverlapFlag = false;
-    reset_videos(player_array);
-    document.getElementById('wrapper_wrapper_retirement_id').style.display = "none";
-});
-
-document.getElementById('video_retirement_id').addEventListener('mouseover', function () {
-    console.log("video mouseover");
+    document.getElementById('wrapper_vimeo_id').style.display = "none";
 
 });
-*/
+
+document.getElementById('vimeo_id').addEventListener('mouseenter', function () {
+    console.log("video mouseeneter");
+
+});
+
 
 // RODEO behaviours
 google.maps.event.addListener(rodeo_rect, 'mouseover', function (event) {
@@ -742,7 +717,7 @@ google.maps.event.addListener(rodeo_rect, 'mouseout', function (event) {
 	this.setOptions({
 	fillColor: '#969696',
 	});
-  reset_videos(player_array);
+
   document.getElementById('wrapper_vimeo_id').style.display = "none";
 
 });
@@ -779,7 +754,7 @@ google.maps.event.addListener(western_park_circle, 'mouseout', function (event) 
 	this.setOptions({
 	fillColor: '#969696',
 	});
-  reset_videos(player_array);
+
   document.getElementById('wrapper_vimeo_id').style.display = "none";
 
 });
@@ -961,11 +936,7 @@ function doPan(d,steps) {
 }
 
 
-function reset_videos(video_array) {
-  //for (i=0;i<video_array.length;i++) {
-  //  video_array[i].setCurrentTime(0);
-  //}
-}
+
 
 function showFronteira() {
   document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "none";
@@ -1001,7 +972,7 @@ var endFronteira = function () {
 function change_video (new_id) {
   vimeo_player.loadVideo(new_id).then(function() {
       // the video successfully loaded
-      console.log("finally");
+      //console.log("finally");
       vimeo_player.play();
 
   }).catch(function(error) {

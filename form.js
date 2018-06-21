@@ -1,10 +1,12 @@
 
 var current_form_page = 0;
 
-//form stuff
+
 function confirm() {
-  if (current_form_page<9) {
+
+  if (current_form_page<8) {
   current_form_page = current_form_page + 1;
+
   document.getElementById('question').innerHTML = form_responses_questions[current_form_page][0];
   document.getElementById('question-count').innerHTML = (current_form_page+1);
 
@@ -29,13 +31,15 @@ function confirm() {
 } else {
 
   //process results
-    document.getElementById('form_id').style.display = 'none';
-    document.getElementById('screenplay_id').style.left = 0;
+  //console.log(document.getElementById("form_id").elements);
+  document.getElementById("form_id").submit();
 
 }
 }
 
 function cleanForm(checkboxNum) {
+  if (checkboxNum != 0) document.getElementById("question_"+current_form_page).value = checkboxNum;
+
   for (i=0;i<9;i++) {
       if ((form_responses_questions[current_form_page][1][i]!=undefined)&&(i!=checkboxNum)) {
         document.getElementById('checkboxG'+i).checked=false;

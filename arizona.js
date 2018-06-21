@@ -10,6 +10,7 @@ var pan_started = 0;
 var allowedBounds;
 var lastValidCenter;
 var reservationOverlay;
+var cruzesOverlay;
 var videoWidth = 200;
 var videoHeight = 112;
 var videoUp = 61;
@@ -17,6 +18,9 @@ var goingToMexico = false;
 var returningToMesa = false;
 var vimeo_fronteira;
 var currentVideoId = -1;
+
+var cruzes_bounds = [];
+var cruzes_overlay = [];
 
 var layerOverlapFlag = false;
 
@@ -28,10 +32,10 @@ var videos  = [[226354540, "Casa dos Hanny"],
   [226368841, "Casa da Jan"],
   [226354563, "Tour das Igrejas"],
   [253042771, "Volta por Mesa"],
-  [225001757, "Skyland Highschool"],
+  [225001757, "High School"],
   [226357094, "Shooting Range"],
   [225001970, "Gym"],
-  [225002041, "Retirement Home"],
+  [225002041, "Condomínios +55"],
   [226364472, "Rodeo"],
   [226354643, "Western Park"]];
 
@@ -87,7 +91,7 @@ google.maps.event.addListener(map, 'center_changed', function() {
     //console.log("center changed");
     // check if we're doing the pan to mexico
     if (!goingToMexico) {
-      if ((!returningToMesa)&&(map.getCenter().lat() < 33.25)) {
+      if ((!returningToMesa)&&(map.getCenter().lat() < 33.30)) {
         //show border arrow
         document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "inline";
 
@@ -138,6 +142,26 @@ reservationOverlay = new google.maps.GroundOverlay(
     'images/reserva.svg',
     reservationBounds);
 reservationOverlay.setMap(map);
+
+
+
+//cruzes overlay
+/*
+var cruzesBounds = {
+  north: 33.311,
+  south: 33.201,
+  east: -112.111,
+  west: -111.861
+};
+
+cruzesOverlay = new google.maps.GroundOverlay(
+    'images/cruzes.png',
+    cruzesBounds);
+cruzesOverlay.setMap(map);
+
+*/
+
+
 
 //casas width .006 height .005
 
@@ -216,6 +240,18 @@ igreja_11_overlay.setMap(map);
 33.217652, -111.724291
 */
 
+/*
+var j=0;
+
+for (i=0;i<cruzes.length;i=i+4) {
+  var b = { north: cruzes[i], south: cruzes[i+1], east: cruzes[i+2], west: cruzes[i+3]};
+  cruzes_overlay.push( new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', b));
+  cruzes_overlay[j].setMap(map);
+  console.log(cruzes_overlay[j]);
+  j++;
+}
+
+
 var cruz_1_bounds = {  north: 33.267,   south: 33.264,   east: -111.947,  west: -111.950 };
 var cruz_2_bounds = {  north: 33.231,   south: 33.228,   east: -111.907,  west: -111.910 };
 var cruz_3_bounds = {  north: 33.223,   south: 33.220,   east: -111.860,  west: -111.863 };
@@ -237,7 +273,7 @@ cruz_4_overlay.setMap(map);
 cruz_5_overlay.setMap(map);
 cruz_6_overlay.setMap(map);
 
-
+*/
 //volta width .004 height .004
 var volta_bounds = {  north: 33.392,   south: 33.388,   east: -111.947,  west: -111.951 };
 var volta_overlay = new google.maps.GroundOverlay('images/icone_estrada.png', volta_bounds);
@@ -376,51 +412,64 @@ function igrejaMouseOver (my_overlay) {
 }
 
 function igrejaMouseOut (out_overlay) {
-  document.getElementById('wrapper_vimeo_id').style.display = "none";
 
-  igreja_1_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
-  igreja_2_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
-  igreja_3_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
-  igreja_4_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
-  igreja_5_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
-  igreja_6_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
-  igreja_7_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
-  igreja_8_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
-  igreja_9_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
-  igreja_10_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
-  igreja_11_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
 
-  igreja_1_overlay.setMap(map);
-  igreja_2_overlay.setMap(map);
-  igreja_3_overlay.setMap(map);
-  igreja_4_overlay.setMap(map);
-  igreja_5_overlay.setMap(map);
-  igreja_6_overlay.setMap(map);
-  igreja_7_overlay.setMap(map);
-  igreja_8_overlay.setMap(map);
-  igreja_9_overlay.setMap(map);
-  igreja_10_overlay.setMap(map);
-  igreja_11_overlay.setMap(map);
+  setTimeout(function () {
+    //console.log("time out");
+    if (!layerOverlapFlag) {
+      document.getElementById('wrapper_vimeo_id').style.display = "none";
 
-  out_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
-  out_overlay.setMap(map);
+      igreja_1_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+      igreja_2_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+      igreja_3_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+      igreja_4_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+      igreja_5_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+      igreja_6_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+      igreja_7_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+      igreja_8_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+      igreja_9_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+      igreja_10_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+      igreja_11_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+
+      igreja_1_overlay.setMap(map);
+      igreja_2_overlay.setMap(map);
+      igreja_3_overlay.setMap(map);
+      igreja_4_overlay.setMap(map);
+      igreja_5_overlay.setMap(map);
+      igreja_6_overlay.setMap(map);
+      igreja_7_overlay.setMap(map);
+      igreja_8_overlay.setMap(map);
+      igreja_9_overlay.setMap(map);
+      igreja_10_overlay.setMap(map);
+      igreja_11_overlay.setMap(map);
+
+      out_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+      out_overlay.setMap(map);
+
+
+
+      layerOverlapFlag = false;
+    }
+  }, 500);
+
+
 
 }
 
 // HOUSES behaviours
 
 google.maps.event.addListener(casa_1_overlay, 'mouseover', function () { casaMouseOver(casa_1_overlay, 'wrapper_vimeo_id',0, 'Casa dos ','Hanny');});
-google.maps.event.addListener(casa_1_overlay, 'mouseout', function () { casaMouseOut(casa_1_overlay, 'wrapper_vimeo_id');});
+google.maps.event.addListener(casa_1_overlay, 'mouseout', function () { casaMouseOut(casa_1_overlay);});
 google.maps.event.addListener(casa_2_overlay, 'mouseover', function () { casaMouseOver(casa_2_overlay, 'wrapper_vimeo_id',1,'Casa do ','Corbin');});
-google.maps.event.addListener(casa_2_overlay, 'mouseout', function () { casaMouseOut(casa_2_overlay, 'wrapper_vimeo_id');});
+google.maps.event.addListener(casa_2_overlay, 'mouseout', function () { casaMouseOut(casa_2_overlay);});
 google.maps.event.addListener(casa_3_overlay, 'mouseover', function () { casaMouseOver(casa_3_overlay, 'wrapper_vimeo_id',2,'Casa da ','Kirsten');});
-google.maps.event.addListener(casa_3_overlay, 'mouseout', function () { casaMouseOut(casa_3_overlay, 'wrapper_vimeo_id');});
+google.maps.event.addListener(casa_3_overlay, 'mouseout', function () { casaMouseOut(casa_3_overlay);});
 google.maps.event.addListener(casa_4_overlay, 'mouseover', function () { casaMouseOver(casa_4_overlay, 'wrapper_vimeo_id',3,'Casa da ','Cait');});
-google.maps.event.addListener(casa_4_overlay, 'mouseout', function () { casaMouseOut(casa_4_overlay, 'wrapper_vimeo_id');});
+google.maps.event.addListener(casa_4_overlay, 'mouseout', function () { casaMouseOut(casa_4_overlay);});
 google.maps.event.addListener(casa_5_overlay, 'mouseover', function () { casaMouseOver(casa_5_overlay, 'wrapper_vimeo_id',4,'Casa dos ','Casillas');});
-google.maps.event.addListener(casa_5_overlay, 'mouseout', function () { casaMouseOut(casa_5_overlay, 'wrapper_vimeo_id');});
+google.maps.event.addListener(casa_5_overlay, 'mouseout', function () { casaMouseOut(casa_5_overlay);});
 google.maps.event.addListener(casa_6_overlay, 'mouseover', function () { casaMouseOver(casa_6_overlay, 'wrapper_vimeo_id',5,'Casa da ','Jan');});
-google.maps.event.addListener(casa_6_overlay, 'mouseout', function () { casaMouseOut(casa_6_overlay, 'wrapper_vimeo_id');});
+google.maps.event.addListener(casa_6_overlay, 'mouseout', function () { casaMouseOut(casa_6_overlay);});
 
 function casaMouseOver(me, id, video_id, text_1, text_2) {
   me.setOptions({
@@ -447,16 +496,23 @@ function casaMouseOver(me, id, video_id, text_1, text_2) {
 
   };
 
-function casaMouseOut (me, id) {
-  me.setOptions({
-		fillColor:'#ffcf2f',
-	});
+function casaMouseOut (me) {
+
+  setTimeout(function () {
+    //console.log("time out");
+    if (!layerOverlapFlag) {
+      me.setOptions({
+    		fillColor:'#ffcf2f',
+    	});
+
+      me.set('url', 'images/arizona_icone_quadrado-cinza.png');
+      me.setMap(map);
+      document.getElementById('wrapper_vimeo_id').style.display = "none";
+      layerOverlapFlag = false;
+    }
+  }, 500);
 
 
-  me.set('url', 'images/arizona_icone_quadrado-cinza.png');
-  me.setMap(map);
-
-  document.getElementById(id).style.display = "none";
 
 }
 
@@ -488,8 +544,18 @@ google.maps.event.addListener(volta_overlay, 'mouseover', function (event) {
 
 google.maps.event.addListener(volta_overlay, 'mouseout', function (event) {
 
-  volta_overlay.set('url', 'images/icone_estrada.png');
-  document.getElementById('wrapper_vimeo_id').style.display = "none";
+
+
+  setTimeout(function () {
+    //console.log("time out");
+    if (!layerOverlapFlag) {
+      volta_overlay.set('url', 'images/icone_estrada.png');
+
+      document.getElementById('wrapper_vimeo_id').style.display = "none";
+      layerOverlapFlag = false;
+    }
+  }, 500);
+
 
 });
 
@@ -516,7 +582,7 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (ev
   var r = get_mapthing_bounds(skyland_highschool_rect) ;
   var center_h = Math.round((r.right + r.left)/2);
 
-  document.getElementById("video_title_id").innerHTML = "Skyland Highschool";
+  document.getElementById("video_title_id").innerHTML = "High School";
   document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
   document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
   document.getElementById('wrapper_vimeo_id').style.display = "inline";
@@ -531,14 +597,7 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (ev
 });
 
 google.maps.event.addListener(skyland_highschool_rect, 'mouseout', function (event) {
-	// Within the event listener, "this" refers to the polygon which
-	// received the event.
-  	//document.getElementById('highschool').style.display="none";
-	this.setOptions({
-	fillColor: '#969696',
-	});
-
-  document.getElementById('wrapper_vimeo_id').style.display = "none";
+  delayOverlayMouseout(this);
 
 });
 
@@ -571,11 +630,7 @@ google.maps.event.addListener(gym_rect, 'mouseover', function (event) {
 });
 
 google.maps.event.addListener(gym_rect, 'mouseout', function (event) {
-	this.setOptions({
-	fillColor: '#969696',
-	});
-
-  document.getElementById('wrapper_vimeo_id').style.display = "none";
+  delayOverlayMouseout(this);
 
 });
 
@@ -610,11 +665,7 @@ google.maps.event.addListener(shooting_range_rect, 'mouseover', function (event)
 });
 
 google.maps.event.addListener(shooting_range_rect, 'mouseout', function (event) {
-	this.setOptions({
-	fillColor: '#969696',
-	});
-
-  document.getElementById('wrapper_vimeo_id').style.display = "none";
+  delayOverlayMouseout(this);
 });
 
 // RETIREMENT behaviours
@@ -633,7 +684,7 @@ google.maps.event.addListener(retirement_rect, 'mouseover', function (e) {
   var center_h = Math.round((r.right + r.left)/2);
   document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
   document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
-  document.getElementById("video_title_id").innerHTML = "Retirement Home";
+  document.getElementById("video_title_id").innerHTML = "Condomínios +55";
   document.getElementById('wrapper_vimeo_id').style.display = "inline";
 
   //the callback function 'timeupdate' will make the video frame visible when it resets
@@ -647,42 +698,13 @@ google.maps.event.addListener(retirement_rect, 'mouseover', function (e) {
 
 google.maps.event.addListener(retirement_rect, 'mouseout', function (event) {
 
-  console.log("bola mouseleave");
-  mythis = this;
+  //console.log("bola mouseleave");
+  delayOverlayMouseout(this);
 
-  setTimeout(function () {
-    console.log("time out");
-    if (!layerOverlapFlag) {
-      mythis.setOptions({
-      fillColor: '#969696',
-      });
 
-      document.getElementById('wrapper_vimeo_id').style.display = "none";
-      layerOverlapFlag = false;
-    }
-  }, 500);
 
 });
 
-document.getElementById('wrapper_vimeo_id').addEventListener('mouseenter', function () {
-    console.log("wrapper mouseenter");
-    layerOverlapFlag = true;
-});
-
-document.getElementById('wrapper_vimeo_id').addEventListener('mouseleave', function () {
-    console.log("wrapper mouseleave");
-    retirement_rect.setOptions({
-    fillColor: '#969696',
-    });
-    layerOverlapFlag = false;
-    document.getElementById('wrapper_vimeo_id').style.display = "none";
-
-});
-
-document.getElementById('vimeo_id').addEventListener('mouseenter', function () {
-    console.log("video mouseeneter");
-
-});
 
 
 // RODEO behaviours
@@ -701,7 +723,7 @@ google.maps.event.addListener(rodeo_rect, 'mouseover', function (event) {
     var center_h = Math.round((r.right + r.left)/2);
     document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
     document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
-    document.getElementById("video_title_id").innerHTML = "Retirement Home";
+    document.getElementById("video_title_id").innerHTML = "Rodeo";
     document.getElementById('wrapper_vimeo_id').style.display = "inline";
 
     //the callback function 'timeupdate' will make the video frame visible when it resets
@@ -714,11 +736,7 @@ google.maps.event.addListener(rodeo_rect, 'mouseover', function (event) {
 });
 
 google.maps.event.addListener(rodeo_rect, 'mouseout', function (event) {
-	this.setOptions({
-	fillColor: '#969696',
-	});
-
-  document.getElementById('wrapper_vimeo_id').style.display = "none";
+  delayOverlayMouseout(this);
 
 });
 
@@ -751,11 +769,7 @@ google.maps.event.addListener(western_park_circle, 'mouseover',function (event) 
 
 
 google.maps.event.addListener(western_park_circle, 'mouseout', function (event) {
-	this.setOptions({
-	fillColor: '#969696',
-	});
-
-  document.getElementById('wrapper_vimeo_id').style.display = "none";
+  delayOverlayMouseout(this);
 
 });
 
@@ -772,6 +786,24 @@ document.getElementById('wrapper_wrapper_seta_fronteira_id').addEventListener('c
   panTo(32.5,-111.5,8,900,4);
 
 });
+
+
+document.getElementById('wrapper_vimeo_id').addEventListener('mouseenter', function () {
+    //console.log("wrapper mouseenter");
+    layerOverlapFlag = true;
+});
+
+document.getElementById('wrapper_vimeo_id').addEventListener('mouseleave', function () {
+    //console.log("wrapper mouseleave");
+    retirement_rect.setOptions({
+    fillColor: '#969696',
+    });
+    layerOverlapFlag = false;
+    document.getElementById('wrapper_vimeo_id').style.display = "none";
+
+});
+
+
 
 /*
 
@@ -811,6 +843,9 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseout', function (eve
 */
 
 }
+
+
+
 
 function get_mapthing_bounds (mymapthing) {
   var mapthing_topright = mymapthing.getBounds().getNorthEast();
@@ -1000,6 +1035,19 @@ function change_video (new_id) {
   });
 }
 
+function delayOverlayMouseout (mythis) {
+  setTimeout(function () {
+    //console.log("time out");
+    if (!layerOverlapFlag) {
+      mythis.setOptions({
+      fillColor: '#969696',
+      });
+
+      document.getElementById('wrapper_vimeo_id').style.display = "none";
+      layerOverlapFlag = false;
+    }
+  }, 500);
+}
 
 var map_style = [
   {
@@ -1306,3 +1354,132 @@ var map_style = [
     ]
   }
 ];
+
+/*
+var cruzes = [
+  32.1117,32.1087,-112.9925,-112.9955,
+  31.91683,31.91383,-112.93808,-112.94108,
+  31.700433,31.697433,-111.700666,-111.703666,
+  33.63877,33.63577,-114.26164,-114.26464,
+  32.31711,32.31411,-113.13486,-113.13786,
+  32.31711,32.31411,-113.13483,-113.13783,
+  32.30597,32.30297,-113.09133,-113.09433,
+  31.68753,31.68453,-111.98465,-111.98765,
+  32.06821,32.06521,-112.4018,-112.4048,
+  31.99745,31.99445,-112.12123,-112.12423,
+  32.11655,32.11355,-111.67701,-111.68001,
+  32.45399,32.45099,-113.18415,-113.18715,
+  32.0145,32.0115,-112.06358,-112.06658,
+  32.3088,32.3058,-111.395217,-111.398217,
+  31.4246,31.4216,-111.2435,-111.2465,
+  31.90777,31.90477,-110.40457,-110.40757,
+  32.08317,32.08017,-112.29913,-112.30213,
+  32.31615,32.31315,-113.08218,-113.08518,
+  32.3235,32.3205,-113.10186,-113.10486,
+  32.28982,32.28682,-113.08218,-113.08518,
+  31.847404,31.844404,-111.404717,-111.407717,
+  32.29002,32.28702,-113.08218,-113.08518,
+  31.42439,31.42139,-111.24375,-111.24675,
+  32.16779,32.16479,-113.11262,-113.11562,
+  31.95165,31.94865,-112.83267,-112.83567,
+  31.745261,31.742261,-111.855706,-111.858706,
+  31.85898,31.85598,-112.40396,-112.40696,
+  32.393333,32.390333,-113.1245,-113.1275,
+  32.34814,32.34514,-113.09823,-113.10123,
+  31.820317,31.817317,-112.141433,-112.144433,
+  31.49293,31.48993,-111.40696,-111.40996,
+  31.77614,31.77314,-111.23924,-111.24224,
+  32.08903,32.08603,-113.25421,-113.25721,
+  32.170217,32.167217,-112.376717,-112.379717,
+  31.9442,31.9412,-113.018383,-113.021383,
+  31.70533,31.70233,-112.00406,-112.00706,
+  32.01978,32.01678,-112.15991,-112.16291,
+  32.39312,32.39012,-113.39312,-113.39612,
+  31.79776,31.79476,-112.12161,-112.12461,
+  32.2623,32.2593,-111.57253,-111.57553,
+  32.34637,32.34337,-113.11729,-113.12029,
+  31.9758,31.9728,-112.988183,-112.991183,
+  32.328767,32.325767,-113.118367,-113.121367,
+  32.11713,32.11413,-113.00212,-113.00512,
+  32.04674,32.04374,-113.00973,-113.01273,
+  31.884333,31.881333,-111.806183,-111.809183,
+  32.04694,32.04394,-113.00973,-113.01273,
+  31.98845,31.98545,-112.149283,-112.152283,
+  31.80328,31.80028,-112.40016,-112.40316,
+  32.41068,32.40768,-113.13601,-113.13901,
+  32.54941,32.54641,-113.13165,-113.13465,
+  31.88556,31.88256,-110.54183,-110.54483,
+  32.4503,32.4473,-113.13721,-113.14021,
+  32.43983,32.43683,-113.13195,-113.13495,
+  32.43381,32.43081,-113.12862,-113.13162,
+  31.882383,31.879383,-112.16165,-112.16465,
+  32.601267,32.598267,-112.671433,-112.674433,
+  32.034241,32.031241,-111.339419,-111.342419,
+  31.76012,31.75712,-111.42261,-111.42561,
+  32.31955,32.31655,-112.5273,-112.5303,
+  31.98217,31.97917,-112.13511,-112.13811,
+  31.64953,31.64653,-111.45708,-111.46008,
+  32.44072,32.43772,-113.11978,-113.12278,
+  32.41934,32.41634,-113.13554,-113.13854,
+  32.41131,32.40831,-113.13784,-113.14084,
+  32.41175,32.40875,-113.13807,-113.14107,
+  32.41754,32.41454,-113.1268,-113.1298,
+  32.42663,32.42363,-113.12548,-113.12848,
+  32.45975,32.45675,-113.12954,-113.13254,
+  32.46414,32.46114,-113.13318,-113.13618,
+  31.90665,31.90365,-111.337367,-111.340367,
+  32.40368,32.40068,-111.5488,-111.5518,
+  32.3334,32.3304,-113.1181,-113.1211,
+  31.793083,31.790083,-111.852183,-111.855183,
+  31.70756,31.70456,-112.00154,-112.00454,
+  32.106783,32.103783,-112.969983,-112.972983,
+  32.06269,32.05969,-112.47641,-112.47941,
+  31.9984,31.9954,-113.0138,-113.0168,
+  32.22316,32.22016,-112923,-112923003,
+  31.764317,31.761317,-111.390167,-111.393167,
+  31.764317,31.761317,-111.390147,-111.393147,
+  31.735367,31.732367,-111.835983,-111.838983,
+  32.35445,32.35145,-111.56925,-111.57225,
+  32.126939,32.123939,-112.410878,-112.413878,
+  31.91138,31.90838,-111.3925,-111.3955,
+  32.3624,32.3594,-113.1166,-113.1196,
+  32.13059,32.12759,-111.16547,-111.16847,
+  32.34835,32.34535,-113.10178,-113.10478,
+  31.9237,31.9207,-112.9088,-112.9118,
+  32.19935,32.19635,-111.4761,-111.4791,
+  31.493283,31.490283,-111.467866,-111.470866,
+  32.36358,32.36058,-112.32331,-112.32631,
+  32.363583,32.360583,-112.323517,-112.326517,
+  32.03378,32.03078,-113.01675,-113.01975,
+  31.92835,31.92535,-111.3568,-111.3598,
+  32.00386,32.00086,-112.77683,-112.77983,
+  32.376133,32.373133,-113.105733,-113.108733,
+  32.181667,32.178667,-111.882317,-111.885317,
+  31.76985,31.76685,-111.96225,-111.96525,
+  32.16643,32.16343,-113.00467,-113.00767,
+  31.735967,31.732967,-111.954083,-111.957083,
+  31.684483,31.681483,-111.863267,-111.866267,
+  31.751633,31.748633,-111.987583,-111.990583,
+  32.06815,32.06515,-111.997033,-112.000033,
+  32.28838,32.28538,-113.07648,-113.07948,
+  31.59205,31.58905,-111.86046,-111.86346,
+  31.71875,31.71575,-112.2128,-112.2158,
+  31.830667,31.827667,-111.3885,-111.3915,
+  32.216033,32.213033,-111.558767,-111.561767,
+  32.19406,32.19106,-112.9916,-112.9946,
+  31.490717,31.487717,-111.426033,-111.429033,
+  31.81731,31.81431,-111.32687,-111.32987,
+  32.15686,32.15386,-112.92628,-112.92928,
+  32.150433,32.147433,-113.144967,-113.147967,
+  32.17897,32.17597,-112.89472,-112.89772,
+  31.96283,31.95983,-110.2434,-110.2464,
+  31.90245,31.89945,-110.4074,-110.4104,
+  32.1505,32.1475,-112.90348,-112.90648,
+  31.88146,31.87846,-111.40476,-111.40776,
+  31.805867,31.802867,-111.604967,-111.607967,
+  31.86881,31.86581,-111.36656,-111.36956,
+  31.68535,31.68235,-110.42346,-110.42646,
+  32.05535,32.05235,-112.429783,-112.432783,
+  32.09966,32.09666,-112.70402,-112.70702
+];
+*/

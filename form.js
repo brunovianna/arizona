@@ -38,7 +38,7 @@ function confirm() {
 }
 
 function cleanForm(checkboxNum) {
-  if (checkboxNum != 0) document.getElementById("question_"+current_form_page).value = checkboxNum;
+  if (checkboxNum != "") document.getElementById("question_"+current_form_page).value = checkboxNum;
 
   for (i=0;i<9;i++) {
       if ((form_responses_questions[current_form_page][1][i]!=undefined)&&(i!=checkboxNum)) {

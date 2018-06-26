@@ -7,8 +7,21 @@
 <link rel="stylesheet" type="text/css" href="css/map.css">
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Oswald:normal,bold" rel="stylesheet">
 <script src="https://player.vimeo.com/api/player.js"></script>
-<script src="arizona.js"></script>
 
+<script type="text/javascript">
+var question = [];
+question.push( <?php echo $_POST["question_0"]; ?> );
+question.push( <?php echo $_POST["question_1"]; ?> );
+question.push( <?php echo $_POST["question_2"]; ?> );
+question.push( <?php echo $_POST["question_3"]; ?> );
+question.push( <?php echo $_POST["question_4"]; ?> );
+question.push( <?php echo $_POST["question_5"]; ?> );
+question.push( <?php echo $_POST["question_6"]; ?> );
+question.push( <?php echo $_POST["question_7"]; ?> );
+question.push( <?php echo $_POST["question_8"]; ?> );
+
+</script>
+<script src="arizona.js"></script>
 </head>
 
 <body >
@@ -28,7 +41,7 @@
   <div class="video_title" id="video_title_id">Western Park</div>
   <div class="video_wrapper" id="video_wrapper_id">
     <iframe
-     src="https://player.vimeo.com/video/226354643?title=0&byline=0&background=1" id="vimeo_id"
+     src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1" id="vimeo_id"
      frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
  </div>
  <div class="video_arrow"><img src="images/seta_video.png"></div>
@@ -38,7 +51,7 @@
   <div class="fronteira_arrow"><img src="images/seta_fronteira.png"></div>
 </div>
 <div class="wrapper_fronteira" id="wrapper_wrapper_fronteira_id">
-<iframe src="https://player.vimeo.com/video/226354838?autoplay=1&title=0&byline=0&portrait=0" id="video_fronteira"
+<iframe src="https://player.vimeo.com/video/226354838?autoplay=0&title=0&byline=0&portrait=0" id="video_fronteira"
 width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 </div>

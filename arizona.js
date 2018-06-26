@@ -115,8 +115,10 @@ vimeo_fronteira = new Vimeo.Player(document.getElementById("video_fronteira"));
 vimeo_player = new Vimeo.Player(document.getElementById("vimeo_id"));
 
 
+
 vimeo_player.on('timeupdate', function(data) {
     // data is an object containing properties specific to that event
+    //console.log("hidden "+data.seconds+", status: "+vimeo_player.getPaused());
     if (document.getElementById("vimeo_id").style.display == "none") {
       //console.log("hidden "+data.seconds);
 
@@ -129,6 +131,8 @@ vimeo_player.on('timeupdate', function(data) {
       //console.log("timeupdate "+data.seconds);
     }
 });
+
+
 
 //reservation overlay
 var reservationBounds = {
@@ -371,6 +375,8 @@ function igrejaMouseOver (my_overlay) {
 
   video_id = 6; //line 29
 
+
+  /*
   igreja_1_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
   igreja_2_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
   igreja_3_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
@@ -395,6 +401,8 @@ function igrejaMouseOver (my_overlay) {
   igreja_10_overlay.setMap(map);
   igreja_11_overlay.setMap(map);
 
+  */
+
   var r = get_mapthing_bounds(my_overlay) ;
   var center_h = Math.round((r.right + r.left)/2);
 
@@ -418,7 +426,7 @@ function igrejaMouseOut (out_overlay) {
     //console.log("time out");
     if (!layerOverlapFlag) {
       document.getElementById('wrapper_vimeo_id').style.display = "none";
-
+      /*
       igreja_1_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
       igreja_2_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
       igreja_3_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
@@ -442,6 +450,7 @@ function igrejaMouseOut (out_overlay) {
       igreja_9_overlay.setMap(map);
       igreja_10_overlay.setMap(map);
       igreja_11_overlay.setMap(map);
+      */
 
       out_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
       out_overlay.setMap(map);
@@ -472,12 +481,14 @@ google.maps.event.addListener(casa_6_overlay, 'mouseover', function () { casaMou
 google.maps.event.addListener(casa_6_overlay, 'mouseout', function () { casaMouseOut(casa_6_overlay);});
 
 function casaMouseOver(me, id, video_id, text_1, text_2) {
-  me.setOptions({
+  /*me.setOptions({
 		fillColor: '#ff9100',
 	});
 
   me.set('url', 'images/arizona_icone_quadrado-amarelo.png');
   me.setMap(map);
+
+  */
 
   var r = get_mapthing_bounds(me) ;
   var center_h = Math.round((r.right + r.left)/2);
@@ -501,12 +512,14 @@ function casaMouseOut (me) {
   setTimeout(function () {
     //console.log("time out");
     if (!layerOverlapFlag) {
+      /*
       me.setOptions({
     		fillColor:'#ffcf2f',
     	});
 
       me.set('url', 'images/arizona_icone_quadrado-cinza.png');
       me.setMap(map);
+      */
       document.getElementById('wrapper_vimeo_id').style.display = "none";
       layerOverlapFlag = false;
     }
@@ -522,7 +535,7 @@ google.maps.event.addListener(volta_overlay, 'mouseover', function (event) {
   //line 30
    video_id = 7;
 
-    volta_overlay.set('url', 'images/icone_estrada-amarelo.png');
+    //volta_overlay.set('url', 'images/icone_estrada-amarelo.png');
 
     var r = get_mapthing_bounds(volta_overlay) ;
     var center_h = Math.round((r.right + r.left)/2);
@@ -549,7 +562,7 @@ google.maps.event.addListener(volta_overlay, 'mouseout', function (event) {
   setTimeout(function () {
     //console.log("time out");
     if (!layerOverlapFlag) {
-      volta_overlay.set('url', 'images/icone_estrada.png');
+      //volta_overlay.set('url', 'images/icone_estrada.png');
 
       document.getElementById('wrapper_vimeo_id').style.display = "none";
       layerOverlapFlag = false;
@@ -569,9 +582,7 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (ev
   //line 31
   video_id = 8;
 
-	this.setOptions({
-		fillColor: '#ffcf2f',
-	});
+	//this.setOptions({		fillColor: '#ffcf2f',	});
 
   //this creates a div retangle in the same place so it can be placed above other layers
   //copy_map_rectangle_position (document.getElementById('rectangle_above_id'),this);
@@ -605,9 +616,7 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseout', function (eve
 // GYM behaviours
 google.maps.event.addListener(gym_rect, 'mouseover', function (event) {
 
-	this.setOptions({
-		fillColor: '#ffcf2f',
-	});
+	//this.setOptions({		fillColor: '#ffcf2f',	});
 
   //line 31
   video_id = 10;
@@ -639,9 +648,8 @@ google.maps.event.addListener(gym_rect, 'mouseout', function (event) {
 
 // SHOOTING RANGE behaviours
 google.maps.event.addListener(shooting_range_rect, 'mouseover', function (event) {
-	this.setOptions({
-		fillColor: '#ffcf2f',
-	});
+
+	//this.setOptions({		fillColor: '#ffcf2f',	});
 
   //line 32
   video_id = 9;
@@ -674,9 +682,7 @@ google.maps.event.addListener(retirement_rect, 'mouseover', function (e) {
 
   video_id = 11; //line 34
 
-  this.setOptions({
-		fillColor: '#ffcf2f',
-	});
+  //this.setOptions({		fillColor: '#ffcf2f',	});
 
 
   //move the video to near the icon
@@ -712,9 +718,7 @@ google.maps.event.addListener(rodeo_rect, 'mouseover', function (event) {
 
   video_id = 12; //line 35
 
-	this.setOptions({
-		fillColor: '#ffcf2f',
-	});
+	//this.setOptions({		fillColor: '#ffcf2f',	});
 
 
 
@@ -746,9 +750,7 @@ google.maps.event.addListener(western_park_circle, 'mouseover',function (event) 
 
   video_id = 13; //line 35
 
-  this.setOptions({
-    fillColor: '#ffcf2f',
-  });
+  //this.setOptions({    fillColor: '#ffcf2f',  });
 
   //move the video to near the icon
   var r = get_mapthing_bounds(western_park_circle) ;
@@ -773,10 +775,6 @@ google.maps.event.addListener(western_park_circle, 'mouseout', function (event) 
 
 });
 
-
-//erase me!!!
-//document.getElementById('wrapper_wrapper_fronteira_id').style.display = "inline";
-//for debugging only
 
 
 document.getElementById('wrapper_wrapper_seta_fronteira_id').addEventListener('click', function (event) {
@@ -803,10 +801,125 @@ document.getElementById('wrapper_vimeo_id').addEventListener('mouseleave', funct
 
 });
 
+//light up the places according to the form answers
+
+var places = [];
+
+for (var i=0;i<9;i++) {
+    if (!places.includes(question_map[i][question[i]]))  {
+      places.push (question_map[i][question[i]]);
+    }
+}
+
+
+//console.log(question);
+//console.log(question_map);
+console.log(places);
+
+for (var i=0; i<places.length; i++) {
+  switch (places[i]) {
+
+    case "hanny":
+      casa_1_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
+      casa_1_overlay.setMap(map);
+      break;
+
+    case "corbin":
+      casa_2_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
+      casa_2_overlay.setMap(map);
+      break;
+
+    case "kirsten":
+      casa_3_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
+      casa_3_overlay.setMap(map);
+      break;
+
+    case "cait":
+      casa_4_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
+      casa_4_overlay.setMap(map);
+      break;
+
+    case "casillas":
+      casa_5_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
+      casa_5_overlay.setMap(map);
+      break;
+
+    case "jan":
+      casa_6_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
+      casa_6_overlay.setMap(map);
+      break;
+
+    case "igrejas":
+      igreja_1_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+      igreja_2_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+      igreja_3_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+      igreja_4_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+      igreja_5_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+      igreja_6_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+      igreja_7_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+      igreja_8_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+      igreja_9_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+      igreja_10_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+      igreja_11_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
+
+      igreja_1_overlay.setMap(map);
+      igreja_2_overlay.setMap(map);
+      igreja_3_overlay.setMap(map);
+      igreja_4_overlay.setMap(map);
+      igreja_5_overlay.setMap(map);
+      igreja_6_overlay.setMap(map);
+      igreja_7_overlay.setMap(map);
+      igreja_8_overlay.setMap(map);
+      igreja_9_overlay.setMap(map);
+      igreja_10_overlay.setMap(map);
+      igreja_11_overlay.setMap(map);
+      break;
+
+    case "volta":
+      volta_overlay.set('url', 'images/icone_estrada-amarelo.png');
+      break;
+
+
+
+
+    case "highschool":
+      skyland_highschool_rect.setOptions({		fillColor: '#ffcf2f',	})
+      break;
+
+    case "shootingrange":
+      shooting_range_rect.setOptions({		fillColor: '#ffcf2f',	});
+      break;
+
+    case "gym":
+      gym_rect.setOptions({		fillColor: '#ffcf2f',	});
+      break;
+
+    case "retirementhome":
+      retirement_rect.setOptions({		fillColor: '#ffcf2f',	});
+      break;
+
+    case "rodeo":
+      rodeo_rect.setOptions({		fillColor: '#ffcf2f',	});
+      break;
+
+    case "westernpark":
+      western_park_circle.setOptions({		fillColor: '#ffcf2f',	});
+      break;
+
+    case "fronteira":
+      document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "inline";
+      break;
+
+
+  }
+
+}
 
 
 /*
+{
 
+}
 google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (event) {
 	// Within the event listener, "this" refers to the polygon which
 	// received the event.
@@ -879,32 +992,6 @@ function copy_map_rectangle_position (my_div, mymapthing ) {
 }
 
 
-//form stuff
-function confirm() {
-  if (current_form_page<9) {
-  current_form_page = current_form_page + 1;
-  document.getElementById('form_question_id').innerHTML = form_responses_questions[current_form_page][0];
-  document.getElementById('form_left_id').innerHTML = (current_form_page+1) + "/10";
-  document.getElementById('label1').innerHTML = form_responses_questions[current_form_page][1][0];
-  document.getElementById('label2').innerHTML = form_responses_questions[current_form_page][1][1];
-  document.getElementById('label3').innerHTML = form_responses_questions[current_form_page][1][2];
-  document.getElementById('label4').innerHTML = form_responses_questions[current_form_page][1][3];
-  //some questions have only 3 answers
-  if (form_responses_questions[current_form_page][1][3]=="") {
-
-    document.getElementById('label4').style.display="none";
-  } else {
-    document.getElementById('label4').style.display="inline";
-  }
-
-} else {
-
-  //process results
-    document.getElementById('form_id').style.display = 'none';
-    document.getElementById('screenplay_id').style.left = 0;
-
-}
-}
 
 function screenplay_close() {
     if (document.getElementById('screenplay_id').style.left == "-310px") {
@@ -1039,15 +1126,25 @@ function delayOverlayMouseout (mythis) {
   setTimeout(function () {
     //console.log("time out");
     if (!layerOverlapFlag) {
-      mythis.setOptions({
-      fillColor: '#969696',
-      });
+      //mythis.setOptions({      fillColor: '#969696',      });
 
       document.getElementById('wrapper_vimeo_id').style.display = "none";
       layerOverlapFlag = false;
     }
   }, 500);
 }
+
+var question_map =   [
+  ["highschool","gym","","retirementhome"],
+  ["fronteira","westernpark","","fronteira","","fronteira",""],
+  ["kirsten","kirsten","","kirsten"],
+  ["corbin","corbin","volta","hanny"],
+  ["igrejas","igrejas","igrejas","igrejas","igrejas"],
+  ["cait","cait","casillas","corbin","hanny","","corbin","casillas","rodeo",""],
+  ["jan","hanny","volta","volta","volta"],
+  ["shootingrange","shootingrange","shootingrange","shootingrange"],
+  ["fronteira","fronteira","fronteira","fronteira"]
+];
 
 var map_style = [
   {
@@ -1354,6 +1451,9 @@ var map_style = [
     ]
   }
 ];
+
+
+
 
 /*
 var cruzes = [

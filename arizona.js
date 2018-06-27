@@ -18,6 +18,7 @@ var goingToMexico = false;
 var returningToMesa = false;
 var vimeo_fronteira;
 var currentVideoId = -1;
+var screenplay_screenplay_content = "<br><br><hr>ROTEIRO<br>";
 
 var cruzes_bounds = [];
 var cruzes_overlay = [];
@@ -819,31 +820,37 @@ for (var i=0; i<places.length; i++) {
     case "hanny":
       casa_1_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
       casa_1_overlay.setMap(map);
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Casa dos Hanny<br>";
       break;
 
     case "corbin":
       casa_2_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
       casa_2_overlay.setMap(map);
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Casa do Corbin<br>";
       break;
 
     case "kirsten":
       casa_3_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
       casa_3_overlay.setMap(map);
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Casa da Kirsten<br>";
       break;
 
     case "cait":
       casa_4_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
       casa_4_overlay.setMap(map);
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Casa da Cait<br>";
       break;
 
     case "casillas":
       casa_5_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
       casa_5_overlay.setMap(map);
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Casa dos Casillas<br>";
       break;
 
     case "jan":
       casa_6_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
       casa_6_overlay.setMap(map);
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + "Casa da Jan<br>";
       break;
 
     case "igrejas":
@@ -870,10 +877,15 @@ for (var i=0; i<places.length; i++) {
       igreja_9_overlay.setMap(map);
       igreja_10_overlay.setMap(map);
       igreja_11_overlay.setMap(map);
+
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Tour das igrejas<br>";
+
       break;
 
     case "volta":
       volta_overlay.set('url', 'images/icone_estrada-amarelo.png');
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Volta por Mesa<br>";
+
       break;
 
 
@@ -881,30 +893,44 @@ for (var i=0; i<places.length; i++) {
 
     case "highschool":
       skyland_highschool_rect.setOptions({		fillColor: '#ffcf2f',	})
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " High school<br>";
+
       break;
 
     case "shootingrange":
       shooting_range_rect.setOptions({		fillColor: '#ffcf2f',	});
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Shooting Range<br>";
+
       break;
 
     case "gym":
       gym_rect.setOptions({		fillColor: '#ffcf2f',	});
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Academia do Ryan<br>";
+
       break;
 
     case "retirementhome":
       retirement_rect.setOptions({		fillColor: '#ffcf2f',	});
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Condomínio +55<br>";
+
       break;
 
     case "rodeo":
       rodeo_rect.setOptions({		fillColor: '#ffcf2f',	});
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Rodeio<br>";
+
       break;
 
     case "westernpark":
       western_park_circle.setOptions({		fillColor: '#ffcf2f',	});
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Parque Western<br>";
+
       break;
 
     case "fronteira":
       document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "inline";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Fronteira do México<br>";
+
       break;
 
 
@@ -912,6 +938,9 @@ for (var i=0; i<places.length; i++) {
 
 }
 
+
+document.getElementById("screenplay_screenplay_id").innerHTML = screenplay_screenplay_content;
+document.getElementById('screenplay_id').style.left = "-310px";
 
 /*
 {

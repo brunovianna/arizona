@@ -452,8 +452,8 @@ function igrejaMouseOut (out_overlay) {
       igreja_11_overlay.setMap(map);
       */
 
-      out_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
-      out_overlay.setMap(map);
+      //out_overlay.set('url', 'images/arizona_icone_triangulo-cinza.png');
+      //out_overlay.setMap(map);
 
 
 
@@ -793,9 +793,6 @@ document.getElementById('wrapper_vimeo_id').addEventListener('mouseenter', funct
 
 document.getElementById('wrapper_vimeo_id').addEventListener('mouseleave', function () {
     //console.log("wrapper mouseleave");
-    retirement_rect.setOptions({
-    fillColor: '#969696',
-    });
     layerOverlapFlag = false;
     document.getElementById('wrapper_vimeo_id').style.display = "none";
 

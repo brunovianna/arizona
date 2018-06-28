@@ -63,7 +63,7 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
          vel illum qui dolorem eum fugiat quo voluptas nulla pariatur</div>
          <div class="screenplay_screenplay" id="screenplay_screenplay_id"><br><br><hr>ROTEIRO<br>
            1 Skyland highschool<br>
-           2 Casa de Kirsten Lax<br>
+           2 Casa de Kristen Lax<br>
            3 Western Park<br>
            4 Academia de Ryan Ehler<br>
            5 Fronteira do México<br>

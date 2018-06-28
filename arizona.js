@@ -472,7 +472,7 @@ google.maps.event.addListener(casa_1_overlay, 'mouseover', function () { casaMou
 google.maps.event.addListener(casa_1_overlay, 'mouseout', function () { casaMouseOut(casa_1_overlay);});
 google.maps.event.addListener(casa_2_overlay, 'mouseover', function () { casaMouseOver(casa_2_overlay, 'wrapper_vimeo_id',1,'Casa do ','Corbin');});
 google.maps.event.addListener(casa_2_overlay, 'mouseout', function () { casaMouseOut(casa_2_overlay);});
-google.maps.event.addListener(casa_3_overlay, 'mouseover', function () { casaMouseOver(casa_3_overlay, 'wrapper_vimeo_id',2,'Casa da ','Kirsten');});
+google.maps.event.addListener(casa_3_overlay, 'mouseover', function () { casaMouseOver(casa_3_overlay, 'wrapper_vimeo_id',2,'Casa da ','Kristen');});
 google.maps.event.addListener(casa_3_overlay, 'mouseout', function () { casaMouseOut(casa_3_overlay);});
 google.maps.event.addListener(casa_4_overlay, 'mouseover', function () { casaMouseOver(casa_4_overlay, 'wrapper_vimeo_id',3,'Casa da ','Cait');});
 google.maps.event.addListener(casa_4_overlay, 'mouseout', function () { casaMouseOut(casa_4_overlay);});
@@ -625,7 +625,7 @@ google.maps.event.addListener(gym_rect, 'mouseover', function (event) {
   //move the video to near the icon
   var r = get_mapthing_bounds(gym_rect) ;
   var center_h = Math.round((r.right + r.left)/2);
-  document.getElementById("video_title_id").innerHTML = "Gym";
+  document.getElementById("video_title_id").innerHTML = "Academia do Ryan";
   document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
   document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
   document.getElementById('wrapper_vimeo_id').style.display = "inline";
@@ -829,10 +829,10 @@ for (var i=0; i<places.length; i++) {
       screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Casa do Corbin<br>";
       break;
 
-    case "kirsten":
+    case "kristen":
       casa_3_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
       casa_3_overlay.setMap(map);
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Casa da Kirsten<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Casa da kristen<br>";
       break;
 
     case "cait":
@@ -1163,7 +1163,7 @@ function delayOverlayMouseout (mythis) {
 var question_map =   [
   ["highschool","gym","","retirementhome"],
   ["fronteira","westernpark","","fronteira","","fronteira",""],
-  ["kirsten","kirsten","","kirsten"],
+  ["kristen","kristen","","kristen"],
   ["corbin","corbin","volta","hanny"],
   ["igrejas","igrejas","igrejas","igrejas","igrejas"],
   ["cait","cait","casillas","corbin","hanny","","corbin","casillas","rodeo",""],

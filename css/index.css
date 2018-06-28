@@ -18,7 +18,7 @@ html, body {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 35% 65%;
+  grid-template-columns: 50% 50%;
   grid-gap: 0;
   padding: 0;
 	position: absolute;
@@ -108,7 +108,7 @@ input[type=checkbox].css-checkbox {
 							line-height:100%;
 							background-repeat:no-repeat;
 							background-position: 0 0;
-							font-size:12px;
+							font-size:15px;
 							vertical-align:middle;
 							cursor:pointer;
 

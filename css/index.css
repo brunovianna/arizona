@@ -108,7 +108,7 @@ input[type=checkbox].css-checkbox {
 							line-height:100%;
 							background-repeat:no-repeat;
 							background-position: 0 0;
-							font-size:15px;
+							font-size:12px;
 							vertical-align:middle;
 							cursor:pointer;
 
@@ -118,7 +118,7 @@ input[type=checkbox].css-checkbox {
 							background-position: 0 -15px;
 						}
 						label.css-label {
-							  font-family: 'Roboto', sans-serif;
+							  font-family: 'Roboto Mono', monospace;
 							background-image:url("../images/checkbox.png");
 							-webkit-touch-callout: none;
 							-webkit-user-select: none;

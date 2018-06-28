@@ -33,19 +33,26 @@ div.title {
 }
 
 span.futura-18 {
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 18px;
 }
 
 span.futura-18-bold {
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
 	font-size: 18px;
 }
 
 span.georgia-18 {
-	font-family: 'Georgia', sans-serif;
+	font-family: 'Roboto Mono', monospace;
 	font-size: 18px;
+}
+
+span.georgia-18-bold {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 18px;
+	font-weight: 700;
+
 }
 
 div.place {
@@ -127,7 +134,7 @@ div.video_fronteira {
 div.video_title {
 	color: white;
 	font-size: 12px;
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
 	padding: 0;
 	margin: 0;
@@ -228,7 +235,7 @@ div.form_left {
 	float:left;*/
 	grid-row: 1 / 11;
 	font-size: 32px;
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
 	border: 1px solid #000000;
 	padding: 10px;
@@ -239,7 +246,7 @@ div.form_right_top {
 /*	width: 80%;
 	float:right;*/
 	font-size: 24px;
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
 	border-bottom: 1px solid #000000;
 	border-top: 1px solid #000000;
@@ -252,7 +259,7 @@ div.form_right {
 /*	width: 80%;
 	float:right;*/
 	font-size: 24px;
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
 	border-bottom: 1px solid #000000;
 	border-right: 1px solid #000000;
@@ -262,7 +269,7 @@ div.form_right {
 
 div.confirma {
 	font-size: 18px;
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
 	cursor: pointer;
 	border-bottom: 1px solid #000000;
@@ -318,13 +325,13 @@ margin-right: -15px;
 
 div.screenplay_header {
 	font-size: 18px;
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
 }
 
 div.screenplay_content {
 	font-size: 14px;
-	font-family: 'Georgia', serif;
+	font-family: 'Roboto Mono', serif;
 	font-weight: 700;
 	font-style: italic;
 
@@ -332,6 +339,6 @@ div.screenplay_content {
 
 div.screenplay_screenplay {
 	font-size: 14px;
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
 }

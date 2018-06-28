@@ -18,7 +18,7 @@ html, body {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 35% 65%;
   grid-gap: 0;
   padding: 0;
 	position: absolute;
@@ -59,26 +59,35 @@ html, body {
 }
 
 span.futura-18 {
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-size: 18px;
 }
 
 span.futura-18-bold {
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
-	font-size: 18px;
-}
-
-span.georgia-18 {
-	font-family: 'Georgia', sans-serif;
 	font-size: 18px;
 }
 
 span.futura-22-bold {
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
 	font-size: 22px;
 }
+
+span.georgia-18 {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 18px;
+}
+
+span.georgia-18-bold {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 18px;
+	font-weight: 700;
+
+}
+
+
 
 span.heebo-24-black {
 	font-family: 'Heebo', sans-serif;
@@ -109,7 +118,7 @@ input[type=checkbox].css-checkbox {
 							background-position: 0 -15px;
 						}
 						label.css-label {
-							  font-family: 'Oswald', sans-serif;
+							  font-family: 'Roboto', sans-serif;
 							background-image:url("../images/checkbox.png");
 							-webkit-touch-callout: none;
 							-webkit-user-select: none;

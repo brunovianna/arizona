@@ -18,7 +18,7 @@ var goingToMexico = false;
 var returningToMesa = false;
 var vimeo_fronteira;
 var currentVideoId = -1;
-var screenplay_screenplay_content = "<br><b>ROTEIRO</b><br>Baseado em suas respostas, recomendamos que você visite as seguintes localidades em Mesa: <br>";
+var screenplay_screenplay_content = "<br><b>ROTEIRO</b><br><br>Baseado em suas respostas, recomendamos que você visite as seguintes localidades em Mesa: <br><br>";
 
 var cruzes_bounds = [];
 var cruzes_overlay = [];
@@ -943,7 +943,7 @@ for (var i=0; i<places.length; i++) {
   }
 
 }
-screenplay_screenplay_content = screenplay_screenplay_content + "<br>Você também pode explorar outros lugares do mapa livremente"
+screenplay_screenplay_content = screenplay_screenplay_content + "<br><br>Você também pode explorar outros lugares do mapa livremente"
 
 document.getElementById("screenplay_screenplay_id").innerHTML = screenplay_screenplay_content;
 document.getElementById('screenplay_id').style.left = "-310px";

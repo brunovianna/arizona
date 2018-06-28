@@ -18,7 +18,7 @@ var goingToMexico = false;
 var returningToMesa = false;
 var vimeo_fronteira;
 var currentVideoId = -1;
-var screenplay_screenplay_content = "<br><br><hr>ROTEIRO<br>";
+var screenplay_screenplay_content = "<br><b>ROTEIRO</b><br>Baseado em suas respostas, recomendamos que você visite as seguintes localidades em Mesa: <br>";
 
 var cruzes_bounds = [];
 var cruzes_overlay = [];
@@ -802,17 +802,24 @@ document.getElementById('wrapper_vimeo_id').addEventListener('mouseleave', funct
 //light up the places according to the form answers
 
 var places = [];
+var screenplay_texts = [];
+
+console.log(question_map);
+
 
 for (var i=0;i<9;i++) {
-    if (!places.includes(question_map[i][question[i]]))  {
-      places.push (question_map[i][question[i]]);
+  if (question_map[i][question[i]] !== "---" ) {
+    console.log(i);
+    console.log(question_map[i][question[i]][0]);
+    console.log(question_map[i][question[i]][1]);
+    if (!places.includes(question_map[i][question[i]][0]))  {
+
+      places.push (question_map[i][question[i]][0]);
+      screenplay_texts.push (question_map[i][question[i]][1]);
     }
+  }
 }
 
-
-//console.log(question);
-//console.log(question_map);
-console.log(places);
 
 for (var i=0; i<places.length; i++) {
   switch (places[i]) {
@@ -820,37 +827,37 @@ for (var i=0; i<places.length; i++) {
     case "hanny":
       casa_1_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
       casa_1_overlay.setMap(map);
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Casa dos Hanny<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
       break;
 
     case "corbin":
       casa_2_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
       casa_2_overlay.setMap(map);
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Casa do Corbin<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
       break;
 
     case "kristen":
       casa_3_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
       casa_3_overlay.setMap(map);
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Casa da kristen<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
       break;
 
     case "cait":
       casa_4_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
       casa_4_overlay.setMap(map);
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Casa da Cait<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
       break;
 
     case "casillas":
       casa_5_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
       casa_5_overlay.setMap(map);
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Casa dos Casillas<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
       break;
 
     case "jan":
       casa_6_overlay.set('url', 'images/arizona_icone_quadrado-amarelo.png');
       casa_6_overlay.setMap(map);
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + "Casa da Jan<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
       break;
 
     case "igrejas":
@@ -878,13 +885,13 @@ for (var i=0; i<places.length; i++) {
       igreja_10_overlay.setMap(map);
       igreja_11_overlay.setMap(map);
 
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Tour das igrejas<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
 
       break;
 
     case "volta":
       volta_overlay.set('url', 'images/icone_estrada-amarelo.png');
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Volta por Mesa<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
 
       break;
 
@@ -893,43 +900,43 @@ for (var i=0; i<places.length; i++) {
 
     case "highschool":
       skyland_highschool_rect.setOptions({		fillColor: '#ffcf2f',	})
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " High school<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
 
       break;
 
     case "shootingrange":
       shooting_range_rect.setOptions({		fillColor: '#ffcf2f',	});
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Shooting Range<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
 
       break;
 
     case "gym":
       gym_rect.setOptions({		fillColor: '#ffcf2f',	});
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Academia do Ryan<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
 
       break;
 
     case "retirementhome":
       retirement_rect.setOptions({		fillColor: '#ffcf2f',	});
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Condomínio +55<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
 
       break;
 
     case "rodeo":
       rodeo_rect.setOptions({		fillColor: '#ffcf2f',	});
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Rodeio<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
 
       break;
 
     case "westernpark":
       western_park_circle.setOptions({		fillColor: '#ffcf2f',	});
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Parque Western<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
 
       break;
 
     case "fronteira":
       document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "inline";
-      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + " Fronteira do México<br>";
+      screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_texts[i];
 
       break;
 
@@ -937,7 +944,7 @@ for (var i=0; i<places.length; i++) {
   }
 
 }
-
+screenplay_screenplay_content = screenplay_screenplay_content + "<br>Você também pode explorar outros lugares do mapa livremente"
 
 document.getElementById("screenplay_screenplay_id").innerHTML = screenplay_screenplay_content;
 document.getElementById('screenplay_id').style.left = "-310px";
@@ -1161,15 +1168,57 @@ function delayOverlayMouseout (mythis) {
 }
 
 var question_map =   [
-  ["highschool","gym","","retirementhome"],
-  ["fronteira","westernpark","","fronteira","","fronteira",""],
-  ["kristen","kristen","","kristen"],
-  ["corbin","corbin","volta","hanny"],
-  ["igrejas","igrejas","igrejas","igrejas","igrejas"],
-  ["cait","cait","casillas","corbin","hanny","","corbin","casillas","rodeo",""],
-  ["jan","hanny","volta","volta","volta"],
-  ["shootingrange","shootingrange","shootingrange","shootingrange"],
-  ["fronteira","fronteira","fronteira","fronteira"]
+  [["highschool"," <b>High school</b>  - Assistir jogo de futebol americano E Falar com Caruso sobre cultura do atleta<br>"],
+  ["gym"," <b>Academia do Ryan</b> - Falar com Ryan e Marcos sobre pessoas da idade deles<br>"],
+  "---",
+  ["retirementhome"," <b>Condomínio +55</b> - Saber sobre aposentados em Mesa<br>"]],
+  [["fronteira"," <b>Fronteira do México</b> - Saber sobre influência mexicana em Mesa<br>"],
+  ["westernpark"," <b>Parque Western</b> - Saber sobre nativos no Arizona<br>"],
+  "---",
+  ["fronteira"," <b>Fronteira do México</b> - Saber sobre influência mexicana em Mesa<br>"],
+  "---",
+  ["fronteira"," <b>Fronteira do México</b> - Saber sobre influência mexicana em Mesa<br>"],
+  "---"],
+  [["kristen", " <b>Casa da Kristen</b> - Falar sobre o clima em Mesa<br>"],
+  ["kristen", " <b>Casa da Kristen</b> - Falar sobre o clima em Mesa<br>"],
+  "---",
+  ["kristen", " <b>Casa da Kristen</b> - Falar sobre o clima em Mesa<br>"],
+  "---"],
+  [["corbin", " <b>Casa do Corbin</b> - Falar sobre progressistas<br>"],
+  ["corbin", " <b>Casa do Corbin</b> - Falar sobre progressistas<br>"],
+  ["volta"," <b>Volta por Mesa</b> - Saber como a cidade mudou em 15 anos<br>"],
+  ["hanny", " <b>Casa dos Hanny</b> - Falar com Pam sobre constituição<br>"],
+  "---"],
+  [["igrejas"," <b>Tour das igrejas</b> - Saber quem são os mormons<br>"],
+  ["igrejas"," <b>Tour das igrejas</b> - Saber quem são os mormons<br>"],
+  ["igrejas"," <b>Tour das igrejas</b> - Saber quem são os mormons<br>"],
+  ["igrejas"," <b>Tour das igrejas</b> - Saber sobre a influência dos mormons  em Mesa<br>"],
+  ["igrejas"," <b>Tour das igrejas</b> - Saber sobre a influência dos mormons  em Mesa<br>"]],
+  [["cait", " <b>Casa da Cait</b> - Perguntar para Cait a diferença entre republicanos e democratas<br>"],
+  ["cait", " <b>Casa da Cait</b> - Perguntar para Cait a diferença entre republicanos e democratas<br>"],
+  ["casillas"," <b>Casa dos Casillas</b> - Falar com Mr Casillas sobre Dom Quixote<br>"],
+  ["corbin", " <b>Casa do Corbin</b> - Falar com Corbin sobre libertários<br>"],
+  ["hanny", " <b>Casa dos Hanny</b> - Falar com Vic sobre conservadores<br>"],
+  "---",
+  ["corbin", " <b>Casa do Corbin</b> - Falar com Corbin sobre libertários<br>"],
+  ["casillas", " <b>Casa dos Casillas</b> - Falar com Mr Casillas sobre Dom Quixote<br>"],
+  ["rodeo"," <b>Rodeio</b> - Falar com EJ sobre eleições de 2016<br>"],
+  "---"],
+  [["jan", " <b>Casa da Jan</b> - Falar com Jan sobre carro<br>"],
+  ["hanny", " <b>Casa dos Hanny</b> - Falar com Brandon sobre transporte em Mesa<br>"],
+  ["volta"," <b>Volta por Mesa</b><br>"],
+  ["volta"," <b>Volta por Mesa</b><br>"],
+  ["volta"," <b>Volta por Mesa</b><br>"]],
+  [["shootingrange"," <b>Shooting Range</b>  - Falar com Ricky sobre armas<br>"],
+  ["shootingrange"," <b>Shooting Range</b> - Saber como é a lei de armas no Arizona<br>"],
+  ["shootingrange"," <b>Shooting Range</b> - Falar com Ricky sobre armas e Falar com Vic sobre 2ª emenda<br>"],
+  ["shootingrange"," <b>Shooting Range</b> - Falar com Ricky sobre armas e Falar com Vic sobre 2ª emenda<br>"],
+  "---"],
+  [["fronteira"," <b>Fronteira do México</b> - Saber sobre influência mexicana em Mesa<br>"],
+  ["fronteira"," <b>Fronteira do México</b> - Saber sobre influência mexicana em Mesa<br>"],
+  ["fronteira"," <b>Fronteira do México</b> - Ouvir opinião sobre o muro<br>"],
+  ["fronteira"," <b>Fronteira do México</b> - Ouvir opinião sobre o muro<br>"],
+  ["fronteira"," <b>Fronteira do México</b> - Saber sobre influência mexicana em Mesa<br>"]]
 ];
 
 var map_style = [

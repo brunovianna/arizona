@@ -57,11 +57,8 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
 </div>
      <div class="screenplay" id="screenplay_id">
      <div class="screenplay_wrapper_left">
-       <div class="screenplay_header">BEM VINDO A MESA<br><br><hr></div>
-       <div class="screenplay_content">Quis autem vel eum iure reprehenderit
-         qui in ea voluptate velit esse quam nihil molestiae consequatur,
-         vel illum qui dolorem eum fugiat quo voluptas nulla pariatur</div>
-         <div class="screenplay_screenplay" id="screenplay_screenplay_id"><br><br><hr>ROTEIRO<br>
+         <div class="screenplay_screenplay" id="screenplay_screenplay_id"><br>ROTEIRO<br>
+           Baseado em suas respostas, recomendamos que você visite as seguintes localidades em Mesa:<br><br>
            1 Skyland highschool<br>
            2 Casa de Kristen Lax<br>
            3 Western Park<br>

@@ -1164,7 +1164,7 @@ function delayOverlayMouseout (mythis) {
 }
 
 var question_map =   [
-  [["highschool"," <b>High school</b>  - Assistir jogo de futebol americano E Falar com Caruso sobre cultura do atleta<br>"],
+  [["highschool"," <b>High school</b>  - Assistir jogo de futebol americano e Falar com Caruso sobre cultura do atleta<br>"],
   ["gym"," <b>Academia do Ryan</b> - Falar com Ryan e Marcos sobre pessoas da idade deles<br>"],
   "---",
   ["retirementhome"," <b>Condomínio +55</b> - Saber sobre aposentados em Mesa<br>"]],
@@ -1180,8 +1180,8 @@ var question_map =   [
   "---",
   ["kristen", " <b>Casa da Kristen</b> - Falar sobre o clima em Mesa<br>"],
   "---"],
-  [["corbin", " <b>Casa do Corbin</b> - Falar sobre progressistas<br>"],
-  ["corbin", " <b>Casa do Corbin</b> - Falar sobre progressistas<br>"],
+  [["corbin", " <b>Casa do Corbin</b> - Falar sobre conservadores<br>"],
+  ["corbin", " <b>Casa do Corbin</b> - Falar sobre conservadores<br>"],
   ["volta"," <b>Volta por Mesa</b> - Saber como a cidade mudou em 15 anos<br>"],
   ["hanny", " <b>Casa dos Hanny</b> - Falar com Pam sobre constituição<br>"],
   "---"],

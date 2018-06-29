@@ -4,41 +4,50 @@ var current_form_page = 0;
 
 function confirm() {
 
-  if (current_form_page<8) {
-  current_form_page = current_form_page + 1;
+  console.log(document.getElementById("question_"+current_form_page).value);
+  if (document.getElementById("question_"+current_form_page).value == -1) {
+    // you should have at least one item selected
+    document.getElementById("nothing_selected_id").style.display = "inline";
+  } else {
 
-  document.getElementById('question').innerHTML = form_responses_questions[current_form_page][0];
-  document.getElementById('question-count').innerHTML = (current_form_page+1);
+    if (current_form_page<8) {
+    current_form_page = current_form_page + 1;
 
-  document.getElementById('form-left-0').style.gridRow = "2 / span "+(form_responses_questions[current_form_page][1].length + 1);
-  //console.log(form_responses_questions[current_form_page][1][0]+" "+form_responses_questions[current_form_page][1].length );
-  //console.log(current_form_page);
+    document.getElementById('question').innerHTML = form_responses_questions[current_form_page][0];
+    document.getElementById('question-count').innerHTML = (current_form_page+1);
 
-  for (j=0;j<9;j++) {
+    document.getElementById('form-left-0').style.gridRow = "2 / span "+(form_responses_questions[current_form_page][1].length + 1);
+    //console.log(form_responses_questions[current_form_page][1][0]+" "+form_responses_questions[current_form_page][1].length );
+    //console.log(current_form_page);
+
+    for (j=0;j<9;j++) {
 
 
-    if (form_responses_questions[current_form_page][1][j]==undefined) {
-      document.getElementById('form-right-'+j).style.display="none";
-      document.getElementById('form-right-'+j).style.borderBottom="none";
-    } else {
-      document.getElementById('form-right-'+j).style.display="block";
-      document.getElementById('label'+j).innerHTML = form_responses_questions[current_form_page][1][j];
-      document.getElementById('form-right-'+j).style.borderBottom="1px solid #000000";
-      cleanForm(-1);
+      if (form_responses_questions[current_form_page][1][j]==undefined) {
+        document.getElementById('form-right-'+j).style.display="none";
+        document.getElementById('form-right-'+j).style.borderBottom="none";
+      } else {
+        document.getElementById('form-right-'+j).style.display="block";
+        document.getElementById('label'+j).innerHTML = form_responses_questions[current_form_page][1][j];
+        document.getElementById('form-right-'+j).style.borderBottom="1px solid #000000";
+        cleanForm(-1);
+      }
+    }
+
+  } else {
+
+    //process results
+    //console.log(document.getElementById("form_id").elements);
+    document.getElementById("form_id").submit();
+
     }
   }
-
-} else {
-
-  //process results
-  //console.log(document.getElementById("form_id").elements);
-  document.getElementById("form_id").submit();
-
-}
 }
 
 function cleanForm(checkboxNum) {
-  console.log("current form page: "+current_form_page+" checkboxNum: "+checkboxNum);
+  //console.log("current form page: "+current_form_page+" checkboxNum: "+checkboxNum);
+  document.getElementById("nothing_selected_id").style.display = "none";
+
   if (checkboxNum != -1) document.getElementById("question_"+current_form_page).value = checkboxNum;
 
   for (i=0;i<9;i++) {

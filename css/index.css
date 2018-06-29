@@ -80,6 +80,11 @@ span.georgia-18 {
 	font-size: 18px;
 }
 
+span.georgia-14 {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 14px;
+}
+
 span.georgia-18-bold {
 	font-family: 'Roboto Mono', monospace;
 	font-size: 18px;
@@ -87,6 +92,9 @@ span.georgia-18-bold {
 
 }
 
+span.hidden {
+	display: none;
+}
 
 
 span.heebo-24-black {

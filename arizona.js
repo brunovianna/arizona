@@ -810,11 +810,8 @@ console.log(question);
 for (var i=0;i<9;i++) {
   if (question[i]!= -1) {
     if (question_map[i][question[i]] !== "---" ) {
-      if (!places.includes(question_map[i][question[i]][0]))  {
-
         places.push (question_map[i][question[i]][0]);
         screenplay_texts.push (question_map[i][question[i]][1]);
-      }
     }
   }
 }

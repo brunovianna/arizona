@@ -148,24 +148,19 @@ reservationOverlay = new google.maps.GroundOverlay(
     reservationBounds);
 reservationOverlay.setMap(map);
 
+//crosses overlay
 
-
-//cruzes overlay
-/*
 var cruzesBounds = {
-  north: 33.311,
-  south: 33.201,
-  east: -112.111,
-  west: -111.861
+  north: 33.246,
+  south: 33.144,
+  east: -111.684,
+  west: -111.921
 };
 
 cruzesOverlay = new google.maps.GroundOverlay(
-    'images/cruzes.png',
+    'images/cruzes_amarelas.png',
     cruzesBounds);
 cruzesOverlay.setMap(map);
-
-*/
-
 
 
 //casas width .006 height .005

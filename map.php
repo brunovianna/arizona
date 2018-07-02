@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <title>Arizona</title>
 <link rel="stylesheet" type="text/css" href="css/map.css">
-<link href="https://fonts.googleapis.com/css?family=Droid+Serif|Oswald:normal,bold" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
 <script src="https://player.vimeo.com/api/player.js"></script>
 
 <script type="text/javascript">
@@ -27,13 +27,8 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 <body >
 
     <div id="map"></div>
-    <div class="title"><span class="futura-18">Mesa, </span><span  class="georgia-18"><i>Arizona</i></span></div>
-    <div class="place" id="highschool">Content for  class "place" id "highschool" Goes Here</div>
-    <!-- used for testing still image as thumbnail. delete in next version
-    <img class="skyland_highschool" id="skyland_highschool_img_id" src="images/skyland_highschool.png" ></img>
-    -->
-
-
+    <div class="title"><span class="futura-18-bold">Mesa, </span><span  class="futura-18-bold">ARIZONA</span></div>
+    
 
 
 

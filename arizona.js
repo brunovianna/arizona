@@ -94,7 +94,10 @@ google.maps.event.addListener(map, 'center_changed', function() {
     if (!goingToMexico) {
       if ((!returningToMesa)&&(map.getCenter().lat() < 33.30)) {
         //show border arrow
-        document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "inline";
+        //use different trigger now? crosses mouseover?
+        document.getElementById('fence_id').style.display = "inline";
+        document.getElementById('fence_us_id').style.display = "none";
+        document.getElementById('fence_mexico_id').style.display = "none";
 
       }
       if (allowedBounds.contains(map.getCenter())) {
@@ -158,7 +161,7 @@ var cruzesBounds = {
 };
 
 cruzesOverlay = new google.maps.GroundOverlay(
-    'images/cruzes_amarelas.png',
+    'images/cruzes_cinza.png',
     cruzesBounds);
 cruzesOverlay.setMap(map);
 
@@ -240,40 +243,7 @@ igreja_11_overlay.setMap(map);
 33.217652, -111.724291
 */
 
-/*
-var j=0;
 
-for (i=0;i<cruzes.length;i=i+4) {
-  var b = { north: cruzes[i], south: cruzes[i+1], east: cruzes[i+2], west: cruzes[i+3]};
-  cruzes_overlay.push( new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', b));
-  cruzes_overlay[j].setMap(map);
-  console.log(cruzes_overlay[j]);
-  j++;
-}
-
-
-var cruz_1_bounds = {  north: 33.267,   south: 33.264,   east: -111.947,  west: -111.950 };
-var cruz_2_bounds = {  north: 33.231,   south: 33.228,   east: -111.907,  west: -111.910 };
-var cruz_3_bounds = {  north: 33.223,   south: 33.220,   east: -111.860,  west: -111.863 };
-var cruz_4_bounds = {  north: 33.205,   south: 33.202,  east: -111.792,  west: -111.795 };
-var cruz_5_bounds = {  north: 33.197,   south: 33.194,   east: -111.753,  west: -111.756 };
-var cruz_6_bounds = {  north: 33.221,   south: 33.218,   east: -111.724,  west: -111.727 };
-
-var cruz_1_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', cruz_1_bounds);
-var cruz_2_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', cruz_2_bounds);
-var cruz_3_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', cruz_3_bounds);
-var cruz_4_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', cruz_4_bounds);
-var cruz_5_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', cruz_5_bounds);
-var cruz_6_overlay = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', cruz_6_bounds);
-
-cruz_1_overlay.setMap(map);
-cruz_2_overlay.setMap(map);
-cruz_3_overlay.setMap(map);
-cruz_4_overlay.setMap(map);
-cruz_5_overlay.setMap(map);
-cruz_6_overlay.setMap(map);
-
-*/
 //volta width .004 height .004
 var volta_bounds = {  north: 33.392,   south: 33.388,   east: -111.947,  west: -111.951 };
 var volta_overlay = new google.maps.GroundOverlay('images/icone_estrada.png', volta_bounds);
@@ -341,6 +311,22 @@ var western_park_circle = new google.maps.Circle({
   fillColor: '#969696',
 	fillOpacity: 1
 });
+
+// CROSSES behaviours
+google.maps.event.addListener(cruzesOverlay, 'mouseover', function() {
+  cruzesOverlay.set('url', 'images/cruzes_amarelas.png');
+  cruzesOverlay.setMap(map);
+  document.getElementById("box_fronteira_id").style.display = "grid";
+
+
+}  );
+
+google.maps.event.addListener(cruzesOverlay, 'mouseout', function() {
+  cruzesOverlay.set('url', 'images/cruzes_cinza.png');
+  cruzesOverlay.setMap(map);
+}  );
+
+
 
 // CHURCHES behaviours
 
@@ -773,13 +759,6 @@ google.maps.event.addListener(western_park_circle, 'mouseout', function (event) 
 
 
 
-document.getElementById('wrapper_wrapper_seta_fronteira_id').addEventListener('click', function (event) {
-  goingToMexico=true;
-  map.set('minZoom',0);
-  map.set('maxZoom',18);
-  panTo(32.5,-111.5,8,900,4);
-
-});
 
 
 document.getElementById('wrapper_vimeo_id').addEventListener('mouseenter', function () {
@@ -799,8 +778,6 @@ document.getElementById('wrapper_vimeo_id').addEventListener('mouseleave', funct
 var places = [];
 var screenplay_places = [];
 var screenplay_texts = [];
-
-console.log(question);
 
 
 for (var i=0;i<9;i++) {
@@ -917,7 +894,9 @@ for (var i=0; i<places.length; i++) {
       break;
 
     case "fronteira":
-      document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "inline";
+    document.getElementById('fence_id').style.display = "inline";
+    document.getElementById('fence_us_id').style.display = "none";
+    document.getElementById('fence_mexico_id').style.display = "none";
       break;
   }
 
@@ -1068,7 +1047,7 @@ function doPan(d,steps) {
 
 
 function showFronteira() {
-  document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "none";
+  document.getElementById('fence_id').style.display = "none";
   document.getElementById('wrapper_wrapper_fronteira_id').style.display = "inline";
 
   //when the movie is finishedm return to main screen
@@ -1084,7 +1063,7 @@ var endFronteira = function () {
 
     vimeo_fronteira.off('ended', endFronteira);
     document.getElementById('wrapper_wrapper_fronteira_id').style.display = "none";
-    document.getElementById('wrapper_wrapper_seta_fronteira_id').style.display = "none";
+    document.getElementById('fence_id').style.display = "none";
 
 
     setTimeout(function() {
@@ -1140,6 +1119,37 @@ function delayOverlayMouseout (mythis) {
     }
   }, 500);
 }
+
+
+function close_box_fronteira() {
+  document.getElementById("box_fronteira_id").style.display = "none";
+  cruzesOverlay.set('url', 'images/cruzes_cinza.png');
+  cruzesOverlay.setMap(map);
+
+}
+
+
+function click_fence() {
+  goingToMexico=true;
+  map.set('minZoom',0);
+  map.set('maxZoom',18);
+  panTo(32.5,-111.5,8,900,4);
+  document.getElementById("fence_us_id").style.display = "none";
+  document.getElementById("fence_id").style.display = "none";
+  document.getElementById("fence_mexico_id").style.display = "none";
+
+}
+
+function show_fence_text () {
+  document.getElementById("fence_us_id").style.display = "inline";
+  document.getElementById("fence_mexico_id").style.display = "inline";
+}
+
+function hide_fence_text () {
+  document.getElementById("fence_us_id").style.display = "none";
+  document.getElementById("fence_mexico_id").style.display = "none";
+}
+
 
 var question_map =   [
   [["highschool"," <b>High school</b>  -"," Assistir jogo de futebol americano e Falar com Caruso sobre cultura do atleta."],

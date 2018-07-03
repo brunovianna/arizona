@@ -785,7 +785,9 @@ for (var i=0;i<9;i++) {
     if (question_map[i][question[i]] !== "---" ) {
         if (places.includes(question_map[i][question[i]][0])) {
           var where = places.indexOf(question_map[i][question[i]][0]);
-          screenplay_texts[where] = screenplay_texts[where] + question_map[i][question[i]][2];
+          if (screenplay_texts[where]!=question_map[i][question[i]][2]) {
+            screenplay_texts[where] = screenplay_texts[where] + question_map[i][question[i]][2];
+          }
         } else {
           places.push (question_map[i][question[i]][0]);
           screenplay_places.push (question_map[i][question[i]][1]);;

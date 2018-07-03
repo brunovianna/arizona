@@ -896,9 +896,9 @@ for (var i=0; i<places.length; i++) {
       break;
 
     case "fronteira":
-    document.getElementById('fence_id').style.display = "inline";
-    document.getElementById('fence_us_id').style.display = "none";
-    document.getElementById('fence_mexico_id').style.display = "none";
+    //document.getElementById('fence_id').style.display = "inline";
+    //document.getElementById('fence_us_id').style.display = "none";
+    //document.getElementById('fence_mexico_id').style.display = "none";
       break;
   }
 

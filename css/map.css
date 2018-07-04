@@ -153,38 +153,27 @@ div.wrapper_wind_rose {
 
 div.las_vegas {
 	grid-column: 1 / span 3;
-	margin: 0;
-	padding: 0;
 	text-align: center;
 }
 
 div.california {
 	text-align: right;
-	padding: 0;
-	margin: 0;
 }
 
 
 div.wind_rose {
 	text-align: center;
-	padding: 0;
-	margin: 0;
 }
 
 
 div.texas {
-	padding: 0;
-	margin: 0;
+
 }
 
 div.mexico {
 	grid-column: 1 / span 3;
 	text-align: center;
-	padding: 0;
-	margin: 0;
 }
-
-
 
 
 div.wrapper_fronteira {

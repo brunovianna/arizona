@@ -52,8 +52,14 @@ span.georgia-18-bold {
 	font-family: 'Roboto Mono', monospace;
 	font-size: 18px;
 	font-weight: 700;
-
 }
+
+span.georgia-12-bold {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 12px;
+	font-weight: 700;
+}
+
 
 div.place {
 	/*width: 90%;
@@ -132,6 +138,53 @@ div.fence_mexico {
 	left: 50%;
 	transform: translate(-50%, 0);
 }
+
+div.wrapper_wind_rose {
+	top: 70px;
+	right: 80px;
+	position: absolute;
+	display: grid;
+	grid-template-columns: 90px 80px 90px;
+	grid-gap: 0;
+  padding: 0;
+	margin: 0;
+
+}
+
+div.las_vegas {
+	grid-column: 1 / span 3;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+div.california {
+	text-align: right;
+	padding: 0;
+	margin: 0;
+}
+
+
+div.wind_rose {
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+
+div.texas {
+	padding: 0;
+	margin: 0;
+}
+
+div.mexico {
+	grid-column: 1 / span 3;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+}
+
+
 
 
 div.wrapper_fronteira {

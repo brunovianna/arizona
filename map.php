@@ -43,13 +43,12 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 </div>
 
 
-
 <div class="wrapper_navigation">
   <div class="nav_info">
-    <img src="images/info_branco.png">
+    <img src="images/info_cinza.png" id="nav_info_img_id">
   </div>
   <div class="nav_screenplay">
-    <img src="images/roteiro_branco.png">
+    <img src="images/roteiro_branco.png"  id="nav_screenplay_img_id">
   </div>
   <div class="nav_credits">
     <img src="images/creditos_branco.png">
@@ -148,7 +147,7 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
      5 Fronteira do México<br>
    </div>
    <div class="screenplay_close">
-     <img src="images/close_cinza.png" onclick="screenplay_close();">
+     <img src="images/close_cinza.png" onclick="close_screenplay();">
    </div>
  </div>
 

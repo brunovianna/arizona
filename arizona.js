@@ -965,16 +965,6 @@ function copy_map_rectangle_position (my_div, mymapthing ) {
 }
 
 
-
-function screenplay_close() {
-    if (document.getElementById('screenplay_id').style.left == "-310px") {
-      document.getElementById('screenplay_id').style.left = "0";
-    } else {
-      document.getElementById('screenplay_id').style.left = "-310px";
-    }
-}
-
-
 //to smoothly pan the map
 function panTo(newLat, newLng, newZoom, d, steps) {
 
@@ -1139,6 +1129,9 @@ function hide_fence_text () {
 
 function close_welcome() {
   document.getElementById("wrapper_welcome_id").style.display="none";
+  document.getElementById("nav_info_img_id").src = "images/info_branco.png";
+  document.getElementById("screenplay_wrapper_id").style.display = "inline";
+  document.getElementById("nav_screenplay_img_id").src = "images/roteiro_cinza.png"
 
   //enable map drag
   map.setOptions({gestureHandling: "auto"});
@@ -1146,6 +1139,11 @@ function close_welcome() {
   //enable mouseover
   mouseover_enabled = true;
 
+}
+
+function close_screenplay() {
+    document.getElementById("screenplay_wrapper_id").style.display = "none";
+    document.getElementById("nav_screenplay_img_id").src = "images/roteiro_branco.png"
 }
 
 function go_homepage() {

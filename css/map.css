@@ -318,6 +318,7 @@ div.screenplay_wrapper {
 		left: 30px;
 		margin: 0;
 		overflow-y: auto;
+		display: none;
 
 
 }
@@ -334,6 +335,7 @@ div.screenplay_close {
 	right: 5px;
 	top: 5px;
 	padding: 5px;
+	cursor: pointer;
 
 }
 

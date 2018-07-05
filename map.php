@@ -43,20 +43,22 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 </div>
 
 
+
 <div class="wrapper_navigation">
   <div class="nav_info">
     <img src="images/info_branco.png">
   </div>
-  <div class="nav_credits">
-    <img src="images/creditos_branco.png">
-  </div>
   <div class="nav_screenplay">
     <img src="images/roteiro_branco.png">
   </div>
-  <div class="nav_home">
+  <div class="nav_credits">
+    <img src="images/creditos_branco.png">
+  </div>
+  <div class="nav_home" onclick="go_homepage();">
     <img src="images/home_branco.png">
   </div>
 </div>
+
 
 <div class="wrapper_wind_rose">
   <div class="las_vegas">

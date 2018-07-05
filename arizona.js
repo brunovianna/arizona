@@ -1149,6 +1149,11 @@ function close_welcome() {
 
 }
 
+function go_homepage() {
+  window.location.href = "http://vps3575.publiccloud.com.br/v7_juntando_tudo/";
+}
+
+
 var question_map =   [
   [["highschool"," <b>High school</b>  -"," Assistir jogo de futebol americano e Falar com Caruso sobre cultura do atleta."],
   ["gym"," <b>Academia do Ryan</b> -"," Falar com Ryan e Marcos sobre pessoas da idade deles"],

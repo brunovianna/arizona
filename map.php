@@ -44,10 +44,10 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 
 
 <div class="wrapper_navigation">
-  <div class="nav_info">
+  <div class="nav_info"  onclick="toggle_welcome();">
     <img src="images/info_cinza.png" id="nav_info_img_id">
   </div>
-  <div class="nav_screenplay">
+  <div class="nav_screenplay"  onclick="toggle_screenplay();">
     <img src="images/roteiro_branco.png"  id="nav_screenplay_img_id">
   </div>
   <div class="nav_credits">
@@ -137,7 +137,7 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
 </div>
 
 
- <div class="screenplay_wrapper" id="screenplay_wrapper_id">
+ <div class="wrapper_screenplay" id="wrapper_screenplay_id">
    <div class="screenplay" id="screenplay_id"><br>ROTEIRO<br>
      Baseado em suas respostas, recomendamos que você visite as seguintes localidades em Mesa:<br><br>
      1 Skyland highschool<br>

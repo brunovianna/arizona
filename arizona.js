@@ -1130,7 +1130,7 @@ function hide_fence_text () {
 function close_welcome() {
   document.getElementById("wrapper_welcome_id").style.display="none";
   document.getElementById("nav_info_img_id").src = "images/info_branco.png";
-  document.getElementById("screenplay_wrapper_id").style.display = "inline";
+  document.getElementById("wrapper_screenplay_id").style.display = "inline";
   document.getElementById("nav_screenplay_img_id").src = "images/roteiro_cinza.png"
 
   //enable map drag
@@ -1142,13 +1142,38 @@ function close_welcome() {
 }
 
 function close_screenplay() {
-    document.getElementById("screenplay_wrapper_id").style.display = "none";
+    document.getElementById("wrapper_screenplay_id").style.display = "none";
     document.getElementById("nav_screenplay_img_id").src = "images/roteiro_branco.png"
 }
 
 function go_homepage() {
   window.location.href = "http://vps3575.publiccloud.com.br/v7_juntando_tudo/";
 }
+
+function toggle_screenplay() {
+  if (document.getElementById("wrapper_screenplay_id").style.display == "none") {
+    document.getElementById("wrapper_screenplay_id").style.display = "inline";
+    document.getElementById("nav_screenplay_img_id").src = "images/roteiro_cinza.png"
+
+  } else {
+    document.getElementById("wrapper_screenplay_id").style.display = "none";
+    document.getElementById("nav_screenplay_img_id").src = "images/roteiro_branco.png"
+
+  }
+}
+
+function toggle_welcome() {
+  if (document.getElementById("wrapper_welcome_id").style.display == "none") {
+    document.getElementById("wrapper_welcome_id").style.display = "inline";
+    document.getElementById("nav_info_img_id").src = "images/info_cinza.png";
+  } else {
+    document.getElementById("wrapper_welcome_id").style.display = "none";
+    document.getElementById("nav_info_img_id").src = "images/info_branco.png";
+
+  }
+}
+
+
 
 
 var question_map =   [

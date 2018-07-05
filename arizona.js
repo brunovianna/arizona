@@ -19,7 +19,7 @@ var returningToMesa = false;
 var mouseover_enabled = false;
 var vimeo_fronteira;
 var currentVideoId = -1;
-var screenplay_screenplay_content = "<br><b>ROTEIRO</b><br><br>Baseado em suas respostas, recomendamos que você visite as seguintes localidades em Mesa: <br><br>";
+var screenplay_content = "<br><b>ROTEIRO</b><br><br>Baseado em suas respostas, recomendamos que você visite as seguintes localidades em Mesa: <br><br>";
 
 var cruzes_bounds = [];
 var cruzes_overlay = [];
@@ -784,13 +784,12 @@ for (var i=0;i<9;i++) {
 }
 
 for (var i=0; i<places.length; i++) {
-  screenplay_screenplay_content = screenplay_screenplay_content + (i+1) + screenplay_places[i] + screenplay_texts[i] + "<br>";
+  screenplay_content = screenplay_content + (i+1) + screenplay_places[i] + screenplay_texts[i] + "<br>";
 }
 
-screenplay_screenplay_content = screenplay_screenplay_content + "<br><br>Você também pode explorar outros lugares do mapa livremente"
+screenplay_content = screenplay_content + "<br><br>Você também pode explorar outros lugares do mapa livremente"
 
-document.getElementById("screenplay_screenplay_id").innerHTML = screenplay_screenplay_content;
-document.getElementById('screenplay_id').style.left = "-310px";
+document.getElementById("screenplay_id").innerHTML = screenplay_content;
 
 
 for (var i=0; i<places.length; i++) {

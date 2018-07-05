@@ -32,7 +32,7 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 
 
 
-<div class="wrapper_wrapper" id="wrapper_vimeo_id">
+<div class="wrapper_wrapper" id="wrapper_vimeo_id"><!-- mouse behaviours are defined in the js file -->
   <div class="video_title" id="video_title_id">Western Park</div>
   <div class="video_wrapper" id="video_wrapper_id">
     <iframe
@@ -137,20 +137,19 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
 
 </div>
 
- <div class="screenplay" id="screenplay_id">
- <div class="screenplay_wrapper_left">
-     <div class="screenplay_screenplay" id="screenplay_screenplay_id"><br>ROTEIRO<br>
-       Baseado em suas respostas, recomendamos que você visite as seguintes localidades em Mesa:<br><br>
-       1 Skyland highschool<br>
-       2 Casa de Kristen Lax<br>
-       3 Western Park<br>
-       4 Academia de Ryan Ehler<br>
-       5 Fronteira do México<br>
-     </div>
- </div>
- <div class="screenplay_title"><img src="images/menuscreenplay.png" onclick="screenplay_close();">
- </div>
 
+ <div class="screenplay_wrapper" id="screenplay_wrapper_id">
+   <div class="screenplay" id="screenplay_id"><br>ROTEIRO<br>
+     Baseado em suas respostas, recomendamos que você visite as seguintes localidades em Mesa:<br><br>
+     1 Skyland highschool<br>
+     2 Casa de Kristen Lax<br>
+     3 Western Park<br>
+     4 Academia de Ryan Ehler<br>
+     5 Fronteira do México<br>
+   </div>
+   <div class="screenplay_close">
+     <img src="images/close_cinza.png" onclick="screenplay_close();">
+   </div>
  </div>
 
    <script async defer

@@ -198,7 +198,7 @@ div.welcome_button {
 
 div.wrapper_navigation {
 	top: 70px;
-	left: 80px;
+	left: 30px;
 	position: absolute;
 	display: grid;
 	grid-template-columns: 34px 34px;
@@ -309,67 +309,35 @@ div.video_arrow {
 	text-align: center;
 }
 
-div.screenplay {
-		color:  #5a5a5a;
+div.screenplay_wrapper {
 		background-color: white;
 		position: fixed;
-		width: 350px;
-		height: 100%;
-		top:0;
-		bottom: 0;
-		/*left: -300px;*/
-		left: -310px;
-		/* right: 0; */
-		margin: 0
+		width: 300px;
+		height: auto;
+		top: 140px;
+		left: 30px;
+		margin: 0;
+		overflow-y: auto;
 
-		transition:         left 500ms ease;
-		-moz-transition:    left 500ms ease;
-		-ms-transition:     left 500ms ease;
-		-o-transition:      left 500ms ease;
-		-webkit-transition: left 500ms ease;
 
 }
 
-div.screenplay_wrapper_left {
-	width: 270px;
-	padding: 20px;
-	border-right: 1px solid black;
-	height: inherit;
+div.screenplay {
+	font-size: 12px;
+	font-family: 'Roboto Mono', monospace;
+	padding: 10px;
 
 }
 
-div.screenplay_title {
-
-
+div.screenplay_close {
 	position: absolute;
-	width: 40px;
-	top: 40%;
-	right: 0;
+	right: 5px;
+	top: 5px;
 	padding: 5px;
 
-display: block;
-
-margin-right: -15px;
-
-
 }
 
-div.screenplay_header {
-	font-size: 18px;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 700;
-}
 
-div.screenplay_content {
-	font-size: 12px;
-	font-family: 'Roboto Mono', monospace;
-
-}
-
-div.screenplay_screenplay {
-	font-size: 12px;
-	font-family: 'Roboto Mono', monospace;
-}
 
 div.box_fronteira {
 	display: none;

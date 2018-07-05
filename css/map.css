@@ -37,10 +37,26 @@ span.futura-18 {
 	font-size: 18px;
 }
 
+span.futura-12 {
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+}
+
+
 span.futura-18-bold {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 700;
 	font-size: 18px;
+}
+
+span.georgia-12 {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 12px;
+}
+
+span.georgia-11 {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 11px;
 }
 
 span.georgia-18 {
@@ -60,6 +76,14 @@ span.georgia-12-bold {
 	font-weight: 700;
 }
 
+span.georgia {
+	font-family: 'Roboto Mono', monospace;
+}
+
+span.georgia-bold {
+	font-family: 'Roboto Mono', monospace;
+	font-weight: 700;
+}
 
 div.place {
 	/*width: 90%;
@@ -138,6 +162,49 @@ div.fence_mexico {
 	left: 50%;
 	transform: translate(-50%, 0);
 }
+
+
+div.wrapper_welcome {
+	background-color: white;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	padding: 20px;
+	transform: translate(-50%, -50%);
+}
+
+div.welcome_text {
+	font-size: 11px;
+}
+
+div.welcome_close {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+}
+
+div.welcome_button {
+	background-color: black;
+	color:  #ffcf2f;
+	font-size: 14px;
+	font-weight: 700;
+	text-align: center;
+	vertical-align: middle;
+	width: 150px;
+	padding: 10px;
+	cursor: pointer;
+}
+
+div.wrapper_navigation {
+	top: 70px;
+	left: 80px;
+	position: absolute;
+	display: grid;
+	grid-template-columns: 34px 34px;
+	grid-gap: 2;
+}
+
 
 div.wrapper_wind_rose {
 	top: 70px;

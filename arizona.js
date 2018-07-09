@@ -63,13 +63,7 @@ map = new google.maps.Map(document.getElementById('map'), {
 });
 
 map.setOptions({styles: map_style});
-/*
-google.maps.event.addListener(map, 'tilesloaded', function (event) {
-  console.log("loaded");
-  if (pan_started==1) {
-      setTimeout(doPan, 20 );
-  }
-});*/
+
 
 //we need this to be able to get the x and y pixel position of the map rectangles
 overlay = new google.maps.OverlayView();
@@ -889,44 +883,9 @@ for (var i=0; i<places.length; i++) {
 
 }
 
-/*
-{
 
-}
-google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (event) {
-	// Within the event listener, "this" refers to the polygon which
-	// received the event.
-  //
-
-
-	this.setOptions({
-		fillColor: '#ff9100',
-	});
-
-  //this creates a div retangle in the same place so it can be placed above other layers
-  //copy_map_rectangle_position (document.getElementById('rectangle_above_id'),this);
-
-  //these lines below bring ot the video preview and the
-  //document.getElementById('wrapper_wrapper_id').style.display="inline";
-  //document.getElementById('rectangle_above_id').style.display = "inline";
-  document.getElementById('place_name_id').style.display = "inline";
-  document.getElementById('skyland_highschool_img_id').style.display = "inline";
-
-});
-
-google.maps.event.addListener(skyland_highschool_rect, 'mouseout', function (event) {
-	// Within the event listener, "this" refers to the polygon which
-	// received the event.
-  	//document.getElementById('highschool').style.display="none";
-	this.setOptions({
-	fillColor: '#ffcf2f',
-	});
-  document.getElementById('place_name_id').style.display = "none";
-  document.getElementById('skyland_highschool_img_id').style.display = "none";
-
-});
-
-*/
+// for the toggle to work properly
+document.getElementById("wrapper_reiniciar_id").style.display = "none";
 
 }
 

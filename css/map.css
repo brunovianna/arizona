@@ -358,14 +358,12 @@ div.wrapper_reiniciar {
 
 div.reiniciar_text {
 	grid-column: 1 / 3;
-	/*border: 1px solid #ff0000;*/
+
 }
 
 div.reiniciar_button {
 	width: 80px;
 	margin: 30px;
-	border: 1px solid #ff0000;
-	vertical-align: middle;
 	cursor: pointer;
 }
 
@@ -379,7 +377,6 @@ div.reiniciar_content {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	vertical-align: middle;
 }
 
 div.box_fronteira {

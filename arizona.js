@@ -1146,9 +1146,23 @@ function close_screenplay() {
     document.getElementById("nav_screenplay_img_id").src = "images/roteiro_branco.png"
 }
 
-function go_homepage() {
+function toggle_confirm_restart () {
+  if (document.getElementById("wrapper_reiniciar_id").style.display == "none") {
+    document.getElementById("wrapper_reiniciar_id").style.display = "grid";
+    document.getElementById("nav_home_img_id").src = "images/home_cinza.png"
+  } else
+     close_restart();
+}
+
+function confirm_restart () {
   window.location.href = "http://vps3575.publiccloud.com.br/v7_juntando_tudo/";
 }
+
+function close_restart() {
+  document.getElementById("wrapper_reiniciar_id").style.display = "none";
+  document.getElementById("nav_home_img_id").src = "images/home_branco.png"
+}
+
 
 function toggle_screenplay() {
   if (document.getElementById("wrapper_screenplay_id").style.display == "none") {

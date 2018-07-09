@@ -141,6 +141,7 @@ div.fence_us {
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, 0);
+	font-weight: 700;
 }
 
 div.fence {
@@ -161,6 +162,7 @@ div.fence_mexico {
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, 0);
+	font-weight: 700;
 }
 
 

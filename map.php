@@ -105,7 +105,7 @@ question.push( <?php echo $_POST["question_8"]; ?> );
   </div>
   <div class="welcome_button" onclick="close_welcome();">
     <span class="georgia-bold">
-      COMEÇAR A VISITA
+      NAVEGAR
     </span>
   </div>
 </div>

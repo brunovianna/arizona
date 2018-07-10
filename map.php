@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <title>Arizona</title>
 <link rel="stylesheet" type="text/css" href="css/map.css">
+<link type="text/css" href="css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
 <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
 <script src="https://player.vimeo.com/api/player.js"></script>
 
@@ -21,7 +22,18 @@ question.push( <?php echo $_POST["question_7"]; ?> );
 question.push( <?php echo $_POST["question_8"]; ?> );
 
 </script>
-<script src="arizona.js"></script>
+
+<!-- latest jQuery direct from jQuery CDN -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<!-- the mousewheel plugin -->
+<script type="text/javascript" src="mwheelIntent.js"></script>
+<!-- the mousewheel plugin -->
+<script type="text/javascript" src="jquery.mousewheel.js"></script>
+<!-- the jScrollPane script -->
+<script type="text/javascript" src="jquery.jscrollpane.min.js"></script>
+
+<script type="text/javascript" src="arizona.js"></script>
 </head>
 
 <body >
@@ -85,7 +97,7 @@ question.push( <?php echo $_POST["question_8"]; ?> );
   </div>
 </div>
 
-<div class="wrapper_welcome_arrows" id="wrapper_welcome_id">
+<div class="wrapper_welcome" id="wrapper_welcome_id">
   <div class="welcome_text">
   <span class="georgia-bold">
         BEM-VINDO(A) A MESA, ARIZONA.<br><br>

@@ -890,14 +890,22 @@ document.getElementById("wrapper_reiniciar_id").style.display = "none";
 //scrollbar function
 $(function()
 {
-	// $('.wrapper_welcome').jScrollPane();
-  $('.wrapper_welcome_arrows').jScrollPane(
+
+  $('.wrapper_welcome').jScrollPane(
   {
 
     showArrows: true,
     horizontalGutter: 10
-  }
-);
+  });
+  
+  $('.wrapper_screenplay').jScrollPane(
+  {
+
+    showArrows: true,
+    horizontalGutter: 10
+  });
+
+
 });
 
 }

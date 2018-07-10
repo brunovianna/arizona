@@ -85,7 +85,7 @@ question.push( <?php echo $_POST["question_8"]; ?> );
   </div>
 </div>
 
-<div class="wrapper_welcome" id="wrapper_welcome_id">
+<div class="wrapper_welcome_arrows" id="wrapper_welcome_id">
   <div class="welcome_text">
   <span class="georgia-bold">
         BEM-VINDO(A) A MESA, ARIZONA.<br><br>

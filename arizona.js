@@ -887,6 +887,19 @@ for (var i=0; i<places.length; i++) {
 // for the toggle to work properly
 document.getElementById("wrapper_reiniciar_id").style.display = "none";
 
+//scrollbar function
+$(function()
+{
+	// $('.wrapper_welcome').jScrollPane();
+  $('.wrapper_welcome_arrows').jScrollPane(
+  {
+
+    showArrows: true,
+    horizontalGutter: 10
+  }
+);
+});
+
 }
 
 

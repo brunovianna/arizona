@@ -683,6 +683,7 @@ document.getElementById('wrapper_preview_id').addEventListener('mouseleave', fun
     document.getElementById('wrapper_preview_id').style.display = "none";
     document.getElementById("wrapper_preview_id").style.width = "200px";
     document.getElementById("wrapper_preview_id").style.height = "136px";
+    document.getElementById("wrapper_preview_id").style.zIndex = "initial";
     document.getElementById("video_title_id").style.display = "block";
     document.getElementById("video_arrow_id").style.display = "block";
     document.getElementById("video_wrapper_id").style.width = "100%";
@@ -1027,12 +1028,13 @@ function change_video (new_id) {
 }
 
 function preview_fullscreen () {
-  console.log("ola full screen");
-  //request_full_screen(vimeo_player);
+
+
   document.getElementById("wrapper_preview_id").style.width = "100%";
   document.getElementById("wrapper_preview_id").style.height = "100%";
   document.getElementById("wrapper_preview_id").style.top = "0px";
   document.getElementById("wrapper_preview_id").style.left = "0px";
+  document.getElementById("wrapper_preview_id").style.zIndex = 1000;
   document.getElementById("video_title_id").style.display = "none";
   document.getElementById("video_arrow_id").style.display = "none";
   document.getElementById("video_wrapper_id").style.width = "100%";
@@ -1051,6 +1053,7 @@ function delay_overlay_mouseout (mythis) {
       //mythis.setOptions({      fillColor: '#969696',      });
 
       document.getElementById('wrapper_preview_id').style.display = "none";
+      document.getElementById("wrapper_preview_id").style.zIndex = "initial";
       layerOverlapFlag = false;
     }
   }, 500);
@@ -1072,7 +1075,7 @@ function click_fence() {
   document.getElementById("fence_us_id").style.display = "none";
   document.getElementById("fence_id").style.display = "none";
   document.getElementById("fence_mexico_id").style.display = "none";
-  document.getElementById("box_fronteira_id").style.display = "none";
+  document.getElementById("box_fronteira_id").style.display = "none";wrapper_reiniciar
 
 }
 

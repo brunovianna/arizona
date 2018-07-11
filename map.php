@@ -165,28 +165,27 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
      <img src="images/close_cinza.png" onclick="close_screenplay();">
    </div>
  </div>
-<!--
-<div class="wrapper_video_content" id="wrapper_video_content_id">
-  <div class="video_content" id="video_content_1">
-    <iframe
-     src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="vimeo_id"
-     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-  </div>
-  <div class="text_content" id="text_content_1"></div>
-  <div class="text_content" id="text_content_2"></div>
-  <div class="video_content" id="video_content_2">
-    <iframe
-     src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="vimeo_id"
-     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-  </div>
-  <div class="video_content" id="video_content_3">
-    <iframe
-     src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="vimeo_id"
-     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-  </div>
-  <div class="text_content" id="text_content_3"></div>
-</div> -->
 
+<div class="wrapper_video_content" id="wrapper_video_content_id">
+  <div class="video_content_left" id="div_video_content_1_id">
+    <iframe class="video_content_frame"
+     src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="video_content_1_id"
+     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
+  </div>
+  <div class="text_content_right" id="text_content_1"></div>
+  <div class="text_content_left" id="text_content_2"></div>
+  <div class="video_content_right" id="div_video_content_2_id">
+    <iframe  class="video_content_frame"
+     src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="video_content_2_id"
+     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
+  </div>
+  <div class="video_content_left" id="div_video_content_3_id">
+    <iframe  class="video_content_frame"
+     src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="video_content_3_id"
+     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  </div>
+  <div class="text_content_right" id="text_content_3"></div>
+</div>
 
    <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ1BJ5R6eyVAvq0oAyjkCPW46uS4e6MnI&callback=initMap">

@@ -139,7 +139,7 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 
 </div>
 
-<div class="fence_us" id="fence_us_id"><span class="futura-18">>ESTADOS UNIDOS</span></div>
+<div class="fence_us" id="fence_us_id"><span class="futura-18">ESTADOS UNIDOS</span></div>
 <div class="fence" id="fence_id" onmouseover="show_fence_text();" onmouseout="hide_fence_text();" onclick="click_fence();">
   <img src="images/fronteira_amarela.png">
 </div>

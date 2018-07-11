@@ -84,7 +84,7 @@ google.maps.event.addListener(map, 'center_changed', function() {
     //console.log("center changed");
     // check if we're doing the pan to mexico
     if (!goingToMexico) {
-      if ((!returningToMesa)&&(map.getCenter().lat() < 33.30)) {
+      if ((!returningToMesa)&&(map.getCenter().lat() < 33.22)) {
         //show border arrow
         //use different trigger now? crosses mouseover?
         document.getElementById('fence_id').style.display = "block";

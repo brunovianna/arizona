@@ -298,8 +298,10 @@ cruzes_overlays.forEach ( function(item, index){
 
   google.maps.event.addListener(item, 'mouseover', function() {
     if (mouseover_enabled) {
-      item.set('url', 'images/arizona_icone_cruz-amarelo.png');
-      item.setMap(map);
+      cruzes_overlays.forEach ( function (subitem,subindex){
+        subitem.set('url', 'images/arizona_icone_cruz-amarelo.png');
+        subitem.setMap(map);
+      });
       document.getElementById("box_fronteira_id").style.display = "grid";
     }
   }  );
@@ -1070,6 +1072,7 @@ function click_fence() {
   document.getElementById("fence_us_id").style.display = "none";
   document.getElementById("fence_id").style.display = "none";
   document.getElementById("fence_mexico_id").style.display = "none";
+  document.getElementById("box_fronteira_id").style.display = "none";
 
 }
 

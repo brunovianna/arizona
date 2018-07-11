@@ -36,6 +36,7 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 <script type="text/javascript" src="arizona.js"></script>
 </head>
 
+
 <body >
 
     <div id="map"></div>
@@ -44,16 +45,15 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 
 
 
-<div class="wrapper_wrapper" id="wrapper_vimeo_id"><!-- mouse behaviours are defined in the js file -->
+<div class="wrapper_preview" id="wrapper_preview_id" onclick="preview_fullscreen();"><!-- mouse behaviours are defined in the js file -->
   <div class="video_title" id="video_title_id">Western Park</div>
-  <div class="video_wrapper" id="video_wrapper_id">
+  <div class="video_wrapper" id="video_wrapper_id" onclick="window.alert('oi');">
     <iframe
-     src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1" id="vimeo_id"
-     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+     src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="vimeo_id"
+     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
  </div>
- <div class="video_arrow"><img src="images/seta_video.png"></div>
+ <div class="video_arrow" id="video_arrow_id" onclick="window.alert('oi');"><img src="images/seta_video.png"></div>
 </div>
-
 
 <div class="wrapper_navigation">
   <div class="nav_info"  onclick="toggle_welcome();">
@@ -69,7 +69,6 @@ question.push( <?php echo $_POST["question_8"]; ?> );
     <img src="images/home_branco.png" id="nav_home_img_id">
   </div>
 </div>
-
 
 <div class="wrapper_wind_rose">
   <div class="las_vegas">
@@ -117,7 +116,7 @@ question.push( <?php echo $_POST["question_8"]; ?> );
   </div>
   <div class="welcome_button" onclick="close_welcome();">
     <span class="georgia-bold">
-      NAVEGAR
+      COMEÇAR A VISITA
     </span>
   </div>
 </div>
@@ -140,11 +139,11 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 
 </div>
 
-<div class="fence_us" id="fence_us_id"><span class="georgia-18">ESTADOS UNIDOS</span></div>
+<div class="fence_us" id="fence_us_id"><span class="futura-18">Estados Unidos</span></div>
 <div class="fence" id="fence_id" onmouseover="show_fence_text();" onmouseout="hide_fence_text();" onclick="click_fence();">
   <img src="images/fronteira_amarela.png">
 </div>
-<div class="fence_mexico"  id="fence_mexico_id"><span class="georgia-18">MÉXICO</span></div>
+<div class="fence_mexico"  id="fence_mexico_id"><span class="futura-18">México</span></div>
 
 
 <div class="wrapper_fronteira" id="wrapper_wrapper_fronteira_id">
@@ -152,7 +151,6 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
 </div>
-
 
  <div class="wrapper_screenplay" id="wrapper_screenplay_id">
    <div class="screenplay" id="screenplay_id"><br>ROTEIRO<br>
@@ -167,6 +165,28 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
      <img src="images/close_cinza.png" onclick="close_screenplay();">
    </div>
  </div>
+<!--
+<div class="wrapper_video_content" id="wrapper_video_content_id">
+  <div class="video_content" id="video_content_1">
+    <iframe
+     src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="vimeo_id"
+     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  </div>
+  <div class="text_content" id="text_content_1"></div>
+  <div class="text_content" id="text_content_2"></div>
+  <div class="video_content" id="video_content_2">
+    <iframe
+     src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="vimeo_id"
+     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  </div>
+  <div class="video_content" id="video_content_3">
+    <iframe
+     src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="vimeo_id"
+     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  </div>
+  <div class="text_content" id="text_content_3"></div>
+</div> -->
+
 
    <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ1BJ5R6eyVAvq0oAyjkCPW46uS4e6MnI&callback=initMap">

@@ -10,13 +10,15 @@ var pan_started = 0;
 var allowedBounds;
 var lastValidCenter;
 var reservationOverlay;
-var videoWidth = 200;
-var videoHeight = 112;
-var videoUp = 61;
+var video_width = 200;
+var video_height = 112;
+var video_up = 61;
+var video_status = "none";
 var goingToMexico = false;
 var returningToMesa = false;
 var mouseover_enabled = false;
 var vimeo_fronteira;
+var vimeo_player;
 var currentVideoId = -1;
 var screenplay_content = "<br><b>ROTEIRO</b><br><br>Baseado em suas respostas, recomendamos que você visite as seguintes localidades em Mesa: <br><br>";
 
@@ -40,7 +42,6 @@ var videos  = [[226354540, "Casa dos Hanny"],
   [226364472, "Rodeo"],
   [226354643, "Western Park"]];
 
-
 function initMap() {
 // Create the map with no initial style specified.
 // It therefore has default styling.
@@ -63,14 +64,10 @@ map = new google.maps.Map(document.getElementById('map'), {
 
 map.setOptions({styles: map_style});
 
-
 //we need this to be able to get the x and y pixel position of the map rectangles
 overlay = new google.maps.OverlayView();
 overlay.draw = function () {};
 overlay.setMap(map);
-
-
-
 
 // bounds of the mesa area -- no panning beyond this
 allowedBounds = new google.maps.LatLngBounds(
@@ -90,7 +87,7 @@ google.maps.event.addListener(map, 'center_changed', function() {
       if ((!returningToMesa)&&(map.getCenter().lat() < 33.30)) {
         //show border arrow
         //use different trigger now? crosses mouseover?
-        document.getElementById('fence_id').style.display = "inline";
+        document.getElementById('fence_id').style.display = "block";
         document.getElementById('fence_us_id').style.display = "none";
         document.getElementById('fence_mexico_id').style.display = "none";
 
@@ -108,12 +105,9 @@ google.maps.event.addListener(map, 'center_changed', function() {
     }
 });
 
-
 vimeo_fronteira = new Vimeo.Player(document.getElementById("video_fronteira"));
 
 vimeo_player = new Vimeo.Player(document.getElementById("vimeo_id"));
-
-
 
 vimeo_player.on('timeupdate', function(data) {
     // data is an object containing properties specific to that event
@@ -131,8 +125,6 @@ vimeo_player.on('timeupdate', function(data) {
     }
 });
 
-
-
 //reservation overlay
 var reservationBounds = {
   north: 33.512,
@@ -144,18 +136,16 @@ var reservationBounds = {
 reservationOverlay = new google.maps.GroundOverlay(
     'images/reserva.svg',
     reservationBounds);
+
 reservationOverlay.setMap(map);
 
 //crosses overlay
-
 cruzes_bounds.forEach (function (item, index) {
   cruzes_overlays[index] = new google.maps.GroundOverlay('images/arizona_icone_cruz-cinza.png', item);
   cruzes_overlays[index].setMap(map);
   }
 
 );
-
-
 
 
 //casas width .006 height .005
@@ -249,8 +239,7 @@ var skyland_highschool_rect = new google.maps.Circle({
     new google.maps.LatLng(33.390,-111.746),
   radius: 300,
 	strokeWeight: 0,
-//	fillColor: '#ffcf2f',
-fillColor: '#969696',
+  fillColor: '#969696',
 	fillOpacity: 1
 });
 
@@ -258,7 +247,7 @@ var gym_rect = new google.maps.Circle({
 	map: map,
 	center:
     new google.maps.LatLng(33.44,-111.715),
-radius: 300,
+  radius: 300,
 	strokeWeight: 0,
   fillColor: '#969696',
 	fillOpacity: 1
@@ -305,8 +294,6 @@ var western_park_circle = new google.maps.Circle({
 });
 
 //CROSSES behaviours
-
-
 cruzes_overlays.forEach ( function(item, index){
 
   google.maps.event.addListener(item, 'mouseover', function() {
@@ -321,12 +308,7 @@ cruzes_overlays.forEach ( function(item, index){
   }
 );
 
-
-
-
-
 // CHURCHES behaviours
-
 google.maps.event.addListener(igreja_1_overlay, 'mouseover', function() { igrejaMouseOver (igreja_1_overlay); }  );
 google.maps.event.addListener(igreja_1_overlay, 'mouseout', function() { igrejaMouseOut (igreja_1_overlay); } );
 google.maps.event.addListener(igreja_2_overlay, 'mouseover', function() { igrejaMouseOver (igreja_2_overlay); }   );
@@ -351,118 +333,75 @@ google.maps.event.addListener(igreja_11_overlay, 'mouseover', function() { igrej
 google.maps.event.addListener(igreja_11_overlay, 'mouseout', function() { igrejaMouseOut (igreja_11_overlay); } );
 
 function igrejaMouseOver (my_overlay) {
-
-
-
-
-  /*
-  igreja_1_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
-  igreja_2_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
-  igreja_3_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
-  igreja_4_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
-  igreja_5_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
-  igreja_6_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
-  igreja_7_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
-  igreja_8_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
-  igreja_9_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
-  igreja_10_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
-  igreja_11_overlay.set('url', 'images/arizona_icone_triangulo-amarelo.png');
-
-  igreja_1_overlay.setMap(map);
-  igreja_2_overlay.setMap(map);
-  igreja_3_overlay.setMap(map);
-  igreja_4_overlay.setMap(map);
-  igreja_5_overlay.setMap(map);
-  igreja_6_overlay.setMap(map);
-  igreja_7_overlay.setMap(map);
-  igreja_8_overlay.setMap(map);
-  igreja_9_overlay.setMap(map);
-  igreja_10_overlay.setMap(map);
-  igreja_11_overlay.setMap(map);
-
-  */
   if (mouseover_enabled) {
     video_id = 6; //line 29
 
     var r = get_mapthing_bounds(my_overlay) ;
-    var center_h = Math.round((r.right + r.left)/2);
 
-    document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
-    document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
-    document.getElementById('wrapper_vimeo_id').style.display = "inline";
-      document.getElementById("video_title_id").innerHTML = "Tour das Igrejas";
-
-      //the callback function 'timeupdate' will make the video frame visible when it resets
-      if (currentVideoId != video_id){
-        document.getElementById("vimeo_id").style.display = "none";
-        currentVideoId = video_id;
-        change_video(videos[video_id][0]);
-    }
+    show_preview (r, video_id, "Tour das Igrejas");
+    // var center_h = Math.round((r.right + r.left)/2);
+    //
+    // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
+    // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
+    // document.getElementById('wrapper_preview_id').style.display = "block";
+    //   document.getElementById("video_title_id").innerHTML = ;
+    //
+    //   //the callback function 'timeupdate' will make the video frame visible when it resets
+    //   if (currentVideoId != video_id){
+    //     document.getElementById("vimeo_id").style.display = "none";
+    //     currentVideoId = video_id;
+    //     change_video(videos[video_id][0]);
+    // }
   }
 }
 
 function igrejaMouseOut (out_overlay) {
-
-
   if (mouseover_enabled) {
-    setTimeout(function () {
-      //console.log("time out");
-      if (!layerOverlapFlag) {
-        document.getElementById('wrapper_vimeo_id').style.display = "none";
-
-        layerOverlapFlag = false;
-      }
-    }, 500);
+    delay_overlay_mouseout(out_overlay);
   }
 }
 
 // HOUSES behaviours
 
-google.maps.event.addListener(casa_1_overlay, 'mouseover', function () { casaMouseOver(casa_1_overlay, 'wrapper_vimeo_id',0, 'Casa dos ','Hanny');});
+google.maps.event.addListener(casa_1_overlay, 'mouseover', function () { casaMouseOver(casa_1_overlay, 'wrapper_preview_id',0, 'Casa dos ','Hanny');});
 google.maps.event.addListener(casa_1_overlay, 'mouseout', function () { casaMouseOut(casa_1_overlay);});
-google.maps.event.addListener(casa_2_overlay, 'mouseover', function () { casaMouseOver(casa_2_overlay, 'wrapper_vimeo_id',1,'Casa do ','Corbin');});
+google.maps.event.addListener(casa_2_overlay, 'mouseover', function () { casaMouseOver(casa_2_overlay, 'wrapper_preview_id',1,'Casa do ','Corbin');});
 google.maps.event.addListener(casa_2_overlay, 'mouseout', function () { casaMouseOut(casa_2_overlay);});
-google.maps.event.addListener(casa_3_overlay, 'mouseover', function () { casaMouseOver(casa_3_overlay, 'wrapper_vimeo_id',2,'Casa da ','Kristen');});
+google.maps.event.addListener(casa_3_overlay, 'mouseover', function () { casaMouseOver(casa_3_overlay, 'wrapper_preview_id',2,'Casa da ','Kristen');});
 google.maps.event.addListener(casa_3_overlay, 'mouseout', function () { casaMouseOut(casa_3_overlay);});
-google.maps.event.addListener(casa_4_overlay, 'mouseover', function () { casaMouseOver(casa_4_overlay, 'wrapper_vimeo_id',3,'Casa da ','Cait');});
+google.maps.event.addListener(casa_4_overlay, 'mouseover', function () { casaMouseOver(casa_4_overlay, 'wrapper_preview_id',3,'Casa da ','Cait');});
 google.maps.event.addListener(casa_4_overlay, 'mouseout', function () { casaMouseOut(casa_4_overlay);});
-google.maps.event.addListener(casa_5_overlay, 'mouseover', function () { casaMouseOver(casa_5_overlay, 'wrapper_vimeo_id',4,'Casa dos ','Casillas');});
+google.maps.event.addListener(casa_5_overlay, 'mouseover', function () { casaMouseOver(casa_5_overlay, 'wrapper_preview_id',4,'Casa dos ','Casillas');});
 google.maps.event.addListener(casa_5_overlay, 'mouseout', function () { casaMouseOut(casa_5_overlay);});
-google.maps.event.addListener(casa_6_overlay, 'mouseover', function () { casaMouseOver(casa_6_overlay, 'wrapper_vimeo_id',5,'Casa da ','Jan');});
+google.maps.event.addListener(casa_6_overlay, 'mouseover', function () { casaMouseOver(casa_6_overlay, 'wrapper_preview_id',5,'Casa da ','Jan');});
 google.maps.event.addListener(casa_6_overlay, 'mouseout', function () { casaMouseOut(casa_6_overlay);});
 
 function casaMouseOver(me, id, video_id, text_1, text_2) {
-
   if (mouseover_enabled) {
 
     var r = get_mapthing_bounds(me) ;
-    var center_h = Math.round((r.right + r.left)/2);
-
-    document.getElementById("video_title_id").innerHTML = text_1+text_2;
-    document.getElementById(id).style.left = (center_h-videoWidth/2)+"px";
-    document.getElementById(id).style.top = (r.bottom-videoHeight-videoUp)+"px";
-    document.getElementById(id).style.display = "inline";
-
-    //the callback function 'timeupdate' will make the video frame visible when it resets
-    if (currentVideoId != video_id){
-      document.getElementById("vimeo_id").style.display = "none";
-      currentVideoId = video_id;
-      change_video(videos[video_id][0]);
-    }
+    show_preview(r, video_id,(text_1+text_2));
+    // var center_h = Math.round((r.right + r.left)/2);
+    //
+    // document.getElementById("video_title_id").innerHTML = text_1+text_2;
+    // document.getElementById(id).style.left = (center_h-video_width/2)+"px";
+    // document.getElementById(id).style.top = (r.bottom-video_height-video_up)+"px";
+    // document.getElementById(id).style.display = "block";
+    //
+    // //the callback function 'timeupdate' will make the video frame visible when it resets
+    // if (currentVideoId != video_id){
+    //   document.getElementById("vimeo_id").style.display = "none";
+    //   currentVideoId = video_id;
+    //   change_video(videos[video_id][0]);
+    // }
   }
 };
 
-function casaMouseOut (me) {
+function casaMouseOut (casa_overlay) {
 
   if (mouseover_enabled) {
 
-    setTimeout(function () {
-      //console.log("time out");
-      if (!layerOverlapFlag) {
-        document.getElementById('wrapper_vimeo_id').style.display = "none";
-        layerOverlapFlag = false;
-      }
-    }, 500);
+    delay_overlay_mouseout(casa_overlay);
 
   }
 
@@ -473,26 +412,24 @@ google.maps.event.addListener(volta_overlay, 'mouseover', function (event) {
 
   if (mouseover_enabled) {
 
-
     //line 30
      video_id = 7;
 
-      //volta_overlay.set('url', 'images/icone_estrada-amarelo.png');
-
       var r = get_mapthing_bounds(volta_overlay) ;
-      var center_h = Math.round((r.right + r.left)/2);
-
-      document.getElementById("video_title_id").innerHTML = "Volta por Mesa";
-      document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
-      document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
-      document.getElementById('wrapper_vimeo_id').style.display = "inline";
-
-      //the callback function 'timeupdate' will make the video frame visible when it resets
-      if (currentVideoId != video_id){
-        document.getElementById("vimeo_id").style.display = "none";
-        currentVideoId = video_id;
-        change_video(videos[video_id][0]);
-      }
+      show_preview(r, video_id, "Volta por Mesa");
+      // var center_h = Math.round((r.right + r.left)/2);
+      //
+      // document.getElementById("video_title_id").innerHTML = "Volta por Mesa";
+      // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
+      // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
+      // document.getElementById('wrapper_preview_id').style.display = "block";
+      //
+      // //the callback function 'timeupdate' will make the video frame visible when it resets
+      // if (currentVideoId != video_id){
+      //   document.getElementById("vimeo_id").style.display = "none";
+      //   currentVideoId = video_id;
+      //   change_video(videos[video_id][0]);
+      // }
 
     }
 });
@@ -502,15 +439,7 @@ google.maps.event.addListener(volta_overlay, 'mouseout', function (event) {
 
   if (mouseover_enabled) {
 
-    setTimeout(function () {
-      //console.log("time out");
-      if (!layerOverlapFlag) {
-        //volta_overlay.set('url', 'images/icone_estrada.png');
-
-        document.getElementById('wrapper_vimeo_id').style.display = "none";
-        layerOverlapFlag = false;
-      }
-    }, 500);
+    delay_overlay_mouseout();
   }
 
 });
@@ -535,25 +464,26 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (ev
 
 
     var r = get_mapthing_bounds(skyland_highschool_rect) ;
-    var center_h = Math.round((r.right + r.left)/2);
-
-    document.getElementById("video_title_id").innerHTML = "High School";
-    document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
-    document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
-    document.getElementById('wrapper_vimeo_id').style.display = "inline";
-
-    //the callback function 'timeupdate' will make the video frame visible when it resets
-    if (currentVideoId != video_id){
-      document.getElementById("vimeo_id").style.display = "none";
-      currentVideoId = video_id;
-      change_video(videos[video_id][0]);
-    }
+    show_preview(r, video_id, "High School");
+    // var center_h = Math.round((r.right + r.left)/2);
+    //
+    // document.getElementById("video_title_id").innerHTML = "High School";
+    // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
+    // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
+    // document.getElementById('wrapper_preview_id').style.display = "block";
+    //
+    // //the callback function 'timeupdate' will make the video frame visible when it resets
+    // if (currentVideoId != video_id){
+    //   document.getElementById("vimeo_id").style.display = "none";
+    //   currentVideoId = video_id;
+    //   change_video(videos[video_id][0]);
+    // }
   }
 });
 
 google.maps.event.addListener(skyland_highschool_rect, 'mouseout', function (event) {
   if (mouseover_enabled) {
-    delayOverlayMouseout(this);
+    delay_overlay_mouseout(this);
   }
 
 });
@@ -570,30 +500,29 @@ google.maps.event.addListener(gym_rect, 'mouseover', function (event) {
 
     //move the video to near the icon
     var r = get_mapthing_bounds(gym_rect) ;
-    var center_h = Math.round((r.right + r.left)/2);
-    document.getElementById("video_title_id").innerHTML = "Academia do Ryan";
-    document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
-    document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
-    document.getElementById('wrapper_vimeo_id').style.display = "inline";
-
-    //the callback function 'timeupdate' will make the video frame visible when it resets
-    if (currentVideoId != video_id){
-      document.getElementById("vimeo_id").style.display = "none";
-      currentVideoId = video_id;
-      change_video(videos[video_id][0]);
-    }
+    show_preview(r, video_id, "Academia do Ryan");
+    //
+    // var center_h = Math.round((r.right + r.left)/2);
+    // document.getElementById("video_title_id").innerHTML = "Academia do Ryan";
+    // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
+    // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
+    // document.getElementById('wrapper_preview_id').style.display = "block";
+    //
+    // //the callback function 'timeupdate' will make the video frame visible when it resets
+    // if (currentVideoId != video_id){
+    //   document.getElementById("vimeo_id").style.display = "none";
+    //   currentVideoId = video_id;
+    //   change_video(videos[video_id][0]);
+    // }
   }
 });
 
 google.maps.event.addListener(gym_rect, 'mouseout', function (event) {
   if (mouseover_enabled) {
-    delayOverlayMouseout(this);
+    delay_overlay_mouseout(this);
   }
 
 });
-
-
-
 
 // SHOOTING RANGE behaviours
 google.maps.event.addListener(shooting_range_rect, 'mouseover', function (event) {
@@ -606,25 +535,27 @@ google.maps.event.addListener(shooting_range_rect, 'mouseover', function (event)
 
     //move the video to near the icon
     var r = get_mapthing_bounds(shooting_range_rect) ;
-    var center_h = Math.round((r.right + r.left)/2);
-    document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
-    document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
+    show_preview(r, video_id, "Shooting Range");
 
-    document.getElementById("video_title_id").innerHTML = "Shooting Range";
-    document.getElementById('wrapper_vimeo_id').style.display = "inline";
-
-    //the callback function 'timeupdate' will make the video frame visible when it resets
-    if (currentVideoId != video_id){
-      document.getElementById("vimeo_id").style.display = "none";
-      currentVideoId = video_id;
-      change_video(videos[video_id][0]);
-    }
+    // var center_h = Math.round((r.right + r.left)/2);
+    // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
+    // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
+    //
+    // document.getElementById("video_title_id").innerHTML = "Shooting Range";
+    // document.getElementById('wrapper_preview_id').style.display = "block";
+    //
+    // //the callback function 'timeupdate' will make the video frame visible when it resets
+    // if (currentVideoId != video_id){
+    //   document.getElementById("vimeo_id").style.display = "none";
+    //   currentVideoId = video_id;
+    //   change_video(videos[video_id][0]);
+    // }
   }
 });
 
 google.maps.event.addListener(shooting_range_rect, 'mouseout', function (event) {
   if (mouseover_enabled) {
-    delayOverlayMouseout(this);
+    delay_overlay_mouseout(this);
   }
 });
 
@@ -640,18 +571,19 @@ google.maps.event.addListener(retirement_rect, 'mouseover', function (e) {
 
     //move the video to near the icon
     var r = get_mapthing_bounds(retirement_rect) ;
-    var center_h = Math.round((r.right + r.left)/2);
-    document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
-    document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
-    document.getElementById("video_title_id").innerHTML = "Condomínios +55";
-    document.getElementById('wrapper_vimeo_id').style.display = "inline";
-
-    //the callback function 'timeupdate' will make the video frame visible when it resets
-    if (currentVideoId != video_id){
-      document.getElementById("vimeo_id").style.display = "none";
-      currentVideoId = video_id;
-      change_video(videos[video_id][0]);
-    }
+    show_preview(r, video_id, "Condomínios +55");
+    // var center_h = Math.round((r.right + r.left)/2);
+    // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
+    // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
+    // document.getElementById("video_title_id").innerHTML = "Condomínios +55";
+    // document.getElementById('wrapper_preview_id').style.display = "block";
+    //
+    // //the callback function 'timeupdate' will make the video frame visible when it resets
+    // if (currentVideoId != video_id){
+    //   document.getElementById("vimeo_id").style.display = "none";
+    //   currentVideoId = video_id;
+    //   change_video(videos[video_id][0]);
+    // }
   }
 });
 
@@ -660,7 +592,7 @@ google.maps.event.addListener(retirement_rect, 'mouseout', function (event) {
   //console.log("bola mouseleave");
   if (mouseover_enabled) {
 
-    delayOverlayMouseout(this);
+    delay_overlay_mouseout(this);
   }
 
 
@@ -675,30 +607,28 @@ google.maps.event.addListener(rodeo_rect, 'mouseover', function (event) {
 
     video_id = 12; //line 35
 
-  	//this.setOptions({		fillColor: '#ffcf2f',	});
-
-
 
       //move the video to near the icon
       var r = get_mapthing_bounds(rodeo_rect) ;
-      var center_h = Math.round((r.right + r.left)/2);
-      document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
-      document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
-      document.getElementById("video_title_id").innerHTML = "Rodeo";
-      document.getElementById('wrapper_vimeo_id').style.display = "inline";
-
-      //the callback function 'timeupdate' will make the video frame visible when it resets
-      if (currentVideoId != video_id){
-        document.getElementById("vimeo_id").style.display = "none";
-        currentVideoId = video_id;
-        change_video(videos[video_id][0]);
-      }
+      show_preview(r, video_id, "Rodeo");
+      // var center_h = Math.round((r.right + r.left)/2);
+      // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
+      // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
+      // document.getElementById("video_title_id").innerHTML = "Rodeo";
+      // document.getElementById('wrapper_preview_id').style.display = "block";
+      //
+      // //the callback function 'timeupdate' will make the video frame visible when it resets
+      // if (currentVideoId != video_id){
+      //   document.getElementById("vimeo_id").style.display = "none";
+      //   currentVideoId = video_id;
+      //   change_video(videos[video_id][0]);
+      // }
     }
 });
 
 google.maps.event.addListener(rodeo_rect, 'mouseout', function (event) {
   if (mouseover_enabled) {
-    delayOverlayMouseout(this);
+    delay_overlay_mouseout(this);
   }
 });
 
@@ -713,25 +643,26 @@ google.maps.event.addListener(western_park_circle, 'mouseover',function (event) 
 
       //move the video to near the icon
       var r = get_mapthing_bounds(western_park_circle) ;
-      var center_h = Math.round((r.right + r.left)/2);
-      document.getElementById('wrapper_vimeo_id').style.left = (center_h-videoWidth/2)+"px";
-      document.getElementById('wrapper_vimeo_id').style.top = (r.bottom-videoHeight-videoUp)+"px";
-      document.getElementById("video_title_id").innerHTML = "Western Park";
-      document.getElementById('wrapper_vimeo_id').style.display = "inline";
-
-      //the callback function 'timeupdate' will make the video frame visible when it resets
-      if (currentVideoId != video_id){
-        document.getElementById("vimeo_id").style.display = "none";
-        currentVideoId = video_id;
-        change_video(videos[video_id][0]);
-      }
+      show_preview(r, video_id, "Western Park");
+      // var center_h = Math.round((r.right + r.left)/2);
+      // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
+      // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
+      // document.getElementById("video_title_id").innerHTML = "Western Park";
+      // document.getElementById('wrapper_preview_id').style.display = "block";
+      //
+      // //the callback function 'timeupdate' will make the video frame visible when it resets
+      // if (currentVideoId != video_id){
+      //   document.getElementById("vimeo_id").style.display = "none";
+      //   currentVideoId = video_id;
+      //   change_video(videos[video_id][0]);
+      // }
     }
 });
 
 
 google.maps.event.addListener(western_park_circle, 'mouseout', function (event) {
   if (mouseover_enabled) {
-    delayOverlayMouseout(this);
+    delay_overlay_mouseout(this);
   }
 });
 
@@ -739,15 +670,22 @@ google.maps.event.addListener(western_park_circle, 'mouseout', function (event) 
 
 
 
-document.getElementById('wrapper_vimeo_id').addEventListener('mouseenter', function () {
+document.getElementById('wrapper_preview_id').addEventListener('mouseenter', function () {
     //console.log("wrapper mouseenter");
     layerOverlapFlag = true;
 });
 
-document.getElementById('wrapper_vimeo_id').addEventListener('mouseleave', function () {
+document.getElementById('wrapper_preview_id').addEventListener('mouseleave', function () {
     //console.log("wrapper mouseleave");
     layerOverlapFlag = false;
-    document.getElementById('wrapper_vimeo_id').style.display = "none";
+    document.getElementById('wrapper_preview_id').style.display = "none";
+    document.getElementById("wrapper_preview_id").style.width = "200px";
+    document.getElementById("wrapper_preview_id").style.height = "136px";
+    document.getElementById("video_title_id").style.display = "block";
+    document.getElementById("video_arrow_id").style.display = "block";
+    document.getElementById("video_wrapper_id").style.width = "100%";
+    document.getElementById("video_wrapper_id").style.height = "112px";
+    document.getElementById("video_wrapper_id").style.margintop = "-18px";
 
 });
 
@@ -873,7 +811,7 @@ for (var i=0; i<places.length; i++) {
       break;
 
     case "fronteira":
-    //document.getElementById('fence_id').style.display = "inline";
+    //document.getElementById('fence_id').style.display = "block";
     //document.getElementById('fence_us_id').style.display = "none";
     //document.getElementById('fence_mexico_id').style.display = "none";
       break;
@@ -908,8 +846,38 @@ $(function()
 
 }
 
+//hack to detect mouse click on iframe
+var monitor = setInterval(function(){
+    var elem = document.activeElement;
+    if(elem && elem.tagName == 'IFRAME'){
 
+        console.log(video_status);
+        if (video_status!="none") {
+          preview_fullscreen();
+        }
+        elem.blur();
+    }
+}, 100);
 
+function show_preview (r, my_video_id, text) {
+
+  video_status = my_video_id;
+
+  var center_h = Math.round((r.right + r.left)/2);
+
+  document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
+  document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
+  document.getElementById('wrapper_preview_id').style.display = "block";
+  document.getElementById("video_title_id").innerHTML = text;
+
+    //the callback function 'timeupdate' will make the video frame visible when it resets
+    if (currentVideoId != my_video_id){
+      document.getElementById("vimeo_id").style.display = "none";
+      currentVideoId = my_video_id;
+      change_video(videos[my_video_id][0]);
+  }
+
+}
 
 function get_mapthing_bounds (mymapthing) {
   var mapthing_topright = mymapthing.getBounds().getNorthEast();
@@ -990,7 +958,7 @@ function doPan(d,steps) {
 
     //after 2 seconds, begin the movie
     if (goingToMexico) {
-      setTimeout(showFronteira, 1000);
+      setTimeout(show_fronteira, 1000);
     } else {
       returningToMesa=false;
     }
@@ -998,25 +966,20 @@ function doPan(d,steps) {
 
 }
 
-
-
-
-function showFronteira() {
+function show_fronteira() {
   document.getElementById('fence_id').style.display = "none";
-  document.getElementById('wrapper_wrapper_fronteira_id').style.display = "inline";
+  document.getElementById('wrapper_wrapper_fronteira_id').style.display = "block";
 
   //when the movie is finishedm return to main screen
 
   vimeo_fronteira.setCurrentTime(0);
-  vimeo_fronteira.on('ended', endFronteira );
+  vimeo_fronteira.on('ended', end_fronteira );
 
 }
 
+var end_fronteira = function () {
 
-
-var endFronteira = function () {
-
-    vimeo_fronteira.off('ended', endFronteira);
+    vimeo_fronteira.off('ended', end_fronteira);
     document.getElementById('wrapper_wrapper_fronteira_id').style.display = "none";
     document.getElementById('fence_id').style.display = "none";
 
@@ -1029,8 +992,6 @@ var endFronteira = function () {
       , 1000);
 
 }
-
-
 
 function change_video (new_id) {
   vimeo_player.loadVideo(new_id).then(function() {
@@ -1063,18 +1024,35 @@ function change_video (new_id) {
   });
 }
 
-function delayOverlayMouseout (mythis) {
+function preview_fullscreen () {
+  console.log("ola full screen");
+  //request_full_screen(vimeo_player);
+  document.getElementById("wrapper_preview_id").style.width = "100%";
+  document.getElementById("wrapper_preview_id").style.height = "100%";
+  document.getElementById("wrapper_preview_id").style.top = "0px";
+  document.getElementById("wrapper_preview_id").style.left = "0px";
+  document.getElementById("video_title_id").style.display = "none";
+  document.getElementById("video_arrow_id").style.display = "none";
+  document.getElementById("video_wrapper_id").style.width = "100%";
+  document.getElementById("video_wrapper_id").style.height = "100%";
+  document.getElementById("video_wrapper_id").style.margintop = "0px";
+
+
+  //document.getElementById("video_wrapper_id").style.top = "0px";
+
+}
+
+function delay_overlay_mouseout (mythis) {
   setTimeout(function () {
     //console.log("time out");
     if (!layerOverlapFlag) {
       //mythis.setOptions({      fillColor: '#969696',      });
 
-      document.getElementById('wrapper_vimeo_id').style.display = "none";
+      document.getElementById('wrapper_preview_id').style.display = "none";
       layerOverlapFlag = false;
     }
   }, 500);
 }
-
 
 function close_box_fronteira() {
   document.getElementById("box_fronteira_id").style.display = "none";
@@ -1083,7 +1061,6 @@ function close_box_fronteira() {
     item.setMap(map);
   });
 }
-
 
 function click_fence() {
   goingToMexico=true;
@@ -1109,7 +1086,7 @@ function hide_fence_text () {
 function close_welcome() {
   document.getElementById("wrapper_welcome_id").style.display="none";
   document.getElementById("nav_info_img_id").src = "images/info_branco.png";
-  document.getElementById("wrapper_screenplay_id").style.display = "inline";
+  document.getElementById("wrapper_screenplay_id").style.display = "block";
   document.getElementById("nav_screenplay_img_id").src = "images/roteiro_cinza.png"
 
   //enable map drag
@@ -1142,10 +1119,9 @@ function close_restart() {
   document.getElementById("nav_home_img_id").src = "images/home_branco.png"
 }
 
-
 function toggle_screenplay() {
   if (document.getElementById("wrapper_screenplay_id").style.display == "none") {
-    document.getElementById("wrapper_screenplay_id").style.display = "inline";
+    document.getElementById("wrapper_screenplay_id").style.display = "block";
     document.getElementById("nav_screenplay_img_id").src = "images/roteiro_cinza.png"
 
   } else {
@@ -1157,7 +1133,7 @@ function toggle_screenplay() {
 
 function toggle_welcome() {
   if (document.getElementById("wrapper_welcome_id").style.display == "none") {
-    document.getElementById("wrapper_welcome_id").style.display = "inline";
+    document.getElementById("wrapper_welcome_id").style.display = "block";
     document.getElementById("nav_info_img_id").src = "images/info_cinza.png";
   } else {
     document.getElementById("wrapper_welcome_id").style.display = "none";
@@ -1165,9 +1141,6 @@ function toggle_welcome() {
 
   }
 }
-
-
-
 
 var question_map =   [
   [["highschool"," <b>High school</b>  -"," Assistir jogo de futebol americano e Falar com Caruso sobre cultura do atleta."],
@@ -1528,7 +1501,6 @@ var map_style = [
     ]
   }
 ];
-
 
 //google earth gave inverse coordinates
 var cruzes_lnglat= [

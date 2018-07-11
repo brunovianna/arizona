@@ -357,22 +357,21 @@ div.wrapper_reiniciar {
 	font-size: 14px;
 	background-color: #ffcf2f;
 	display: none;
-	grid-template-columns: 50% 50%;
+	grid-template-rows: 40% 40%;
 	text-align: center;
-	grid-gap: 1px;
-	padding: 10px;
-
+	grid-gap: 30px;
+	padding: 20px;
 }
 
 div.reiniciar_text {
 	grid-column: 1 / 3;
-
+	padding: 20px;
 }
 
 div.reiniciar_button {
-	width: 80px;
-	margin: 30px;
+
 	cursor: pointer;
+
 }
 
 div.yellow_on_black {
@@ -381,11 +380,15 @@ div.yellow_on_black {
 }
 
 div.reiniciar_content {
+
 	position: relative;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+	font-family: 'Roboto Mono', monospace;
 }
+
+
 
 div.box_fronteira {
 	display: none;

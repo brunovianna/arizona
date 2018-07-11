@@ -122,9 +122,9 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 </div>
 
 <div class="wrapper_reiniciar" id="wrapper_reiniciar_id">
-  <div class="reiniciar_text"><div class="reiniciar_content"><span class="georgia-bold">TEM CERTEZA DE QUE DESEJA REINICIAR O ROTEIRO?</span></div></div>
-  <div class="yellow_on_black reiniciar_button" onclick="confirm_restart();"><div class="reiniciar_content"><span class="georgia-bold">SIM</span></div></div>
-  <div class="yellow_on_black reiniciar_button" onclick="close_restart();"><div class="reiniciar_content"><span class="georgia-bold">NÃO</span></div></div>
+  <div class="reiniciar_text"><span class="georgia-bold">TEM CERTEZA DE QUE DESEJA REINICIAR O ROTEIRO?</span></div>
+  <div class="yellow_on_black reiniciar_button" onclick="confirm_restart();"><div class="reiniciar_content">SIM</div></div>
+  <div class="yellow_on_black reiniciar_button" onclick="close_restart();"><div class="reiniciar_content">NÃO</div></div>
 </div>
 
 <div class="box_fronteira" id="box_fronteira_id">

@@ -119,20 +119,6 @@ div.rectangle_above {
 
 }
 
-div.wrapper_wrapper {
-	width: 200px;
-	height: 136px;
-	background-color: #5a5a5a;
-	position: absolute;
-	top:220px;
-	bottom: 0;
-	left: 40px;
-	right: 0;
-	margin: 0;
-	padding: 0;
-	display: none;
-
-}
 
 
 div.fence_us {
@@ -265,6 +251,22 @@ div.video_fronteira {
 	top: 0;
 
 }
+
+div.wrapper_preview {
+	width: 200px;
+	height: 136px;
+	background-color: #5a5a5a;
+	position: absolute;
+	top:220px;
+	bottom: 0;
+	left: 40px;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	display: none;
+
+}
+
 
 div.video_title {
 	color: white;

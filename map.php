@@ -47,12 +47,12 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 
 <div class="wrapper_preview" id="wrapper_preview_id" onclick="preview_fullscreen();"><!-- mouse behaviours are defined in the js file -->
   <div class="video_title" id="video_title_id">Western Park</div>
-  <div class="video_wrapper" id="video_wrapper_id" onclick="window.alert('oi');">
+  <div class="video_wrapper" id="video_wrapper_id" >
     <iframe
      src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="vimeo_id"
      frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
  </div>
- <div class="video_arrow" id="video_arrow_id" onclick="window.alert('oi');"><img src="images/seta_video.png"></div>
+ <div class="video_arrow" id="video_arrow_id"><img src="images/seta_video.png"></div>
 </div>
 
 <div class="wrapper_navigation">
@@ -166,7 +166,7 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
    </div>
  </div>
 
-<div class="wrapper_video_content" id="wrapper_video_content_id">
+<div class="wrapper_video_content futura-18" id="wrapper_video_content_id">
   <div class="video_content_left" id="div_video_content_1_id">
     <iframe class="video_content_frame"
      src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="video_content_1_id"

@@ -7,8 +7,8 @@ var panPath = [];   // An array of points the current panning action will use
 var panQueue = [];  // An array of subsequent panTo actions to take
 var STEPS = 10;     // The number of steps that each panTo action will undergo
 var pan_started = 0;
-var allowedBounds;
-var lastValidCenter;
+var allowed_bounds;
+var last_valid_center;
 var reservationOverlay;
 var video_width = 200;
 var video_height = 112;
@@ -17,30 +17,22 @@ var video_status = "none";
 var goingToMexico = false;
 var returningToMesa = false;
 var mouseover_enabled = false;
+var mouseover_place = "";
 var vimeo_fronteira;
 var vimeo_player;
 var currentVideoId = -1;
 var screenplay_content = "<br><b>ROTEIRO</b><br><br>Baseado em suas respostas, recomendamos que você visite as seguintes localidades em Mesa: <br><br>";
+
 
 var cruzes_bounds = [];
 var cruzes_overlays = [];
 
 var layerOverlapFlag = false;
 
-var videos  = [[226354540, "Casa dos Hanny"],
-  [226353399, "Casa do Corbin"],
-  [226353447, "Casa da Kristen"],
-  [226353387, "Casa da Cait"],
-  [226353434, "Casa dos Casillas"],
-  [226368841, "Casa da Jan"],
-  [226354563, "Tour das Igrejas"],
-  [253042771, "Volta por Mesa"],
-  [225001757, "High School"],
-  [226357094, "Shooting Range"],
-  [225001970, "Gym"],
-  [225002041, "Condomínios +55"],
-  [226364472, "Rodeo"],
-  [226354643, "Western Park"]];
+
+var places = [];
+var screenplay_places = [];
+var screenplay_texts = [];
 
 function initMap() {
 // Create the map with no initial style specified.
@@ -70,17 +62,17 @@ overlay.draw = function () {};
 overlay.setMap(map);
 
 // bounds of the mesa area -- no panning beyond this
-allowedBounds = new google.maps.LatLngBounds(
+allowed_bounds = new google.maps.LatLngBounds(
      new google.maps.LatLng(33.2, -112),
      //new google.maps.LatLng(31.18, -112),
      new google.maps.LatLng(33.45, -111.7)
 );
-lastValidCenter = map.getCenter();
+last_valid_center = map.getCenter();
 
 
 google.maps.event.addListener(map, 'center_changed', function() {
     //console.log(map.getCenter().lat()+ " "+map.getCenter().lng());
-    //console.log(allowedBounds+ " "+map.getCenter().lng());
+    //console.log(allowed_bounds+ " "+map.getCenter().lng());
     //console.log("center changed");
     // check if we're doing the pan to mexico
     if (!goingToMexico) {
@@ -92,15 +84,15 @@ google.maps.event.addListener(map, 'center_changed', function() {
         document.getElementById('fence_mexico_id').style.display = "none";
 
       }
-      if (allowedBounds.contains(map.getCenter())) {
+      if (allowed_bounds.contains(map.getCenter())) {
           // still within valid bounds, so save the last valid position
           //console.log("center");
-          lastValidCenter = map.getCenter();
+          last_valid_center = map.getCenter();
           return;
       }
 
       // not valid anymore => return to last valid position
-      map.panTo(lastValidCenter);
+      map.panTo(last_valid_center);
       //console.log("yeah");
     }
 });
@@ -108,6 +100,10 @@ google.maps.event.addListener(map, 'center_changed', function() {
 vimeo_fronteira = new Vimeo.Player(document.getElementById("video_fronteira"));
 
 vimeo_player = new Vimeo.Player(document.getElementById("vimeo_id"));
+
+video_content_1 = new Vimeo.Player(document.getElementById("video_content_1_id"));
+video_content_2 = new Vimeo.Player(document.getElementById("video_content_2_id"));
+video_content_3 = new Vimeo.Player(document.getElementById("video_content_3_id"));
 
 vimeo_player.on('timeupdate', function(data) {
     // data is an object containing properties specific to that event
@@ -124,6 +120,68 @@ vimeo_player.on('timeupdate', function(data) {
       //console.log("timeupdate "+data.seconds);
     }
 });
+
+vimeo_player.on('ended', function(data) {
+
+    // show screenplay videos
+    place = preview_videos[video_status];
+    var position = -1;
+    for (var i=0;i<places_display_videos_map.length;i++) {
+      if (places_display_videos_map[i][0] == place) {
+        position = i;
+        break;
+      }
+    }
+
+    place_display_videos = places_display_videos_map[i][1];
+
+    video_content_1.loadVideo(place_display_videos[0]).then (function() {
+      video_content_1.pause();
+    }).catch(function(error) {
+      console.log("Couldn't load video. Error: "+error);
+    });
+
+    document.getElementById("text_content_1").innerHTML = display_video_keymap[place_display_videos[0]];
+
+    if (place_display_videos[1]!=undefined) {
+      video_content_2.loadVideo(place_display_videos[1]).then (function() {
+        video_content_2.pause();
+      }).catch(function(error){
+        console.log("Couldn't load video. Error: "+error);
+      });
+
+      document.getElementById("text_content_2").innerHTML = display_video_keymap[place_display_videos[1]];
+    } else {
+
+      document.getElementById("div_video_content_2_id").style.display = "none";
+      document.getElementById("text_content_2").style.display = "none";
+    }
+
+    if (place_display_videos[2]!=undefined) {
+      video_content_3.loadVideo(place_display_videos[2]).then (function() {
+        video_content_3.pause();
+      }).catch(function(error){
+        console.log("Couldn't load video. Error: "+error);
+      });
+      document.getElementById("text_content_3").innerHTML = display_video_keymap[place_display_videos[2]];
+    } else {
+      document.getElementById("div_video_content_3_id").style.display = "none";
+      document.getElementById("text_content_3").style.display = "none";
+    }
+
+    close_preview();
+    var bg_color = -1;
+    for (var i=0;i<places_colors_map.length;i++) {
+      if (places_colors_map[i][0] == place) {
+        position = i;
+        break;
+      }
+    }
+    document.getElementById("wrapper_video_content_id").style.backgroundColor = places_colors_map[i][1];
+    document.getElementById("wrapper_video_content_id").style.display = "grid";
+
+});
+
 
 //reservation overlay
 var reservationBounds = {
@@ -336,24 +394,12 @@ google.maps.event.addListener(igreja_11_overlay, 'mouseout', function() { igreja
 
 function igrejaMouseOver (my_overlay) {
   if (mouseover_enabled) {
-    video_id = 6; //line 29
+    video_id = 226354563; //line 29
 
     var r = get_mapthing_bounds(my_overlay) ;
 
     show_preview (r, video_id, "Tour das Igrejas");
-    // var center_h = Math.round((r.right + r.left)/2);
-    //
-    // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
-    // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
-    // document.getElementById('wrapper_preview_id').style.display = "block";
-    //   document.getElementById("video_title_id").innerHTML = ;
-    //
-    //   //the callback function 'timeupdate' will make the video frame visible when it resets
-    //   if (currentVideoId != video_id){
-    //     document.getElementById("vimeo_id").style.display = "none";
-    //     currentVideoId = video_id;
-    //     change_video(videos[video_id][0]);
-    // }
+
   }
 }
 
@@ -365,17 +411,17 @@ function igrejaMouseOut (out_overlay) {
 
 // HOUSES behaviours
 
-google.maps.event.addListener(casa_1_overlay, 'mouseover', function () { casaMouseOver(casa_1_overlay, 'wrapper_preview_id',0, 'Casa dos ','Hanny');});
+google.maps.event.addListener(casa_1_overlay, 'mouseover', function () { casaMouseOver(casa_1_overlay, 'wrapper_preview_id',226354540, 'Casa dos ','Hanny');});
 google.maps.event.addListener(casa_1_overlay, 'mouseout', function () { casaMouseOut(casa_1_overlay);});
-google.maps.event.addListener(casa_2_overlay, 'mouseover', function () { casaMouseOver(casa_2_overlay, 'wrapper_preview_id',1,'Casa do ','Corbin');});
+google.maps.event.addListener(casa_2_overlay, 'mouseover', function () { casaMouseOver(casa_2_overlay, 'wrapper_preview_id',226353399,'Casa do ','Corbin');});
 google.maps.event.addListener(casa_2_overlay, 'mouseout', function () { casaMouseOut(casa_2_overlay);});
-google.maps.event.addListener(casa_3_overlay, 'mouseover', function () { casaMouseOver(casa_3_overlay, 'wrapper_preview_id',2,'Casa da ','Kristen');});
+google.maps.event.addListener(casa_3_overlay, 'mouseover', function () { casaMouseOver(casa_3_overlay, 'wrapper_preview_id',226353447,'Casa da ','Kristen');});
 google.maps.event.addListener(casa_3_overlay, 'mouseout', function () { casaMouseOut(casa_3_overlay);});
-google.maps.event.addListener(casa_4_overlay, 'mouseover', function () { casaMouseOver(casa_4_overlay, 'wrapper_preview_id',3,'Casa da ','Cait');});
+google.maps.event.addListener(casa_4_overlay, 'mouseover', function () { casaMouseOver(casa_4_overlay, 'wrapper_preview_id',226353387,'Casa da ','Cait');});
 google.maps.event.addListener(casa_4_overlay, 'mouseout', function () { casaMouseOut(casa_4_overlay);});
-google.maps.event.addListener(casa_5_overlay, 'mouseover', function () { casaMouseOver(casa_5_overlay, 'wrapper_preview_id',4,'Casa dos ','Casillas');});
+google.maps.event.addListener(casa_5_overlay, 'mouseover', function () { casaMouseOver(casa_5_overlay, 'wrapper_preview_id',226353434,'Casa dos ','Casillas');});
 google.maps.event.addListener(casa_5_overlay, 'mouseout', function () { casaMouseOut(casa_5_overlay);});
-google.maps.event.addListener(casa_6_overlay, 'mouseover', function () { casaMouseOver(casa_6_overlay, 'wrapper_preview_id',5,'Casa da ','Jan');});
+google.maps.event.addListener(casa_6_overlay, 'mouseover', function () { casaMouseOver(casa_6_overlay, 'wrapper_preview_id',226368841,'Casa da ','Jan');});
 google.maps.event.addListener(casa_6_overlay, 'mouseout', function () { casaMouseOut(casa_6_overlay);});
 
 function casaMouseOver(me, id, video_id, text_1, text_2) {
@@ -383,19 +429,7 @@ function casaMouseOver(me, id, video_id, text_1, text_2) {
 
     var r = get_mapthing_bounds(me) ;
     show_preview(r, video_id,(text_1+text_2));
-    // var center_h = Math.round((r.right + r.left)/2);
-    //
-    // document.getElementById("video_title_id").innerHTML = text_1+text_2;
-    // document.getElementById(id).style.left = (center_h-video_width/2)+"px";
-    // document.getElementById(id).style.top = (r.bottom-video_height-video_up)+"px";
-    // document.getElementById(id).style.display = "block";
-    //
-    // //the callback function 'timeupdate' will make the video frame visible when it resets
-    // if (currentVideoId != video_id){
-    //   document.getElementById("vimeo_id").style.display = "none";
-    //   currentVideoId = video_id;
-    //   change_video(videos[video_id][0]);
-    // }
+
   }
 };
 
@@ -415,23 +449,11 @@ google.maps.event.addListener(volta_overlay, 'mouseover', function (event) {
   if (mouseover_enabled) {
 
     //line 30
-     video_id = 7;
+     video_id = 253042771;
 
       var r = get_mapthing_bounds(volta_overlay) ;
       show_preview(r, video_id, "Volta por Mesa");
-      // var center_h = Math.round((r.right + r.left)/2);
-      //
-      // document.getElementById("video_title_id").innerHTML = "Volta por Mesa";
-      // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
-      // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
-      // document.getElementById('wrapper_preview_id').style.display = "block";
-      //
-      // //the callback function 'timeupdate' will make the video frame visible when it resets
-      // if (currentVideoId != video_id){
-      //   document.getElementById("vimeo_id").style.display = "none";
-      //   currentVideoId = video_id;
-      //   change_video(videos[video_id][0]);
-      // }
+
 
     }
 });
@@ -455,31 +477,11 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (ev
   if (mouseover_enabled) {
 
     //line 31
-    video_id = 8;
-
-  	//this.setOptions({		fillColor: '#ffcf2f',	});
-
-    //this creates a div retangle in the same place so it can be placed above other layers
-    //copy_map_rectangle_position (document.getElementById('rectangle_above_id'),this);
-
-    //these lines below bring ot the video preview and the
-
+    video_id = 225001757;
 
     var r = get_mapthing_bounds(skyland_highschool_rect) ;
     show_preview(r, video_id, "High School");
-    // var center_h = Math.round((r.right + r.left)/2);
-    //
-    // document.getElementById("video_title_id").innerHTML = "High School";
-    // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
-    // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
-    // document.getElementById('wrapper_preview_id').style.display = "block";
-    //
-    // //the callback function 'timeupdate' will make the video frame visible when it resets
-    // if (currentVideoId != video_id){
-    //   document.getElementById("vimeo_id").style.display = "none";
-    //   currentVideoId = video_id;
-    //   change_video(videos[video_id][0]);
-    // }
+
   }
 });
 
@@ -498,24 +500,12 @@ google.maps.event.addListener(gym_rect, 'mouseover', function (event) {
   if (mouseover_enabled) {
 
     //line 31
-    video_id = 10;
+    video_id = 225001970;
 
     //move the video to near the icon
     var r = get_mapthing_bounds(gym_rect) ;
     show_preview(r, video_id, "Academia do Ryan");
-    //
-    // var center_h = Math.round((r.right + r.left)/2);
-    // document.getElementById("video_title_id").innerHTML = "Academia do Ryan";
-    // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
-    // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
-    // document.getElementById('wrapper_preview_id').style.display = "block";
-    //
-    // //the callback function 'timeupdate' will make the video frame visible when it resets
-    // if (currentVideoId != video_id){
-    //   document.getElementById("vimeo_id").style.display = "none";
-    //   currentVideoId = video_id;
-    //   change_video(videos[video_id][0]);
-    // }
+
   }
 });
 
@@ -533,25 +523,12 @@ google.maps.event.addListener(shooting_range_rect, 'mouseover', function (event)
   if (mouseover_enabled) {
 
     //line 32
-    video_id = 9;
+    video_id = 226357094;
 
     //move the video to near the icon
     var r = get_mapthing_bounds(shooting_range_rect) ;
     show_preview(r, video_id, "Shooting Range");
 
-    // var center_h = Math.round((r.right + r.left)/2);
-    // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
-    // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
-    //
-    // document.getElementById("video_title_id").innerHTML = "Shooting Range";
-    // document.getElementById('wrapper_preview_id').style.display = "block";
-    //
-    // //the callback function 'timeupdate' will make the video frame visible when it resets
-    // if (currentVideoId != video_id){
-    //   document.getElementById("vimeo_id").style.display = "none";
-    //   currentVideoId = video_id;
-    //   change_video(videos[video_id][0]);
-    // }
   }
 });
 
@@ -566,7 +543,7 @@ google.maps.event.addListener(retirement_rect, 'mouseover', function (e) {
 
   if (mouseover_enabled) {
 
-    video_id = 11; //line 34
+    video_id = 225002041; //line 34
 
     //this.setOptions({		fillColor: '#ffcf2f',	});
 
@@ -574,18 +551,7 @@ google.maps.event.addListener(retirement_rect, 'mouseover', function (e) {
     //move the video to near the icon
     var r = get_mapthing_bounds(retirement_rect) ;
     show_preview(r, video_id, "Condomínios +55");
-    // var center_h = Math.round((r.right + r.left)/2);
-    // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
-    // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
-    // document.getElementById("video_title_id").innerHTML = "Condomínios +55";
-    // document.getElementById('wrapper_preview_id').style.display = "block";
-    //
-    // //the callback function 'timeupdate' will make the video frame visible when it resets
-    // if (currentVideoId != video_id){
-    //   document.getElementById("vimeo_id").style.display = "none";
-    //   currentVideoId = video_id;
-    //   change_video(videos[video_id][0]);
-    // }
+
   }
 });
 
@@ -607,24 +573,13 @@ google.maps.event.addListener(rodeo_rect, 'mouseover', function (event) {
 
   if (mouseover_enabled) {
 
-    video_id = 12; //line 35
+    video_id = 226364472; //line 35
 
 
       //move the video to near the icon
       var r = get_mapthing_bounds(rodeo_rect) ;
       show_preview(r, video_id, "Rodeo");
-      // var center_h = Math.round((r.right + r.left)/2);
-      // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
-      // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
-      // document.getElementById("video_title_id").innerHTML = "Rodeo";
-      // document.getElementById('wrapper_preview_id').style.display = "block";
-      //
-      // //the callback function 'timeupdate' will make the video frame visible when it resets
-      // if (currentVideoId != video_id){
-      //   document.getElementById("vimeo_id").style.display = "none";
-      //   currentVideoId = video_id;
-      //   change_video(videos[video_id][0]);
-      // }
+
     }
 });
 
@@ -639,25 +594,14 @@ google.maps.event.addListener(rodeo_rect, 'mouseout', function (event) {
 google.maps.event.addListener(western_park_circle, 'mouseover',function (event)  {
 
   if (mouseover_enabled) {
-        video_id = 13; //line 35
+        video_id = 226354643; //line 35
 
       //this.setOptions({    fillColor: '#ffcf2f',  });
 
       //move the video to near the icon
       var r = get_mapthing_bounds(western_park_circle) ;
       show_preview(r, video_id, "Western Park");
-      // var center_h = Math.round((r.right + r.left)/2);
-      // document.getElementById('wrapper_preview_id').style.left = (center_h-video_width/2)+"px";
-      // document.getElementById('wrapper_preview_id').style.top = (r.bottom-video_height-video_up)+"px";
-      // document.getElementById("video_title_id").innerHTML = "Western Park";
-      // document.getElementById('wrapper_preview_id').style.display = "block";
-      //
-      // //the callback function 'timeupdate' will make the video frame visible when it resets
-      // if (currentVideoId != video_id){
-      //   document.getElementById("vimeo_id").style.display = "none";
-      //   currentVideoId = video_id;
-      //   change_video(videos[video_id][0]);
-      // }
+
     }
 });
 
@@ -679,24 +623,11 @@ document.getElementById('wrapper_preview_id').addEventListener('mouseenter', fun
 
 document.getElementById('wrapper_preview_id').addEventListener('mouseleave', function () {
     //console.log("wrapper mouseleave");
-    layerOverlapFlag = false;
-    document.getElementById('wrapper_preview_id').style.display = "none";
-    document.getElementById("wrapper_preview_id").style.width = "200px";
-    document.getElementById("wrapper_preview_id").style.height = "136px";
-    document.getElementById("wrapper_preview_id").style.zIndex = "initial";
-    document.getElementById("video_title_id").style.display = "block";
-    document.getElementById("video_arrow_id").style.display = "block";
-    document.getElementById("video_wrapper_id").style.width = "100%";
-    document.getElementById("video_wrapper_id").style.height = "112px";
-    document.getElementById("video_wrapper_id").style.margintop = "-18px";
-
+    close_preview();
 });
 
 //light up the places according to the form answers
 
-var places = [];
-var screenplay_places = [];
-var screenplay_texts = [];
 
 
 for (var i=0;i<9;i++) {
@@ -705,16 +636,19 @@ for (var i=0;i<9;i++) {
         if (places.includes(question_map[i][question[i]][0])) {
           var where = places.indexOf(question_map[i][question[i]][0]);
           if (screenplay_texts[where]!=question_map[i][question[i]][2]) {
-            screenplay_texts[where] = screenplay_texts[where] + question_map[i][question[i]][2];
+            screenplay_texts[where] = screenplay_texts[where]  + question_map[i][question[i]][2];
+
           }
         } else {
           places.push (question_map[i][question[i]][0]);
-          screenplay_places.push (question_map[i][question[i]][1]);;
+          screenplay_places.push (question_map[i][question[i]][1]);
           screenplay_texts.push (question_map[i][question[i]][2]);
+;
         }
     }
   }
 }
+
 
 for (var i=0; i<places.length; i++) {
   screenplay_content = screenplay_content + (i+1) + screenplay_places[i] + screenplay_texts[i] + "<br>";
@@ -877,7 +811,7 @@ function show_preview (r, my_video_id, text) {
     if (currentVideoId != my_video_id){
       document.getElementById("vimeo_id").style.display = "none";
       currentVideoId = my_video_id;
-      change_video(videos[my_video_id][0]);
+      change_video(my_video_id);
   }
 
 }
@@ -1041,9 +975,35 @@ function preview_fullscreen () {
   document.getElementById("video_wrapper_id").style.height = "100%";
   document.getElementById("video_wrapper_id").style.margintop = "0px";
 
+  vimeo_player.setLoop(false).then(function(loop) {
+      // loop was turned on
+
+  }).catch(function(error) {
+      // an error occurred
+      console.log("couldnt stop loop");
+  });
 
   //document.getElementById("video_wrapper_id").style.top = "0px";
 
+}
+
+function close_preview() {
+  layerOverlapFlag = false;
+  document.getElementById('wrapper_preview_id').style.display = "none";
+  document.getElementById("wrapper_preview_id").style.width = "200px";
+  document.getElementById("wrapper_preview_id").style.height = "136px";
+  document.getElementById("wrapper_preview_id").style.zIndex = "initial";
+  document.getElementById("video_title_id").style.display = "block";
+  document.getElementById("video_arrow_id").style.display = "block";
+  document.getElementById("video_wrapper_id").style.width = "100%";
+  document.getElementById("video_wrapper_id").style.height = "112px";
+  document.getElementById("video_wrapper_id").style.margintop = "-18px";
+  vimeo_player.setLoop(true).then(function(loop) {
+      // loop was turned on
+  }).catch(function(error) {
+      // an error occurred
+      console.log("couldnt restart loop");
+  });
 }
 
 function delay_overlay_mouseout (mythis) {
@@ -1147,6 +1107,86 @@ function toggle_welcome() {
 
   }
 }
+
+var display_video_keymap = {
+  277709314: " Saber sobre influência mexicana em Mesa.",
+  277715449: " Ouvir opinião sobre o muro.",
+  277708469: " Falar com Vic sobre 2ª emenda.",
+  277692847: " Falar com Ricky sobre armas.",
+  277698969: " Falar com Brandon sobre transporte em Mesa.",
+  225001839: " Assistir jogo de futebol americano.",
+  277672983: " Falar com Caruso sobre cultura do atleta.",
+  225002003: " Falar com Ryan e Marcos sobre pessoas da idade deles.",
+  225002617: " Saber sobre aposentados em Mesa.",
+  277671504: " Saber sobre nativos no Arizona.",
+  277671431: " Falar sobre o clima em Mesa.",
+  277671318: " Falar sobre conservadores.",
+  277704394: " Saber como a cidade mudou em 15 anos.",
+  277700826: " Falar com Pam sobre constituição.",
+  277691166: " Saber quem são os mormons.",
+  277672205: " Saber sobre a influência dos mormons  em Mesa.",
+  277696011: " Perguntar para Cait a diferença entre republicanos e democratas.",
+  277701979: " Falar com Mr Casillas sobre Dom Quixote.",
+  277713981: " Falar com Corbin sobre libertários.",
+  277693843: " Falar com Vic sobre conservadores.",
+  277713981: " Falar com Corbin sobre libertários.",
+  277671346: " Falar com EJ sobre eleições de 2016.",
+  277671386: " Falar com Jan sobre carro.",
+  277698969: " Falar com Brandon sobre transporte em Mesa.",
+  277707280: " Saber como é a lei de armas em Arizona"
+};
+
+
+var  preview_videos = {226354540: "hanny",
+  226353399: "corbin",
+  226353447: "kristen",
+  226353387: "cait",
+  226353434: "casillas",
+  226368841: "jan",
+  226354563: "igrejas",
+  253042771: "volta",
+  225001757: "highschool",
+  226357094: "shootingrang",
+  225001970: "gym",
+  225002041: "retirementhome",
+  226364472: "rodeo",
+  226354643: "westernpark"};
+
+
+var places_display_videos_map = [
+  ["kristen",[277671431]],
+  ["corbin",[277671318]],
+  ["hanny", [277700826,277698969]],
+  ["cait", [277696011]],
+  ["casillas", [277701979]],
+  ["jan", [277671386]],
+  ["volta", [277704394]],
+  ["igrejas", [277691166,277672205]],
+  ["rodeo", [277671346]],
+  ["highschool",[225001839,277672983]],
+  ["gym", [225002003]],
+  ["retirementhome", [225002617]],
+  ["westernpark", [277671504]],
+  ["shootingrange",[277692847,277707280,277708469]]
+];
+
+var places_colors_map = [
+  ["highschool","#466e00"],
+  ["shootingrange", "#5a5a5a"],
+  ["rodeo","#ff9100"],
+  ["igrejas", "#f0d2b4"],
+  ["fronteira", "#a09632"],
+  ["westernpark","#ffcf2f"],
+  ["jan","#ece5cd"],
+  ["kristen","#ece5cd"],
+  ["hanny","#ece5cd"],
+  ["cait","#ece5cd"],
+  ["casillas","#ece5cd"],
+  ["corbin","#ece5cd"],
+  ["retirementhome", "#969696"],
+  ["volta","#f0d2b4"]
+];
+
 
 var question_map =   [
   [["highschool"," <b>High school</b>  -"," Assistir jogo de futebol americano e Falar com Caruso sobre cultura do atleta."],

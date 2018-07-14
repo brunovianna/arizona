@@ -105,80 +105,36 @@ video_content_1 = new Vimeo.Player(document.getElementById("video_content_1_id")
 video_content_2 = new Vimeo.Player(document.getElementById("video_content_2_id"));
 video_content_3 = new Vimeo.Player(document.getElementById("video_content_3_id"));
 
-vimeo_player.on('timeupdate', function(data) {
-    // data is an object containing properties specific to that event
-    //console.log("hidden "+data.seconds+", status: "+vimeo_player.getPaused());
-    if (document.getElementById("vimeo_id").style.display == "none") {
-      //console.log("hidden "+data.seconds);
+// vimeo_player.on('timeupdate', function(data) {
+//     // data is an object containing properties specific to that event
+//     //console.log("hidden "+data.seconds+", status: "+vimeo_player.getPaused());
+//     if (document.getElementById("vimeo_id").style.display == "none") {
+//       //console.log("hidden "+data.seconds);
+//
+//       if (data.seconds < 0.5 ){
+//         document.getElementById("vimeo_id").style.display="block";
+//         //console.log("showing "+data.seconds);
+//
+//       }
+//     } else {
+//       //console.log("timeupdate "+data.seconds);
+//     }
+// });
 
-      if (data.seconds < 0.5 ){
-        document.getElementById("vimeo_id").style.display="block";
-        //console.log("showing "+data.seconds);
-
-      }
-    } else {
-      //console.log("timeupdate "+data.seconds);
-    }
+vimeo_player.on('bufferend', function(){
+  if (document.getElementById("vimeo_id").style.display == "none") {
+    document.getElementById("vimeo_id").style.display="block";
+  }
 });
+
+// vimeo_player.on('loaded', function(){
+//   console.log("loaded "+video_status);
+// });
 
 vimeo_player.on('ended', function(data) {
 
-    // show screenplay videos
-    place = preview_videos[video_status];
-    var position = -1;
-    for (var i=0;i<places_display_videos_map.length;i++) {
-      if (places_display_videos_map[i][0] == place) {
-        position = i;
-        break;
-      }
-    }
-
-    place_display_videos = places_display_videos_map[i][1];
-
-    video_content_1.loadVideo(place_display_videos[0]).then (function() {
-      video_content_1.pause();
-    }).catch(function(error) {
-      console.log("Couldn't load video. Error: "+error);
-    });
-
-    document.getElementById("text_content_1").innerHTML = display_video_keymap[place_display_videos[0]];
-
-    if (place_display_videos[1]!=undefined) {
-      video_content_2.loadVideo(place_display_videos[1]).then (function() {
-        video_content_2.pause();
-      }).catch(function(error){
-        console.log("Couldn't load video. Error: "+error);
-      });
-
-      document.getElementById("text_content_2").innerHTML = display_video_keymap[place_display_videos[1]];
-    } else {
-
-      document.getElementById("div_video_content_2_id").style.display = "none";
-      document.getElementById("text_content_2").style.display = "none";
-    }
-
-    if (place_display_videos[2]!=undefined) {
-      video_content_3.loadVideo(place_display_videos[2]).then (function() {
-        video_content_3.pause();
-      }).catch(function(error){
-        console.log("Couldn't load video. Error: "+error);
-      });
-      document.getElementById("text_content_3").innerHTML = display_video_keymap[place_display_videos[2]];
-    } else {
-      document.getElementById("div_video_content_3_id").style.display = "none";
-      document.getElementById("text_content_3").style.display = "none";
-    }
-
-    close_preview();
-    var bg_color = -1;
-    for (var i=0;i<places_colors_map.length;i++) {
-      if (places_colors_map[i][0] == place) {
-        position = i;
-        break;
-      }
-    }
-    document.getElementById("wrapper_video_content_id").style.backgroundColor = places_colors_map[i][1];
-    document.getElementById("wrapper_video_content_id").style.display = "grid";
+    // show display videos
+    show_display_videos();
 
 });
 
@@ -626,9 +582,14 @@ document.getElementById('wrapper_preview_id').addEventListener('mouseleave', fun
     close_preview();
 });
 
+document.getElementById("wrapper_video_content_id").addEventListener('mouseleave', function () {
+  //
+  //console.log("mouseleave");
+  close_display_videos();
+});
+
+
 //light up the places according to the form answers
-
-
 
 for (var i=0;i<9;i++) {
   if (question[i]!= -1) {
@@ -784,13 +745,17 @@ $(function()
 }
 
 //hack to detect mouse click on iframe
-var monitor = setInterval(function(){
+var iframe_monitor = setInterval(function(){
     var elem = document.activeElement;
     if(elem && elem.tagName == 'IFRAME'){
 
-        console.log(video_status);
         if (video_status!="none") {
-          preview_fullscreen();
+          // if the preview is already fullscreen, clicking will close it and show the display videos
+          if (  document.getElementById("wrapper_preview_id").style.width == "100%") {
+            show_display_videos();
+          } else { //otherwise show to preview on fullscreen
+            preview_fullscreen();
+          }
         }
         elem.blur();
     }
@@ -811,10 +776,12 @@ function show_preview (r, my_video_id, text) {
     if (currentVideoId != my_video_id){
       document.getElementById("vimeo_id").style.display = "none";
       currentVideoId = my_video_id;
-      change_video(my_video_id);
+      change_video(my_video_id, vimeo_player);
   }
 
 }
+
+
 
 function get_mapthing_bounds (mymapthing) {
   var mapthing_topright = mymapthing.getBounds().getNorthEast();
@@ -930,35 +897,40 @@ var end_fronteira = function () {
 
 }
 
-function change_video (new_id) {
-  vimeo_player.loadVideo(new_id).then(function() {
-      // the video successfully loaded
-      //console.log("finally");
-      vimeo_player.play();
+function change_video (new_id, video_object) {
+  video_object.unload().then(function() {
+    video_object.loadVideo(new_id).then(function() {
+        // the video successfully loaded
+        console.log("finally");
+          if (document.getElementById("vimeo_id").style.display == "none") {
+            document.getElementById("vimeo_id").style.display="block";
+          }
+        vimeo_player.play();
 
-  }).catch(function(error) {
-      switch (error.name) {
-          case 'TypeError':
-              // the id was not a number
-              console.log("type error");
-              break;
+    }).catch(function(error) {
+        switch (error.name) {
+            case 'TypeError':
+                // the id was not a number
+                console.log("type error");
+                break;
 
-          case 'PasswordError':
-              // the video is password-protected and the viewer needs to enter the
-              // password first
-              console.log("pass error");
-              break;
+            case 'PasswordError':
+                // the video is password-protected and the viewer needs to enter the
+                // password first
+                console.log("pass error");
+                break;
 
-          case 'PrivacyError':
-              // the video is password-protected or private
-              break;
+            case 'PrivacyError':
+                // the video is password-protected or private
+                break;
 
-          default:
-              // some other error occurred
-              console.log("default");
-              break;
-      }
-  });
+            default:
+                // some other error occurred
+                console.log("default");
+                break;
+        }
+      });
+    });
 }
 
 function preview_fullscreen () {
@@ -984,6 +956,75 @@ function preview_fullscreen () {
   });
 
   //document.getElementById("video_wrapper_id").style.top = "0px";
+
+}
+
+function show_display_videos() {
+  place = preview_videos[video_status];
+  var position = -1;
+  for (var i=0;i<places_display_videos_map.length;i++) {
+    if (places_display_videos_map[i][0] == place) {
+      position = i;
+      break;
+    }
+  }
+
+  place_display_videos = places_display_videos_map[i][1];
+
+  video_content_1.loadVideo(place_display_videos[0]).then (function() {
+    video_content_1.pause();
+  }).catch(function(error) {
+    console.log("Couldn't load video. Error: "+error);
+  });
+
+  document.getElementById("text_content_1").innerHTML = display_video_keymap[place_display_videos[0]];
+
+  if (place_display_videos[1]!=undefined) {
+    video_content_2.loadVideo(place_display_videos[1]).then (function() {
+      video_content_2.pause();
+    }).catch(function(error){
+      console.log("Couldn't load video. Error: "+error);
+    });
+
+    document.getElementById("text_content_2").innerHTML = display_video_keymap[place_display_videos[1]];
+  } else {
+
+    document.getElementById("div_video_content_2_id").style.display = "none";
+    document.getElementById("text_content_2").style.display = "none";
+  }
+
+  if (place_display_videos[2]!=undefined) {
+    video_content_3.loadVideo(place_display_videos[2]).then (function() {
+      video_content_3.pause();
+    }).catch(function(error){
+      console.log("Couldn't load video. Error: "+error);
+    });
+    document.getElementById("text_content_3").innerHTML = display_video_keymap[place_display_videos[2]];
+  } else {
+    document.getElementById("div_video_content_3_id").style.display = "none";
+    document.getElementById("text_content_3").style.display = "none";
+  }
+
+  close_preview();
+  var bg_color = -1;
+  for (var i=0;i<places_colors_map.length;i++) {
+    if (places_colors_map[i][0] == place) {
+      position = i;
+      break;
+    }
+  }
+  document.getElementById("wrapper_video_content_id").style.backgroundColor = places_colors_map[i][1];
+  document.getElementById("wrapper_video_content_id").style.display = "grid";
+
+}
+
+
+function close_display_videos() {
+  //TODO
+  video_content_1.unload();
+  video_content_2.unload();
+  video_content_3.unload();
+  document.getElementById("wrapper_video_content_id").style.display = "none";
 
 }
 

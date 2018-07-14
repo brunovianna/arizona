@@ -292,7 +292,7 @@ div.video_wrapper {
   padding-top: 0;
 
 
-	background: transparent url('../images/loading.gif')  center no-repeat;;
+	background: transparent url('../images/loading.gif')  center no-repeat;
 	/*display: none; background-color: #CD5E12;*/
 }
 .video_wrapper iframe {
@@ -318,7 +318,7 @@ div.video_arrow {
 
 div.wrapper_screenplay {
 		background-color: white;
-		position: fixed;
+		position: absolute;
 		width: 300px;
 		height: auto;
 		top: 140px;
@@ -428,29 +428,38 @@ div.box_fronteira_close {
 div.wrapper_video_content {
 	position: absolute;
 	display: none;
-	grid-template-columns: 535px auto 535px;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	top: 7px;
+	left: 7px;
+	right: 7px;
+	bottom: 7px;
 	font-size: 22px;
 	font-weight: 700;
-	color: white;
+	color: #555555;
 	padding: 20px;
+		border: 1px solid blue;
+}
+
+
+div.wrapper_video_grid {
+	display: grid;
+	left: 0;
+	right: 0;
+	grid-template-columns: 535px auto 535px;
+	grid-template-rows: 300px 300px 300px;
+
 }
 
 div.video_content_left {
 	border: 1px solid red;
-	position: relative;
-	top: 50%;
+	background: transparent url('../images/loading.gif')  center no-repeat;
 }
 
 div.video_content_right {
 	border: 1px solid red;
 	text-align: right;
-	position: relative;
-	top: 50%;
-
+	/*position: relative;
+	top: 50%;*/
+	background: transparent url('../images/loading.gif')  center no-repeat;
 }
 
 iframe.video_content_frame	{
@@ -462,14 +471,14 @@ div.text_content_left {
 	border: 1px solid red;
 	grid-column: 1 / span 2;
 	padding: 20px;
-	position: relative;
-	top: 50%;
+	/*position: relative;
+	top: 50%;*/
 }
 
 div.text_content_right {
 	border: 1px solid red;
 	grid-column: 2 / span 2;
 	padding: 20px;
-	position: relative;
-	top: 50%;
+	/*position: relative;
+	top: 50%;*/
 }

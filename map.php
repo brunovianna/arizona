@@ -146,11 +146,11 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 <div class="fence_mexico"  id="fence_mexico_id"><span class="futura-18">MÉXICO</span></div>
 
 
-<div class="wrapper_fronteira" id="wrapper_wrapper_fronteira_id">
+<!-- <div class="wrapper_fronteira" id="wrapper_wrapper_fronteira_id">
 <iframe src="https://player.vimeo.com/video/226354838?autoplay=0&title=0&byline=0&portrait=0" id="video_fronteira"
 width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 
-</div>
+</div> -->
 
  <div class="wrapper_screenplay" id="wrapper_screenplay_id">
    <div class="screenplay" id="screenplay_id"><br>ROTEIRO<br>
@@ -167,14 +167,14 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
  </div>
 
 <div class="wrapper_video_content futura-18" id="wrapper_video_content_id">
-  <div class="wrapper_video_grid">
+  <div class="wrapper_video_grid" id="wrapper_video_grid_id">
     <div class="video_content_left" id="div_video_content_1_id">
       <iframe class="video_content_frame"
        src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="video_content_1_id"
        frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
     </div>
-    <div class="text_content_right" id="text_content_1"></div>
-    <div class="text_content_left" id="text_content_2"></div>
+    <div class="text_content_right" id="text_content_1_id"></div>
+    <div class="text_content_left" id="text_content_2_id"></div>
     <div class="video_content_right" id="div_video_content_2_id">
       <iframe  class="video_content_frame"
        src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="video_content_2_id"
@@ -185,7 +185,7 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
        src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="video_content_3_id"
        frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
     </div>
-    <div class="text_content_right" id="text_content_3"></div>
+    <div class="text_content_right" id="text_content_3_id"></div>
   </div>
 </div>
 

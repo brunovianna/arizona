@@ -101,9 +101,8 @@ google.maps.event.addListener(map, 'center_changed', function() {
 
 vimeo_player = new Vimeo.Player(document.getElementById("vimeo_id"));
 
-video_content_1 = new Vimeo.Player(document.getElementById("video_content_1_id"));
-video_content_2 = new Vimeo.Player(document.getElementById("video_content_2_id"));
-video_content_3 = new Vimeo.Player(document.getElementById("video_content_3_id"));
+video_full = new Vimeo.Player(document.getElementById("video_full_id"));
+
 
 // vimeo_player.on('timeupdate', function(data) {
 //     // data is an object containing properties specific to that event
@@ -582,11 +581,12 @@ document.getElementById('wrapper_preview_id').addEventListener('mouseleave', fun
     close_preview();
 });
 
-document.getElementById("wrapper_video_content_id").addEventListener('mouseleave', function () {
+document.getElementById("wrapper_content_id").addEventListener('mouseleave', function () {
   //
   //console.log("mouseleave");
   close_display_videos();
 });
+
 
 
 //light up the places according to the form answers
@@ -748,18 +748,27 @@ $(function()
 var iframe_monitor = setInterval(function(){
     var elem = document.activeElement;
     if(elem && elem.tagName == 'IFRAME'){
-
+      if (elem.id == "vimeo_id") {
+        console.log(video_status);
         if (video_status!="none") {
           // if the preview is already fullscreen, clicking will close it and show the display videos
-          if (  document.getElementById("wrapper_preview_id").style.width == "100%") {
+          if (  document.getElementById("wrapper_preview_id").style.width == "97%") {
             show_display_videos();
           } else { //otherwise show to preview on fullscreen
             preview_fullscreen();
           }
         }
-        elem.blur();
+      } else { //clicked on the display video_titles
+
+      }
+      elem.blur();
     }
 }, 100);
+
+function show_video_content_full_screen (video_content_id, video_object) {
+  document.getElementById("wrapper_video_full_id").style.display = "block";
+}
+
 
 function show_preview (r, my_video_id, text) {
 
@@ -935,10 +944,11 @@ function change_video (new_id, video_object) {
 function preview_fullscreen () {
 
 
-  document.getElementById("wrapper_preview_id").style.width = "100%";
-  document.getElementById("wrapper_preview_id").style.height = "100%";
-  document.getElementById("wrapper_preview_id").style.top = "0px";
-  document.getElementById("wrapper_preview_id").style.left = "0px";
+  document.getElementById("wrapper_preview_id").style.width = "97%";
+  document.getElementById("wrapper_preview_id").style.height = "97%";
+  document.getElementById("wrapper_preview_id").style.top = "50%";
+  document.getElementById("wrapper_preview_id").style.left = "50%";
+  document.getElementById("wrapper_preview_id").style.transform = "translate(-50%,-50%)";
   document.getElementById("wrapper_preview_id").style.zIndex = 1000;
   document.getElementById("video_title_id").style.display = "none";
   document.getElementById("video_arrow_id").style.display = "none";
@@ -970,54 +980,39 @@ function show_display_videos() {
 
   place_display_videos = places_display_videos_map[i][1];
 
-  video_content_1.loadVideo(place_display_videos[0]).then (function() {
-    video_content_1.pause();
-  }).catch(function(error) {
-    console.log("Couldn't load video. Error: "+error);
-  });
-
   document.getElementById("text_content_1_id").innerHTML = display_video_keymap[place_display_videos[0]];
-  document.getElementById("div_video_content_1_id").style.display = "block";
+  document.getElementById("div_img_content_1_id").style.display = "block";
   document.getElementById("text_content_1_id").style.display = "block";
-  document.getElementById("wrapper_video_grid_id").style.gridTemplateRows = "300px";
-  document.getElementById("wrapper_video_grid_id").style.top = "50%";
-  document.getElementById("wrapper_video_grid_id").style.transform = "translate(0,-50%)";
+  document.getElementById("wrapper_content_grid_id").style.gridTemplateRows = "300px";
+  document.getElementById("wrapper_content_grid_id").style.top = "50%";
+  document.getElementById("wrapper_content_grid_id").style.transform = "translate(0,-50%)";
 
 
   if (place_display_videos[1]!=undefined) {
-    video_content_2.loadVideo(place_display_videos[1]).then (function() {
-      video_content_2.pause();
-    }).catch(function(error){
-      console.log("Couldn't load video. Error: "+error);
-    });
 
     document.getElementById("text_content_2_id").innerHTML = display_video_keymap[place_display_videos[1]];
-    document.getElementById("div_video_content_2_id").style.display = "block";
+    document.getElementById("div_img_content_2_id").style.display = "block";
     document.getElementById("text_content_2_id").style.display = "block";
-    document.getElementById("wrapper_video_grid_id").style.gridTemplateRows = "300px 300px";
-    document.getElementById("wrapper_video_grid_id").style.top = "50%";
-    document.getElementById("wrapper_video_grid_id").style.transform = "translate(0,-50%)";
+    document.getElementById("wrapper_content_grid_id").style.gridTemplateRows = "300px 300px";
+    document.getElementById("wrapper_content_grid_id").style.top = "50%";
+    document.getElementById("wrapper_content_grid_id").style.transform = "translate(0,-50%)";
 
   } else {
 
-    document.getElementById("div_video_content_2_id").style.display = "none";
+    document.getElementById("div_img_content_2_id").style.display = "none";
     document.getElementById("text_content_2_id").style.display = "none";
   }
 
   if (place_display_videos[2]!=undefined) {
-    video_content_3.loadVideo(place_display_videos[2]).then (function() {
-      video_content_3.pause();
-    }).catch(function(error){
-      console.log("Couldn't load video. Error: "+error);
-    });
+
     document.getElementById("text_content_3_id").innerHTML = display_video_keymap[place_display_videos[2]];
-    document.getElementById("div_video_content_3_id").style.display = "block";
+    document.getElementById("div_img_content_3_id").style.display = "block";
     document.getElementById("text_content_3_id").style.display = "block";
-    document.getElementById("wrapper_video_grid_id").style.gridTemplateRows = "300px 300px 300px";
-    document.getElementById("wrapper_video_grid_id").style.top = "0";
+    document.getElementById("wrapper_content_grid_id").style.gridTemplateRows = "300px 300px 300px";
+    document.getElementById("wrapper_content_grid_id").style.top = "0";
 
   } else {
-    document.getElementById("div_video_content_3_id").style.display = "none";
+    document.getElementById("div_img_content_3_id").style.display = "none";
     document.getElementById("text_content_3_id").style.display = "none";
   }
 
@@ -1029,18 +1024,15 @@ function show_display_videos() {
       break;
     }
   }
-  document.getElementById("wrapper_video_content_id").style.backgroundColor = places_colors_map[i][1];
-  document.getElementById("wrapper_video_content_id").style.display = "block";
+  document.getElementById("wrapper_content_id").style.backgroundColor = places_colors_map[i][1];
+  document.getElementById("wrapper_content_id").style.display = "block";
 
 }
 
 
 function close_display_videos() {
-  //TODO
-  video_content_1.unload();
-  video_content_2.unload();
-  video_content_3.unload();
-  document.getElementById("wrapper_video_content_id").style.display = "none";
+
+  document.getElementById("wrapper_content_id").style.display = "none";
   if (video_status == 226354838) { // fronteira
 
   }
@@ -1053,6 +1045,7 @@ function close_preview() {
   document.getElementById("wrapper_preview_id").style.width = "200px";
   document.getElementById("wrapper_preview_id").style.height = "136px";
   document.getElementById("wrapper_preview_id").style.zIndex = "initial";
+  document.getElementById("wrapper_preview_id").style.transform = "";
   document.getElementById("video_title_id").style.display = "block";
   document.getElementById("video_arrow_id").style.display = "block";
   document.getElementById("video_wrapper_id").style.width = "100%";

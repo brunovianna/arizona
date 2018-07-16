@@ -166,27 +166,27 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
    </div>
  </div>
 
-<div class="wrapper_video_content futura-18" id="wrapper_video_content_id">
-  <div class="wrapper_video_grid" id="wrapper_video_grid_id">
-    <div class="video_content_left" id="div_video_content_1_id">
-      <iframe class="video_content_frame"
-       src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="video_content_1_id"
-       frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
+<div class="wrapper_content futura-18" id="wrapper_content_id">
+  <div class="wrapper_content_grid" id="wrapper_content_grid_id">
+    <div class="img_content_left" id="div_img_content_1_id">
+      <img id="img_content_1_id" src="images/still_ph.jpg">
     </div>
     <div class="text_content_right" id="text_content_1_id"></div>
     <div class="text_content_left" id="text_content_2_id"></div>
-    <div class="video_content_right" id="div_video_content_2_id">
-      <iframe  class="video_content_frame"
-       src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="video_content_2_id"
-       frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
+    <div class="img_content_right" id="div_img_content_2_id">
+      <img id="img_content_2_id" src="images/still_ph.jpg">
     </div>
-    <div class="video_content_left" id="div_video_content_3_id">
-      <iframe  class="video_content_frame"
-       src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="video_content_3_id"
-       frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    <div class="img_content_left" id="div_img_content_3_id">
+      <img id="img_content_3_id" src="images/still_ph.jpg">
     </div>
     <div class="text_content_right" id="text_content_3_id"></div>
   </div>
+</div>
+
+<div class="wrapper_video_full" id="wrapper_video_full_id">
+  <iframe
+   src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="video_full_id"
+   frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
 </div>
 
    <script async defer

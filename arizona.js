@@ -1010,6 +1010,7 @@ function show_display_videos() {
     document.getElementById("text_content_3_id").style.display = "block";
     document.getElementById("wrapper_content_grid_id").style.gridTemplateRows = "300px 300px 300px";
     document.getElementById("wrapper_content_grid_id").style.top = "0";
+    document.getElementById("wrapper_content_grid_id").style.transform = "translate(0,0)";
 
   } else {
     document.getElementById("div_img_content_3_id").style.display = "none";
@@ -1032,6 +1033,8 @@ function show_display_videos() {
 
 function close_display_videos() {
 
+  video_status = "none";
+
   document.getElementById("wrapper_content_id").style.display = "none";
   if (video_status == 226354838) { // fronteira
 
@@ -1041,6 +1044,7 @@ function close_display_videos() {
 
 function close_preview() {
 
+  video_status = "none";
   document.getElementById('wrapper_preview_id').style.display = "none";
   document.getElementById("wrapper_preview_id").style.width = "200px";
   document.getElementById("wrapper_preview_id").style.height = "136px";
@@ -1208,7 +1212,7 @@ var  preview_videos = {
   226354563: "igrejas",
   253042771: "volta",
   225001757: "highschool",
-  226357094: "shootingrang",
+  226357094: "shootingrange",
   225001970: "gym",
   225002041: "retirementhome",
   226364472: "rodeo",

@@ -184,7 +184,7 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
 </div>
 
 <div class="wrapper_video_full" id="wrapper_video_full_id">
-  <iframe
+  <iframe class="video_content_frame"
    src="https://player.vimeo.com/video/226354643?autoplay=1&title=0&byline=0&background=1&transparent=0" id="video_full_id"
    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
 </div>

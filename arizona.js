@@ -18,8 +18,8 @@ var goingToMexico = false;
 var returningToMesa = false;
 var mouseover_enabled = false;
 var mouseover_place = "";
-var vimeo_fronteira;
-var vimeo_player;
+var video_full;
+var video_preview;
 var currentVideoId = -1;
 var screenplay_content = "<br><b>ROTEIRO</b><br><br>Baseado em suas respostas, recomendamos que você visite as seguintes localidades em Mesa: <br><br>";
 
@@ -99,14 +99,31 @@ google.maps.event.addListener(map, 'center_changed', function() {
 
 //vimeo_fronteira = new Vimeo.Player(document.getElementById("video_fronteira"));
 
-vimeo_player = new Vimeo.Player(document.getElementById("vimeo_id"));
+video_preview = new Vimeo.Player(document.getElementById("vimeo_id"));
+
+video_preview.enableTextTrack('pt-br').then(function(track) {
+    // track.language = the iso code for the language
+    // track.kind = 'captions' or 'subtitles'
+    // track.label = the human-readable label
+}).catch(function(error) {
+  console.log("no pt-br track");
+});
 
 video_full = new Vimeo.Player(document.getElementById("video_full_id"));
 
+video_full.enableTextTrack('pt-br').then(function(track) {
+    // track.language = the iso code for the language
+    // track.kind = 'captions' or 'subtitles'
+    // track.label = the human-readable label
+}).catch(function(error) {
+  console.log("no pt-br track");
+});
 
-// vimeo_player.on('timeupdate', function(data) {
+
+
+// video_preview.on('timeupdate', function(data) {
 //     // data is an object containing properties specific to that event
-//     //console.log("hidden "+data.seconds+", status: "+vimeo_player.getPaused());
+//     //console.log("hidden "+data.seconds+", status: "+video_preview.getPaused());
 //     if (document.getElementById("vimeo_id").style.display == "none") {
 //       //console.log("hidden "+data.seconds);
 //
@@ -120,17 +137,17 @@ video_full = new Vimeo.Player(document.getElementById("video_full_id"));
 //     }
 // });
 
-vimeo_player.on('bufferend', function(){
+video_preview.on('bufferend', function(){
   if (document.getElementById("vimeo_id").style.display == "none") {
     document.getElementById("vimeo_id").style.display="block";
   }
 });
 
-// vimeo_player.on('loaded', function(){
+// video_preview.on('loaded', function(){
 //   console.log("loaded "+video_status);
 // });
 
-vimeo_player.on('ended', function(data) {
+video_preview.on('ended', function(data) {
 
     // show display videos
     show_display_videos();
@@ -571,6 +588,7 @@ google.maps.event.addListener(western_park_circle, 'mouseout', function (event) 
 
 
 
+
 document.getElementById('wrapper_preview_id').addEventListener('mouseenter', function () {
     //console.log("wrapper mouseenter");
     layerOverlapFlag = true;
@@ -587,6 +605,14 @@ document.getElementById("wrapper_content_id").addEventListener('mouseleave', fun
   close_display_videos();
 });
 
+document.getElementById("div_img_content_1_id").addEventListener('click', function () {
+  show_video_content_full_screen(this.video_id);
+});
+
+document.getElementById('wrapper_video_full_id').addEventListener('mouseleave', function () {
+    //console.log("wrapper mouseleave");
+    this.style.display = "none";
+});
 
 
 //light up the places according to the form answers
@@ -765,8 +791,25 @@ var iframe_monitor = setInterval(function(){
     }
 }, 100);
 
-function show_video_content_full_screen (video_content_id, video_object) {
+function show_video_content_full_screen (video_id) {
+
+  video_full.unload().then(function() {
+    video_full.loadVideo(video_id).then(function() {
+        // the video successfully loaded
+        //console.log("finally");
+
+        video_full.play();
+
+    }).catch(function(error) {
+    });
+  });
+
   document.getElementById("wrapper_video_full_id").style.display = "block";
+  document.getElementById("wrapper_content_id").removeListener('mouseleave', function () {
+    //
+    //console.log("mouseleave");
+    close_display_videos();
+  });
 }
 
 
@@ -785,7 +828,7 @@ function show_preview (r, my_video_id, text) {
     if (currentVideoId != my_video_id){
       document.getElementById("vimeo_id").style.display = "none";
       currentVideoId = my_video_id;
-      change_video(my_video_id, vimeo_player);
+      change_video(my_video_id, video_preview);
   }
 
 }
@@ -909,11 +952,11 @@ function change_video (new_id, video_object) {
   video_object.unload().then(function() {
     video_object.loadVideo(new_id).then(function() {
         // the video successfully loaded
-        console.log("finally");
+        //console.log("finally");
           if (document.getElementById("vimeo_id").style.display == "none") {
             document.getElementById("vimeo_id").style.display="block";
           }
-        vimeo_player.play();
+        video_preview.play();
 
     }).catch(function(error) {
         switch (error.name) {
@@ -956,7 +999,7 @@ function preview_fullscreen () {
   document.getElementById("video_wrapper_id").style.height = "100%";
   document.getElementById("video_wrapper_id").style.margintop = "0px";
 
-  vimeo_player.setLoop(false).then(function(loop) {
+  video_preview.setLoop(false).then(function(loop) {
       // loop was turned on
 
   }).catch(function(error) {
@@ -987,6 +1030,7 @@ function show_display_videos() {
   document.getElementById("wrapper_content_grid_id").style.top = "50%";
   document.getElementById("wrapper_content_grid_id").style.transform = "translate(0,-50%)";
 
+  document.getElementById("div_img_content_1_id").video_id = place_display_videos[0];
 
   if (place_display_videos[1]!=undefined) {
 
@@ -996,6 +1040,9 @@ function show_display_videos() {
     document.getElementById("wrapper_content_grid_id").style.gridTemplateRows = "300px 300px";
     document.getElementById("wrapper_content_grid_id").style.top = "50%";
     document.getElementById("wrapper_content_grid_id").style.transform = "translate(0,-50%)";
+
+    document.getElementById("div_img_content_2_id").video_id = place_display_videos[1];
+
 
   } else {
 
@@ -1011,6 +1058,9 @@ function show_display_videos() {
     document.getElementById("wrapper_content_grid_id").style.gridTemplateRows = "300px 300px 300px";
     document.getElementById("wrapper_content_grid_id").style.top = "0";
     document.getElementById("wrapper_content_grid_id").style.transform = "translate(0,0)";
+
+    document.getElementById("div_img_content_3_id").video_id = place_display_videos[2];
+
 
   } else {
     document.getElementById("div_img_content_3_id").style.display = "none";
@@ -1062,7 +1112,7 @@ function close_preview() {
     end_fronteira();
   } else {
 
-    vimeo_player.setLoop(true).then(function(loop) {
+    video_preview.setLoop(true).then(function(loop) {
         // loop was turned on
     }).catch(function(error) {
         // an error occurred

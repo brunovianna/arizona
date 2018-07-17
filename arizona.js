@@ -746,6 +746,7 @@ for (var i=0; i<places.length; i++) {
 
 // for the toggle to work properly
 document.getElementById("wrapper_reiniciar_id").style.display = "none";
+document.getElementById("wrapper_credits_id").style.display = "none";
 
 //scrollbar function
 $(function()
@@ -1222,6 +1223,22 @@ function toggle_welcome() {
 
   }
 }
+
+function toggle_credits() {
+  if (document.getElementById("wrapper_credits_id").style.display == "none") {
+    document.getElementById("wrapper_credits_id").style.display = "block";
+    document.getElementById("nav_credits_img_id").src = "images/creditos_cinza.png"
+  } else {
+    document.getElementById("wrapper_credits_id").style.display = "none";
+    document.getElementById("nav_credits_img_id").src = "images/creditos_branco.png"
+  }
+}
+
+function close_credits() {
+  document.getElementById("wrapper_credits_id").style.display = "none";
+  document.getElementById("nav_credits_img_id").src = "images/creditos_branco.png"
+}
+
 
 var display_video_keymap = {
   277709314: " Saber sobre influência mexicana em Mesa.",

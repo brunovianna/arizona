@@ -62,8 +62,8 @@ question.push( <?php echo $_POST["question_8"]; ?> );
   <div class="nav_screenplay"  onclick="toggle_screenplay();">
     <img src="images/roteiro_branco.png"  id="nav_screenplay_img_id">
   </div>
-  <div class="nav_credits">
-    <img src="images/creditos_branco.png">
+  <div class="nav_credits"  onclick="toggle_credits();">
+    <img src="images/creditos_branco.png" id="nav_credits_img_id">
   </div>
   <div class="nav_home" onclick="toggle_confirm_restart();">
     <img src="images/home_branco.png" id="nav_home_img_id">
@@ -120,6 +120,40 @@ question.push( <?php echo $_POST["question_8"]; ?> );
     </span>
   </div>
 </div>
+
+<div class="wrapper_credits" id="wrapper_credits_id">
+  <div class="welcome_text">
+  <span class="georgia-bold">
+        ZONA ÁRIDA INTERATIVO<br><br>
+  </span>
+  <span class="georgia">
+    Realização: Fernanda Pessoa<br>
+    Programação: Bruno Vianna<br>
+    Design: Guilherme Falcão<Br><br>
+    Direção de Fotografia: Rodrigo Levy<br>
+    Assistência de Direção: Mari Nagem<br>
+    Som direto: Corbin Billings<br>
+    Edição: Fernanda Pessoa e ?<Br><br>
+    Expografia: Flavio Franzosi<Br><br>
+    Pesquisador e curador colaborador: Diego Matos<br>
+    Questionário: Fernanda Pessoa e Diego Matos<br><br>
+    Projeto selecionado na residência LABMIS 2017<br><br>
+    <br><br>
+  </span>
+  </div>
+  <div class="credits_mis">
+    <img src="images/logo-mis.png">
+  </div>
+  <div class="credits_pessoa">
+    <img src="images/pessoa_logo.png">
+  </div>
+  <div class="credits_close" onclick="close_credits();">
+    <img src="images/close_cinza.png"  >
+  </div>
+
+</div>
+
+
 
 <div class="wrapper_reiniciar" id="wrapper_reiniciar_id">
   <div class="reiniciar_text"><span class="georgia-bold">TEM CERTEZA DE QUE DESEJA REINICIAR O ROTEIRO?</span></div>

@@ -14,6 +14,7 @@ var video_width = 200;
 var video_height = 112;
 var video_up = 61;
 var video_status = "none";
+var loading_video = 280382025;
 var goingToMexico = false;
 var returningToMesa = false;
 var mouseover_enabled = false;
@@ -109,6 +110,9 @@ video_preview.enableTextTrack('pt-br').then(function(track) {
   console.log("no pt-br track");
 });
 
+video_preview.loadVideo (loading_video);
+video_preview.play();
+
 video_full = new Vimeo.Player(document.getElementById("video_full_id"));
 
 video_full.enableTextTrack('pt-br').then(function(track) {
@@ -119,6 +123,8 @@ video_full.enableTextTrack('pt-br').then(function(track) {
   console.log("no pt-br track");
 });
 
+video_full.loadVideo (loading_video);
+video_full.play();
 
 
 // video_preview.on('timeupdate', function(data) {
@@ -609,9 +615,20 @@ document.getElementById("div_img_content_1_id").addEventListener('click', functi
   show_video_content_full_screen(this.video_id);
 });
 
+document.getElementById("div_img_content_2_id").addEventListener('click', function () {
+  show_video_content_full_screen(this.video_id);
+});
+
+document.getElementById("div_img_content_3_id").addEventListener('click', function () {
+  show_video_content_full_screen(this.video_id);
+});
+
+
 document.getElementById('wrapper_video_full_id').addEventListener('mouseleave', function () {
     //console.log("wrapper mouseleave");
     this.style.display = "none";
+    video_full.loadVideo(loading_video);
+    video_full.play();
 });
 
 
@@ -794,7 +811,6 @@ var iframe_monitor = setInterval(function(){
 
 function show_video_content_full_screen (video_id) {
 
-  video_full.unload().then(function() {
     video_full.loadVideo(video_id).then(function() {
         // the video successfully loaded
         //console.log("finally");
@@ -802,7 +818,6 @@ function show_video_content_full_screen (video_id) {
         video_full.play();
 
     }).catch(function(error) {
-    });
   });
 
   document.getElementById("wrapper_video_full_id").style.display = "block";
@@ -950,39 +965,39 @@ var end_fronteira = function () {
 }
 
 function change_video (new_id, video_object) {
-  video_object.unload().then(function() {
-    video_object.loadVideo(new_id).then(function() {
-        // the video successfully loaded
-        //console.log("finally");
-          if (document.getElementById("vimeo_id").style.display == "none") {
-            document.getElementById("vimeo_id").style.display="block";
-          }
-        video_preview.play();
 
-    }).catch(function(error) {
-        switch (error.name) {
-            case 'TypeError':
-                // the id was not a number
-                console.log("type error");
-                break;
-
-            case 'PasswordError':
-                // the video is password-protected and the viewer needs to enter the
-                // password first
-                console.log("pass error");
-                break;
-
-            case 'PrivacyError':
-                // the video is password-protected or private
-                break;
-
-            default:
-                // some other error occurred
-                console.log("default");
-                break;
+  video_object.loadVideo(new_id).then(function() {
+      // the video successfully loaded
+      //console.log("finally");
+        if (document.getElementById("vimeo_id").style.display == "none") {
+          document.getElementById("vimeo_id").style.display="block";
         }
-      });
+      video_preview.play();
+
+  }).catch(function(error) {
+      switch (error.name) {
+          case 'TypeError':
+              // the id was not a number
+              console.log("type error");
+              break;
+
+          case 'PasswordError':
+              // the video is password-protected and the viewer needs to enter the
+              // password first
+              console.log("pass error");
+              break;
+
+          case 'PrivacyError':
+              // the video is password-protected or private
+              break;
+
+          default:
+              // some other error occurred
+              console.log("default");
+              break;
+      }
     });
+
 }
 
 function preview_fullscreen () {
@@ -1095,7 +1110,6 @@ function close_display_videos() {
 
 function close_preview() {
 
-  video_status = "none";
   document.getElementById('wrapper_preview_id').style.display = "none";
   document.getElementById("wrapper_preview_id").style.width = "200px";
   document.getElementById("wrapper_preview_id").style.height = "136px";
@@ -1108,7 +1122,7 @@ function close_preview() {
   document.getElementById("video_wrapper_id").style.margintop = "-18px";
   layerOverlapFlag = false;
 
-  if (video_status == 226354838) { //fronteir has no mouseover preview
+  if (video_status == 226354838) { //fronteira has no mouseover preview
 
     end_fronteira();
   } else {
@@ -1120,6 +1134,12 @@ function close_preview() {
         console.log("couldnt restart loop");
     });
   }
+
+  video_status = "none";
+
+  video_preview.loadVideo(loading_video);
+  video_preview.play();
+
 }
 
 function delay_overlay_mouseout (mythis) {
@@ -1131,6 +1151,8 @@ function delay_overlay_mouseout (mythis) {
       document.getElementById('wrapper_preview_id').style.display = "none";
       document.getElementById("wrapper_preview_id").style.zIndex = "initial";
       layerOverlapFlag = false;
+      video_preview.loadVideo(loading_video);
+      video_preview.play();
     }
   }, 500);
 }
@@ -1144,14 +1166,15 @@ function close_box_fronteira() {
 }
 
 function click_fence() {
-  goingToMexico=true;
-  map.set('minZoom',0);
-  map.set('maxZoom',18);
-  panTo(32.5,-111.5,8,900,4);
   document.getElementById("fence_us_id").style.display = "none";
   document.getElementById("fence_id").style.display = "none";
   document.getElementById("fence_mexico_id").style.display = "none";
   document.getElementById("box_fronteira_id").style.display = "none";
+  goingToMexico=true;
+  map.set('minZoom',0);
+  map.set('maxZoom',18);
+  panTo(32.5,-111.5,8,900,4);
+
 
 }
 

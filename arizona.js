@@ -266,65 +266,31 @@ volta_overlay.setMap(map);
 
 
 //polygons!
-var skyland_highschool_rect = new google.maps.Circle({
-	map: map,
-	center:
-    new google.maps.LatLng(33.390,-111.746),
-  radius: 300,
-	strokeWeight: 0,
-  fillColor: '#969696',
-	fillOpacity: 1
-});
 
-var gym_rect = new google.maps.Circle({
-	map: map,
-	center:
-    new google.maps.LatLng(33.44,-111.715),
-  radius: 300,
-	strokeWeight: 0,
-  fillColor: '#969696',
-	fillOpacity: 1
-});
+var skyland_highschool_bounds = {north: 33.393, south: 33.388, east: -111.743, west: -111.749};
+var skyland_highschool_overlay = new google.maps.GroundOverlay ('images/circulo_cinza.png', skyland_highschool_bounds);
+skyland_highschool_overlay.setMap(map);
 
-var shooting_range_rect = new google.maps.Circle({
-	map: map,
-	center:
-    new google.maps.LatLng(33.427,-111.649),
-  radius: 300,
-	strokeWeight: 0,
-  fillColor: '#969696',
-	fillOpacity: 1
-});
+var gym_bounds =  {north: 33.443, south: 33.438, east: -111.711, west: -111.717};
+var gym_overlay = new google.maps.GroundOverlay('images/circulo_cinza.png', gym_bounds);
+gym_overlay.setMap(map);
 
-var retirement_rect = new google.maps.Circle({
-	map: map,
-	center:
-    new google.maps.LatLng(33.3245,-111.8157),
-  radius: 300,
-	strokeWeight: 0,
-  fillColor: '#969696',
-	fillOpacity: 1
-});
+var shooting_range_bounds = {north: 33.429, south: 33.424, east: -111.646, west: -111.652};
+var shooting_range_overlay = new google.maps.GroundOverlay('images/circulo_cinza.png', shooting_range_bounds);
+shooting_range_overlay.setMap(map);
 
-var rodeo_rect = new google.maps.Circle({
-	map: map,
-	center:
-    new google.maps.LatLng(33.343,-111.696),
-  radius: 300,
-	strokeWeight: 0,
-  fillColor: '#969696',
-	fillOpacity: 1
-});
+var retirement_bounds = {north: 33.3265, south: 33.3215, east: -111.8137, west: -111.8197};
+var retirement_overlay = new google.maps.GroundOverlay('images/circulo_cinza.png', retirement_bounds);
+retirement_overlay.setMap(map);
 
-var western_park_circle = new google.maps.Circle({
-	map: map,
-	center:
-    new google.maps.LatLng(33.2984,-112.0061),
-  radius: 650,
-	strokeWeight: 0,
-  fillColor: '#969696',
-	fillOpacity: 1
-});
+var rodeo_bounds = {north: 33.346, south: 33.341, east: -111.693, west: -111.699};
+var rodeo_overlay = new google.maps.GroundOverlay('images/circulo_cinza.png', rodeo_bounds);
+rodeo_overlay.setMap(map);
+
+var western_park_bounds =  {north: 33.301, south: 33.296, east: -112.0021, west: -112.0081};
+var western_park_overlay = new google.maps.GroundOverlay('images/circulo_cinza.png', western_park_bounds);
+western_park_overlay.setMap(map);
+
 
 //CROSSES behaviours
 cruzes_overlays.forEach ( function(item, index){
@@ -445,7 +411,7 @@ google.maps.event.addListener(volta_overlay, 'mouseout', function (event) {
 
 
 // SCHOOL behaviours
-google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (event) {
+google.maps.event.addListener(skyland_highschool_overlay, 'mouseover', function (event) {
 	// Within the event listener, "this" refers to the polygon which
 	// received the event.
   //
@@ -454,13 +420,13 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseover', function (ev
     //line 31
     video_id = 225001757;
 
-    var r = get_mapthing_bounds(skyland_highschool_rect) ;
+    var r = get_mapthing_bounds(skyland_highschool_overlay) ;
     show_preview(r, video_id, "High School");
 
   }
 });
 
-google.maps.event.addListener(skyland_highschool_rect, 'mouseout', function (event) {
+google.maps.event.addListener(skyland_highschool_overlay, 'mouseout', function (event) {
   if (mouseover_enabled) {
     delay_overlay_mouseout(this);
   }
@@ -469,7 +435,7 @@ google.maps.event.addListener(skyland_highschool_rect, 'mouseout', function (eve
 
 
 // GYM behaviours
-google.maps.event.addListener(gym_rect, 'mouseover', function (event) {
+google.maps.event.addListener(gym_overlay, 'mouseover', function (event) {
 
 	//this.setOptions({		fillColor: '#ffcf2f',	});
   if (mouseover_enabled) {
@@ -478,13 +444,13 @@ google.maps.event.addListener(gym_rect, 'mouseover', function (event) {
     video_id = 225001970;
 
     //move the video to near the icon
-    var r = get_mapthing_bounds(gym_rect) ;
+    var r = get_mapthing_bounds(gym_overlay) ;
     show_preview(r, video_id, "Academia do Ryan");
 
   }
 });
 
-google.maps.event.addListener(gym_rect, 'mouseout', function (event) {
+google.maps.event.addListener(gym_overlay, 'mouseout', function (event) {
   if (mouseover_enabled) {
     delay_overlay_mouseout(this);
   }
@@ -492,7 +458,7 @@ google.maps.event.addListener(gym_rect, 'mouseout', function (event) {
 });
 
 // SHOOTING RANGE behaviours
-google.maps.event.addListener(shooting_range_rect, 'mouseover', function (event) {
+google.maps.event.addListener(shooting_range_overlay, 'mouseover', function (event) {
 
 	//this.setOptions({		fillColor: '#ffcf2f',	});
   if (mouseover_enabled) {
@@ -501,20 +467,20 @@ google.maps.event.addListener(shooting_range_rect, 'mouseover', function (event)
     video_id = 226357094;
 
     //move the video to near the icon
-    var r = get_mapthing_bounds(shooting_range_rect) ;
+    var r = get_mapthing_bounds(shooting_range_overlay) ;
     show_preview(r, video_id, "Shooting Range");
 
   }
 });
 
-google.maps.event.addListener(shooting_range_rect, 'mouseout', function (event) {
+google.maps.event.addListener(shooting_range_overlay, 'mouseout', function (event) {
   if (mouseover_enabled) {
     delay_overlay_mouseout(this);
   }
 });
 
 // RETIREMENT behaviours
-google.maps.event.addListener(retirement_rect, 'mouseover', function (e) {
+google.maps.event.addListener(retirement_overlay, 'mouseover', function (e) {
 
   if (mouseover_enabled) {
 
@@ -524,13 +490,13 @@ google.maps.event.addListener(retirement_rect, 'mouseover', function (e) {
 
 
     //move the video to near the icon
-    var r = get_mapthing_bounds(retirement_rect) ;
+    var r = get_mapthing_bounds(retirement_overlay) ;
     show_preview(r, video_id, "Condomínios +55");
 
   }
 });
 
-google.maps.event.addListener(retirement_rect, 'mouseout', function (event) {
+google.maps.event.addListener(retirement_overlay, 'mouseout', function (event) {
 
   //console.log("bola mouseleave");
   if (mouseover_enabled) {
@@ -544,7 +510,7 @@ google.maps.event.addListener(retirement_rect, 'mouseout', function (event) {
 
 
 // RODEO behaviours
-google.maps.event.addListener(rodeo_rect, 'mouseover', function (event) {
+google.maps.event.addListener(rodeo_overlay, 'mouseover', function (event) {
 
   if (mouseover_enabled) {
 
@@ -552,13 +518,13 @@ google.maps.event.addListener(rodeo_rect, 'mouseover', function (event) {
 
 
       //move the video to near the icon
-      var r = get_mapthing_bounds(rodeo_rect) ;
+      var r = get_mapthing_bounds(rodeo_overlay) ;
       show_preview(r, video_id, "Rodeo");
 
     }
 });
 
-google.maps.event.addListener(rodeo_rect, 'mouseout', function (event) {
+google.maps.event.addListener(rodeo_overlay, 'mouseout', function (event) {
   if (mouseover_enabled) {
     delay_overlay_mouseout(this);
   }
@@ -566,7 +532,7 @@ google.maps.event.addListener(rodeo_rect, 'mouseout', function (event) {
 
 
 // WESTERN PARK behaviours
-google.maps.event.addListener(western_park_circle, 'mouseover',function (event)  {
+google.maps.event.addListener(western_park_overlay, 'mouseover',function (event)  {
 
   if (mouseover_enabled) {
         video_id = 226354643; //line 35
@@ -574,14 +540,14 @@ google.maps.event.addListener(western_park_circle, 'mouseover',function (event) 
       //this.setOptions({    fillColor: '#ffcf2f',  });
 
       //move the video to near the icon
-      var r = get_mapthing_bounds(western_park_circle) ;
+      var r = get_mapthing_bounds(western_park_overlay) ;
       show_preview(r, video_id, "Western Park");
 
     }
 });
 
 
-google.maps.event.addListener(western_park_circle, 'mouseout', function (event) {
+google.maps.event.addListener(western_park_overlay, 'mouseout', function (event) {
   if (mouseover_enabled) {
     delay_overlay_mouseout(this);
   }
@@ -724,27 +690,31 @@ for (var i=0; i<places.length; i++) {
 
 
     case "highschool":
-      skyland_highschool_rect.setOptions({		fillColor: '#ffcf2f',	})
+      skyland_highschool_overlay.set('url', 'images/circulo_amarelo.png');
+      // skyland_highschool_overlay.setOptions({		fillColor: '#ffcf2f',	})
       break;
 
     case "shootingrange":
-      shooting_range_rect.setOptions({		fillColor: '#ffcf2f',	});
+      shooting_range_overlay.set('url', 'images/circulo_amarelo.png');
+      //shooting_range_overlay.setOptions({		fillColor: '#ffcf2f',	});
       break;
 
     case "gym":
-      gym_rect.setOptions({		fillColor: '#ffcf2f',	});
+      gym_overlay.set('url', 'images/circulo_amarelo.png');
+      // gym_overlay.setOptions({		fillColor: '#ffcf2f',	});
       break;
 
     case "retirementhome":
-      retirement_rect.setOptions({		fillColor: '#ffcf2f',	});
+      retirement_overlay.set('url', 'images/circulo_amarelo.png');
+      // retirement_overlay.setOptions({		fillColor: '#ffcf2f',	});
       break;
 
     case "rodeo":
-      rodeo_rect.setOptions({		fillColor: '#ffcf2f',	});
+      rodeo_overlay.set('url', 'images/circulo_amarelo.png');
       break;
 
     case "westernpark":
-      western_park_circle.setOptions({		fillColor: '#ffcf2f',	});
+      western_park_overlay.set('url', 'images/circulo_amarelo.png');
       break;
 
     case "fronteira":

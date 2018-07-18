@@ -9,12 +9,11 @@ var STEPS = 10;     // The number of steps that each panTo action will undergo
 var pan_started = 0;
 var allowed_bounds;
 var last_valid_center;
-var reservationOverlay;
+var reservation_overlay;
 var video_width = 200;
 var video_height = 112;
 var video_up = 61;
 var video_status = "none";
-var loading_video = 280382025;
 var goingToMexico = false;
 var returningToMesa = false;
 var mouseover_enabled = false;
@@ -110,8 +109,7 @@ video_preview.enableTextTrack('pt-br').then(function(track) {
   console.log("no pt-br track");
 });
 
-video_preview.loadVideo (loading_video);
-video_preview.play();
+video_preview.setLoop(true);
 
 video_full = new Vimeo.Player(document.getElementById("video_full_id"));
 
@@ -123,35 +121,8 @@ video_full.enableTextTrack('pt-br').then(function(track) {
   console.log("no pt-br track");
 });
 
-video_full.loadVideo (loading_video);
-video_full.play();
 
 
-// video_preview.on('timeupdate', function(data) {
-//     // data is an object containing properties specific to that event
-//     //console.log("hidden "+data.seconds+", status: "+video_preview.getPaused());
-//     if (document.getElementById("vimeo_id").style.display == "none") {
-//       //console.log("hidden "+data.seconds);
-//
-//       if (data.seconds < 0.5 ){
-//         document.getElementById("vimeo_id").style.display="block";
-//         //console.log("showing "+data.seconds);
-//
-//       }
-//     } else {
-//       //console.log("timeupdate "+data.seconds);
-//     }
-// });
-
-video_preview.on('bufferend', function(){
-  if (document.getElementById("vimeo_id").style.display == "none") {
-    document.getElementById("vimeo_id").style.display="block";
-  }
-});
-
-// video_preview.on('loaded', function(){
-//   console.log("loaded "+video_status);
-// });
 
 video_preview.on('ended', function(data) {
 
@@ -162,18 +133,32 @@ video_preview.on('ended', function(data) {
 
 
 //reservation overlay
-var reservationBounds = {
+var reservation_bounds = {
   north: 33.512,
   south: 33.4251,
   east: -111.791,
   west: -111.891
 };
 
-reservationOverlay = new google.maps.GroundOverlay(
+reservation_overlay = new google.maps.GroundOverlay(
     'images/reserva.svg',
-    reservationBounds);
+    reservation_bounds);
 
-reservationOverlay.setMap(map);
+reservation_overlay.setMap(map);
+
+//reservation text-align
+var reservation_text_bounds = {
+  north: 33.4687,
+  south: 33.465,
+  east: -111.855,
+  west: -111.8653
+};
+
+reservation_text_overlay = new google.maps.GroundOverlay(
+    'images/reserva.png',
+    reservation_text_bounds);
+
+reservation_text_overlay.setMap(map);
 
 //crosses overlay
 cruzes_bounds.forEach (function (item, index) {
@@ -627,8 +612,7 @@ document.getElementById("div_img_content_3_id").addEventListener('click', functi
 document.getElementById('wrapper_video_full_id').addEventListener('mouseleave', function () {
     //console.log("wrapper mouseleave");
     this.style.display = "none";
-    video_full.loadVideo(loading_video);
-    video_full.play();
+
 });
 
 
@@ -792,18 +776,13 @@ $(function()
 var iframe_monitor = setInterval(function(){
     var elem = document.activeElement;
     if(elem && elem.tagName == 'IFRAME'){
-      if (elem.id == "vimeo_id") {
-        console.log(video_status);
-        if (video_status!="none") {
-          // if the preview is already fullscreen, clicking will close it and show the display videos
-          if (  document.getElementById("wrapper_preview_id").style.width == "97%") {
-            show_display_videos();
-          } else { //otherwise show to preview on fullscreen
-            preview_fullscreen();
-          }
+      if (video_status!="none") {
+        // if the preview is already fullscreen, clicking will close it and show the display videos
+        if (  document.getElementById("wrapper_preview_id").style.width == "97%") {
+          show_display_videos();
+        } else { //otherwise show to preview on fullscreen
+          preview_fullscreen();
         }
-      } else { //clicked on the display video_titles
-
       }
       elem.blur();
     }
@@ -840,11 +819,12 @@ function show_preview (r, my_video_id, text) {
   document.getElementById('wrapper_preview_id').style.display = "block";
   document.getElementById("video_title_id").innerHTML = text;
 
-    //the callback function 'timeupdate' will make the video frame visible when it resets
+  video_preview.setLoop(true);
+
     if (currentVideoId != my_video_id){
       document.getElementById("vimeo_id").style.display = "none";
       currentVideoId = my_video_id;
-      change_video(my_video_id, video_preview);
+      change_video(my_video_id);
   }
 
 }
@@ -943,8 +923,6 @@ function show_fronteira() {
 
   preview_fullscreen();
 
-  // vimeo_fronteira.setCurrentTime(0);
-  // vimeo_fronteira.on('ended', end_fronteira );
 
 }
 
@@ -964,15 +942,16 @@ var end_fronteira = function () {
 
 }
 
-function change_video (new_id, video_object) {
+function change_video (new_id) {
 
-  video_object.loadVideo(new_id).then(function() {
+  video_preview.loadVideo(new_id).then(function() {
       // the video successfully loaded
       //console.log("finally");
         if (document.getElementById("vimeo_id").style.display == "none") {
           document.getElementById("vimeo_id").style.display="block";
         }
       video_preview.play();
+
 
   }).catch(function(error) {
       switch (error.name) {
@@ -1015,13 +994,7 @@ function preview_fullscreen () {
   document.getElementById("video_wrapper_id").style.height = "100%";
   document.getElementById("video_wrapper_id").style.margintop = "0px";
 
-  video_preview.setLoop(false).then(function(loop) {
-      // loop was turned on
-
-  }).catch(function(error) {
-      // an error occurred
-      console.log("couldnt stop loop");
-  });
+  video_preview.setLoop(false);
 
   //document.getElementById("video_wrapper_id").style.top = "0px";
 
@@ -1103,8 +1076,10 @@ function close_display_videos() {
 
   document.getElementById("wrapper_content_id").style.display = "none";
   if (video_status == 226354838) { // fronteira
-
+    end_fronteira();
   }
+
+  video_full.pause();
 
 }
 
@@ -1127,18 +1102,11 @@ function close_preview() {
     end_fronteira();
   } else {
 
-    video_preview.setLoop(true).then(function(loop) {
-        // loop was turned on
-    }).catch(function(error) {
-        // an error occurred
-        console.log("couldnt restart loop");
-    });
+    video_preview.pause();
+
   }
 
   video_status = "none";
-
-  video_preview.loadVideo(loading_video);
-  video_preview.play();
 
 }
 
@@ -1151,8 +1119,8 @@ function delay_overlay_mouseout (mythis) {
       document.getElementById('wrapper_preview_id').style.display = "none";
       document.getElementById("wrapper_preview_id").style.zIndex = "initial";
       layerOverlapFlag = false;
-      video_preview.loadVideo(loading_video);
-      video_preview.play();
+      video_preview.pause();
+
     }
   }, 500);
 }
@@ -1216,7 +1184,7 @@ function toggle_confirm_restart () {
 }
 
 function confirm_restart () {
-  window.location.href = "http://vps3575.publiccloud.com.br/v7_juntando_tudo/";
+  window.location.href = "http://vps3575.publiccloud.com.br/";
 }
 
 function close_restart() {

@@ -111,6 +111,19 @@ video_preview.enableTextTrack('pt-br').then(function(track) {
 
 video_preview.setLoop(true);
 
+
+
+video_preview.on('ended', function(data) {
+
+
+    // show display videos
+    show_display_videos();
+
+    video_preview.setCurrentTime(0);
+    video_preview.pause();
+
+});
+
 video_full = new Vimeo.Player(document.getElementById("video_full_id"));
 
 video_full.enableTextTrack('pt-br').then(function(track) {
@@ -121,15 +134,14 @@ video_full.enableTextTrack('pt-br').then(function(track) {
   console.log("no pt-br track");
 });
 
-
-
-
-video_preview.on('ended', function(data) {
-
-    // show display videos
-    show_display_videos();
-
+video_full.on('ended', function (data){
+  document.getElementById('wrapper_video_full_id').style.display = "none";
+  document.getElementById('wrapper_content_id').style.display = "block";
+  video_full.setCurrentTime(0);
+  video_full.pause();
 });
+
+
 
 
 //reservation overlay
@@ -801,8 +813,7 @@ function show_video_content_full_screen (video_id) {
 
   document.getElementById("wrapper_video_full_id").style.display = "block";
   document.getElementById("wrapper_content_id").removeListener('mouseleave', function () {
-    //
-    //console.log("mouseleave");
+
     close_display_videos();
   });
 }
@@ -1066,6 +1077,13 @@ function show_display_videos() {
   }
   document.getElementById("wrapper_content_id").style.backgroundColor = places_colors_map[i][1];
   document.getElementById("wrapper_content_id").style.display = "block";
+
+  //put the listenr back in the case it was closed
+  document.getElementById("wrapper_content_id").addEventListener('mouseleave', function () {
+
+    close_display_videos();
+  });
+
 
 }
 

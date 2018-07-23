@@ -221,12 +221,18 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
     </div>
     <div class="text_content_right" id="text_content_3_id"></div>
   </div>
+  <div class="back_arrow" id="display_back_arrow_id">
+    <img src="images/arrow_back.png">
+  </div>
 </div>
 
 <div class="wrapper_video_full" id="wrapper_video_full_id">
   <iframe class="video_content_frame"
    src="https://player.vimeo.com/video/280382025?autoplay=1&title=1&byline=0&transparent=0" id="video_full_id"
    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
+   <div class="back_arrow" id="full_video_back_arrow_id">
+     <img src="images/arrow_back.png">
+   </div>
 </div>
 
 

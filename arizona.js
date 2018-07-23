@@ -594,13 +594,23 @@ function initMap() {
     show_video_content_full_screen(this.video_id);
   });
 
-
-  document.getElementById('wrapper_video_full_id').addEventListener('mouseleave', function () {
+  document.getElementById('display_back_arrow_id').addEventListener('click', function () {
       //console.log("wrapper mouseleave");
-      this.style.display = "none";
-      show_display_videos();
+      close_display_videos();
+  }, true);
 
-  });
+
+  // document.getElementById('wrapper_video_full_id').addEventListener('mouseleave', function () {
+  //     //console.log("wrapper mouseleave");
+  //     this.style.display = "none";
+  //     show_display_videos();
+  // });
+
+  document.getElementById('full_video_back_arrow_id').addEventListener('click', function () {
+
+      document.getElementById('wrapper_video_full_id').style.display = "none";
+  }, true);
+
 
 
   //light up the places according to the form answers
@@ -800,6 +810,7 @@ function show_video_content_full_screen (video_id) {
   });
 
   document.getElementById("wrapper_video_full_id").style.display = "block";
+  document.getElementById("full_video_back_arrow_id").style.display = "block";
   //document.getElementById("wrapper_content_id").removeEventListener('mouseleave',  close_display_videos);
 }
 
@@ -1068,9 +1079,10 @@ function show_display_videos() {
   }
   document.getElementById("wrapper_content_id").style.backgroundColor = places_colors_map[i][1];
   document.getElementById("wrapper_content_id").style.display = "block";
+  document.getElementById("display_back_arrow_id").style.display = "block";
 
   //put the listenr back in the case it was closed
-  document.getElementById("wrapper_content_id").addEventListener('mouseleave',   close_display_videos);
+  //document.getElementById("wrapper_content_id").addEventListener('mouseleave',   close_display_videos);
 
 
 }
@@ -1086,6 +1098,7 @@ function close_display_videos(data) {
   }
 
   video_full.pause();
+  //document.getElementById("display_back_arrow_id").style.display = "none";
 
 }
 

@@ -49,7 +49,7 @@ question.push( <?php echo $_POST["question_8"]; ?> );
   <div class="video_title" id="video_title_id">Western Park</div>
   <div class="video_wrapper" id="video_wrapper_id" >
     <iframe
-     src="https://player.vimeo.com/video/280382025?autoplay=1&title=0&byline=0&background=1&transparent=0" id="vimeo_id"
+     src="https://player.vimeo.com/video/280382025?autoplay=1&title=0&byline=0&transparent=0" id="vimeo_id"
      frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
  </div>
  <div class="video_arrow" id="video_arrow_id"><img src="images/seta_video.png"></div>
@@ -133,7 +133,7 @@ question.push( <?php echo $_POST["question_8"]; ?> );
     Direção de Fotografia: Rodrigo Levy<br>
     Assistência de Direção: Mari Nagem<br>
     Som direto: Corbin Billings<br>
-    Edição: Fernanda Pessoa e ?<Br><br>
+    Edição: Fernanda Pessoa<Br><br>
     Expografia: Flavio Franzosi<Br><br>
     Pesquisador e curador colaborador: Diego Matos<br>
     Questionário: Fernanda Pessoa e Diego Matos<br><br>
@@ -219,7 +219,7 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
 
 <div class="wrapper_video_full" id="wrapper_video_full_id">
   <iframe class="video_content_frame"
-   src="https://player.vimeo.com/video/280382025?autoplay=1&title=1&byline=0&background=1&transparent=0" id="video_full_id"
+   src="https://player.vimeo.com/video/280382025?autoplay=1&title=1&byline=0&transparent=0" id="video_full_id"
    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
 </div>
 

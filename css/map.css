@@ -154,11 +154,11 @@ div.fence_mexico {
 div.wrapper_welcome {
 	background-color: white;
 	position: absolute;
-	height: 580px;
-	width: 550px;
+	height: 550px;
+	width: 650px;
 	left: 50%;
 	top: 50%;
-	padding: 20px;
+	padding: 15px;
 	transform: translate(-50%, -50%);
 	overflow: auto;
 }
@@ -186,6 +186,52 @@ div.welcome_button {
 	padding: 10px;
 	cursor: pointer;
 }
+
+div.wrapper_welcome {
+	background-color: white;
+	position: absolute;
+	height: 550px;
+	width: 650px;
+	left: 50%;
+	top: 50%;
+	padding: 15px;
+	transform: translate(-50%, -50%);
+	overflow: auto;
+}
+
+
+div.wrapper_credits {
+	background-color: white;
+	position: absolute;
+	display: none;
+	height: 400px;
+	width: 450px;
+	left: 50%;
+	top: 50%;
+	padding: 30px;
+	transform: translate(-50%, -50%);
+	overflow: auto;
+}
+
+div.credits_pessoa {
+	position: absolute;
+	left: 210px;
+	bottom: 20px;
+
+}
+
+div.credits_mis {
+	position: absolute;
+	left: 20px;
+	bottom: 30px;
+}
+
+div.credits_close {
+	position: absolute;
+	right: 15px;
+	top: 15px;
+}
+
 
 div.wrapper_navigation {
 	top: 70px;
@@ -292,7 +338,7 @@ div.video_wrapper {
   padding-top: 0;
 
 
-	background: transparent url('../images/loading.gif')  center no-repeat;
+	/*background: transparent url('../images/loading.gif')  center no-repeat;*/
 	/*display: none; background-color: #CD5E12;*/
 }
 .video_wrapper iframe {
@@ -302,9 +348,6 @@ div.video_wrapper {
 	width: 100%;
 	height: 100%;
 	background-color: #0000aa;
-
-
-
 }
 
 div.video_arrow {
@@ -425,7 +468,7 @@ div.box_fronteira_close {
 	cursor: pointer;
 }
 
-div.wrapper_video_content {
+div.wrapper_content {
 	position: absolute;
 	display: none;
 	top: 7px;
@@ -434,51 +477,71 @@ div.wrapper_video_content {
 	bottom: 7px;
 	font-size: 22px;
 	font-weight: 700;
-	color: #555555;
+	color: #ffffff;
 	padding: 20px;
-		border: 1px solid blue;
+	overflow: auto;
+	/*border: 1px solid blue;*/
 }
 
 
-div.wrapper_video_grid {
+div.wrapper_content_grid {
 	display: grid;
 	left: 0;
 	right: 0;
 	grid-template-columns: 535px auto 535px;
-	grid-template-rows: 300px 300px 300px;
+	grid-template-rows: 300px;
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
 
 }
 
-div.video_content_left {
-	border: 1px solid red;
-	background: transparent url('../images/loading.gif')  center no-repeat;
+div.img_content_left {
+	/*border: 1px solid red;*/
+	display: none;
+	cursor: pointer;
 }
 
-div.video_content_right {
-	border: 1px solid red;
+div.img_content_right {
+	/*border: 1px solid red;*/
 	text-align: right;
 	/*position: relative;
 	top: 50%;*/
-	background: transparent url('../images/loading.gif')  center no-repeat;
+	display: none;
+	cursor: pointer;
 }
 
 iframe.video_content_frame	{
- height: 300px;
- width: 533px;
+ /*height: 300px;
+ width: 533px*/
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
  }
 
 div.text_content_left {
-	border: 1px solid red;
+	/*border: 1px solid red;*/
 	grid-column: 1 / span 2;
 	padding: 20px;
-	/*position: relative;
-	top: 50%;*/
+	display: none;
+	text-align: right;
 }
 
 div.text_content_right {
-	border: 1px solid red;
+	/*border: 1px solid red;*/
 	grid-column: 2 / span 2;
 	padding: 20px;
-	/*position: relative;
-	top: 50%;*/
+	display: none;
+}
+
+div.wrapper_video_full {
+	display: none;
+	position: absolute;
+	width: 97%;
+	height: 97%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }

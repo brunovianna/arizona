@@ -141,10 +141,12 @@ question.push( <?php echo $_POST["question_8"]; ?> );
     <br><br>
   </span>
   </div>
-  <div class="credits_mis">
+  <div class="credits_mis welcome_text">
+    <span class="georgia">Apoio<br><br><br></span>
     <img src="images/logo-mis.png">
   </div>
-  <div class="credits_pessoa">
+  <div class="credits_pessoa welcome_text">
+    <span class="georgia">Produção<br><br></span>
     <img src="images/pessoa_logo.png">
   </div>
   <div class="credits_close" onclick="close_credits();">

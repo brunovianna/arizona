@@ -214,16 +214,18 @@ div.wrapper_credits {
 }
 
 div.credits_pessoa {
+		/*border: 1px solid red;*/
 	position: absolute;
 	left: 210px;
-	bottom: 20px;
+	top: 340px;
 
 }
 
 div.credits_mis {
+		/*border: 1px solid blue;*/
 	position: absolute;
 	left: 20px;
-	bottom: 30px;
+	top: 340px;
 }
 
 div.credits_close {
@@ -475,7 +477,7 @@ div.wrapper_content {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	font-size: 22px;
+	font-size: 42px;
 	font-weight: 700;
 	color: #ffffff;
 	padding: 20px;

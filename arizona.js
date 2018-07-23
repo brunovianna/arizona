@@ -570,6 +570,7 @@ function initMap() {
 
   document.getElementById('wrapper_preview_id').addEventListener('mouseleave', function () {
       //console.log("wrapper mouseleave");
+      //console.log(this.style.width);
       if (this.style.width == "200px")
         close_preview();
   });

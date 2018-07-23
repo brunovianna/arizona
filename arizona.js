@@ -557,16 +557,28 @@ function initMap() {
 
 
 
-
   document.getElementById('wrapper_preview_id').addEventListener('mouseenter', function () {
       //console.log("wrapper mouseenter");
       layerOverlapFlag = true;
   });
 
-  document.getElementById('wrapper_preview_id').addEventListener('mouseleave', function () {
+  document.getElementById('wrapper_preview_id').addEventListener('click', function () {
+      //console.log(this.style.width);
+      //if the preview is not on full screen
+      if (this.style.width != "200px")
+        preview_fullscreen();
+  });
+
+
+  // document.getElementById('wrapper_preview_id').addEventListener('mouseleave', function () {
+  //     //console.log("wrapper mouseleave");
+  //     close_preview();
+  // });
+
+  document.getElementById('preview_back_arrow_id').addEventListener('click', function () {
       //console.log("wrapper mouseleave");
       close_preview();
-  });
+  }, true);
 
   // document.getElementById("wrapper_content_id").addEventListener('mouseleave',  close_display_videos);
 
@@ -766,7 +778,7 @@ var iframe_monitor = setInterval(function(){
     if(elem && elem.tagName == 'IFRAME'){
       if (video_status!="none") {
         // if the preview is already fullscreen, clicking will close it and show the display videos
-        if (  document.getElementById("wrapper_preview_id").style.width == "97%") {
+        if (  document.getElementById("wrapper_preview_id").style.width == "100%") {
           show_display_videos();
         } else { //otherwise show to preview on fullscreen
           preview_fullscreen();
@@ -966,11 +978,13 @@ function change_video (new_id) {
 function preview_fullscreen () {
 
 
-  document.getElementById("wrapper_preview_id").style.width = "97%";
-  document.getElementById("wrapper_preview_id").style.height = "97%";
-  document.getElementById("wrapper_preview_id").style.top = "50%";
-  document.getElementById("wrapper_preview_id").style.left = "50%";
-  document.getElementById("wrapper_preview_id").style.transform = "translate(-50%,-50%)";
+  document.getElementById("wrapper_preview_id").style.width = "100%";
+  document.getElementById("wrapper_preview_id").style.height = "100%";
+  document.getElementById("wrapper_preview_id").style.top = "0";
+  document.getElementById("wrapper_preview_id").style.left = "0";
+
+  document.getElementById("preview_back_arrow_id").style.display = "block";
+  // document.getElementById("wrapper_preview_id").style.transform = "translate(-50%,-50%)";
   document.getElementById("wrapper_preview_id").style.zIndex = 1000;
   document.getElementById("video_title_id").style.display = "none";
   document.getElementById("video_arrow_id").style.display = "none";
@@ -1077,11 +1091,13 @@ function close_display_videos(data) {
 
 function close_preview() {
 
+
   document.getElementById('wrapper_preview_id').style.display = "none";
   document.getElementById("wrapper_preview_id").style.width = "200px";
   document.getElementById("wrapper_preview_id").style.height = "136px";
   document.getElementById("wrapper_preview_id").style.zIndex = "initial";
   document.getElementById("wrapper_preview_id").style.transform = "";
+  document.getElementById("preview_back_arrow_id").style.display = "none";
   document.getElementById("video_title_id").style.display = "block";
   document.getElementById("video_arrow_id").style.display = "block";
   document.getElementById("video_wrapper_id").style.width = "100%";

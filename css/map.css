@@ -470,6 +470,8 @@ div.box_fronteira_close {
 	cursor: pointer;
 }
 
+
+
 div.wrapper_content {
 	position: absolute;
 	display: none;
@@ -551,4 +553,13 @@ div.wrapper_video_full {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+div.back_arrow {
+	position: absolute;
+	display: none;
+	top: 50%;
+	left: 0;
+	transform: translate(0, -50%);
+	cursor: pointer;
 }

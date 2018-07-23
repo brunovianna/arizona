@@ -45,12 +45,15 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 
 
 
-<div class="wrapper_preview" id="wrapper_preview_id" onclick="preview_fullscreen();"><!-- mouse behaviours are defined in the js file -->
+<div class="wrapper_preview" id="wrapper_preview_id"><!-- mouse behaviours are defined in the js file -->
   <div class="video_title" id="video_title_id">Western Park</div>
   <div class="video_wrapper" id="video_wrapper_id" >
     <iframe
      src="https://player.vimeo.com/video/280382025?autoplay=1&title=0&byline=0&transparent=0" id="vimeo_id"
      frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
+     <div class="back_arrow" id="preview_back_arrow_id">
+       <img src="images/arrow_back.png">
+     </div>
  </div>
  <div class="video_arrow" id="video_arrow_id"><img src="images/seta_video.png"></div>
 </div>
@@ -202,6 +205,7 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
    </div>
  </div>
 
+
 <div class="wrapper_content futura-18" id="wrapper_content_id">
   <div class="wrapper_content_grid" id="wrapper_content_grid_id">
     <div class="img_content_left" id="div_img_content_1_id">
@@ -224,6 +228,8 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
    src="https://player.vimeo.com/video/280382025?autoplay=1&title=1&byline=0&transparent=0" id="video_full_id"
    frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
 </div>
+
+
 
    <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ1BJ5R6eyVAvq0oAyjkCPW46uS4e6MnI&callback=initMap">

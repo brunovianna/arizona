@@ -1312,7 +1312,7 @@ var  preview_videos = {
 var places_display_videos_map = [
   ["kristen",[277671431]],
   ["corbin",[277671318]],
-  ["hanny", [277700826,277698969]],
+  ["hanny", [277700826,277698969,277693843]],
   ["cait", [277696011]],
   ["casillas", [277701979]],
   ["jan", [277671386]],

@@ -203,15 +203,15 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
 <div class="wrapper_content futura-18" id="wrapper_content_id">
   <div class="wrapper_content_grid" id="wrapper_content_grid_id">
     <div class="img_content_left" id="div_img_content_1_id">
-      <img id="img_content_1_id" src="images/still_ph.jpg">
+      <img class="content" id="img_content_1_id" src="images/still_ph.jpg">
     </div>
     <div class="text_content_right" id="text_content_1_id"></div>
     <div class="text_content_left" id="text_content_2_id"></div>
     <div class="img_content_right" id="div_img_content_2_id">
-      <img id="img_content_2_id" src="images/still_ph.jpg">
+      <img class="content" id="img_content_2_id" src="images/still_ph.jpg">
     </div>
     <div class="img_content_left" id="div_img_content_3_id">
-      <img id="img_content_3_id" src="images/still_ph.jpg">
+      <img class="content" id="img_content_3_id" src="images/still_ph.jpg">
     </div>
     <div class="text_content_right" id="text_content_3_id"></div>
   </div>

@@ -568,7 +568,7 @@ function initMap() {
       close_preview();
   });
 
-  document.getElementById("wrapper_content_id").addEventListener('mouseleave',  close_display_videos);
+  // document.getElementById("wrapper_content_id").addEventListener('mouseleave',  close_display_videos);
 
   document.getElementById("div_img_content_1_id").addEventListener('click', function () {
     show_video_content_full_screen(this.video_id);
@@ -1000,7 +1000,7 @@ function show_display_videos() {
   document.getElementById("text_content_1_id").innerHTML = display_video_keymap[place_display_videos[0]];
   document.getElementById("div_img_content_1_id").style.display = "block";
   document.getElementById("text_content_1_id").style.display = "block";
-  document.getElementById("wrapper_content_grid_id").style.gridTemplateRows = "300px";
+  // document.getElementById("wrapper_content_grid_id").style.gridTemplateRows = "300px";
   document.getElementById("wrapper_content_grid_id").style.top = "50%";
   document.getElementById("wrapper_content_grid_id").style.transform = "translate(0,-50%)";
 
@@ -1012,9 +1012,11 @@ function show_display_videos() {
     document.getElementById("text_content_2_id").innerHTML = display_video_keymap[place_display_videos[1]];
     document.getElementById("div_img_content_2_id").style.display = "block";
     document.getElementById("text_content_2_id").style.display = "block";
-    document.getElementById("wrapper_content_grid_id").style.gridTemplateRows = "300px 300px";
-    document.getElementById("wrapper_content_grid_id").style.top = "50%";
-    document.getElementById("wrapper_content_grid_id").style.transform = "translate(0,-50%)";
+    // document.getElementById("wrapper_content_grid_id").style.gridTemplateRows = "300px 300px";
+    // document.getElementById("wrapper_content_grid_id").style.top = "50%";
+    // document.getElementById("wrapper_content_grid_id").style.transform = "translate(0,-50%)";
+    document.getElementById("wrapper_content_grid_id").style.top = "0";
+    document.getElementById("wrapper_content_grid_id").style.transform = "translate(0,0)";
 
     document.getElementById("div_img_content_2_id").video_id = place_display_videos[1];
 
@@ -1030,7 +1032,7 @@ function show_display_videos() {
     document.getElementById("text_content_3_id").innerHTML = display_video_keymap[place_display_videos[2]];
     document.getElementById("div_img_content_3_id").style.display = "block";
     document.getElementById("text_content_3_id").style.display = "block";
-    document.getElementById("wrapper_content_grid_id").style.gridTemplateRows = "300px 300px 300px";
+    // document.getElementById("wrapper_content_grid_id").style.gridTemplateRows = "300px 300px 300px";
     document.getElementById("wrapper_content_grid_id").style.top = "0";
     document.getElementById("wrapper_content_grid_id").style.transform = "translate(0,0)";
 

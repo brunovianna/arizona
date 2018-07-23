@@ -471,10 +471,10 @@ div.box_fronteira_close {
 div.wrapper_content {
 	position: absolute;
 	display: none;
-	top: 7px;
-	left: 7px;
-	right: 7px;
-	bottom: 7px;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	font-size: 22px;
 	font-weight: 700;
 	color: #ffffff;
@@ -488,8 +488,8 @@ div.wrapper_content_grid {
 	display: grid;
 	left: 0;
 	right: 0;
-	grid-template-columns: 535px auto 535px;
-	grid-template-rows: 300px;
+	grid-template-columns: 50% 50%;
+	/*grid-template-rows: 300px;*/
 	position: absolute;
 	top: 50%;
 	transform: translate(0, -50%);
@@ -500,6 +500,7 @@ div.img_content_left {
 	/*border: 1px solid red;*/
 	display: none;
 	cursor: pointer;
+	width: 100%;
 }
 
 div.img_content_right {
@@ -509,7 +510,13 @@ div.img_content_right {
 	top: 50%;*/
 	display: none;
 	cursor: pointer;
+	width: 100%;
 }
+
+img.content {
+	width: 100%;
+}
+
 
 iframe.video_content_frame	{
  /*height: 300px;
@@ -523,7 +530,6 @@ iframe.video_content_frame	{
 
 div.text_content_left {
 	/*border: 1px solid red;*/
-	grid-column: 1 / span 2;
 	padding: 20px;
 	display: none;
 	text-align: right;
@@ -531,7 +537,6 @@ div.text_content_left {
 
 div.text_content_right {
 	/*border: 1px solid red;*/
-	grid-column: 2 / span 2;
 	padding: 20px;
 	display: none;
 }

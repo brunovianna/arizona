@@ -498,9 +498,7 @@ function initMap() {
 
   google.maps.event.addListener(retirement_overlay, 'mouseout', function (event) {
 
-    //console.log("bola mouseleave");
     if (mouseover_enabled) {
-
       delay_overlay_mouseout(this);
     }
 
@@ -558,7 +556,7 @@ function initMap() {
 
 
   document.getElementById('wrapper_preview_id').addEventListener('mouseenter', function () {
-      //console.log("wrapper mouseenter");
+      console.log("wrapper mouseenter");
       layerOverlapFlag = true;
   });
 
@@ -570,10 +568,11 @@ function initMap() {
   });
 
 
-  // document.getElementById('wrapper_preview_id').addEventListener('mouseleave', function () {
-  //     //console.log("wrapper mouseleave");
-  //     close_preview();
-  // });
+  document.getElementById('wrapper_preview_id').addEventListener('mouseleave', function () {
+      //console.log("wrapper mouseleave");
+      if (this.style.width == "200px")
+        close_preview();
+  });
 
   document.getElementById('preview_back_arrow_id').addEventListener('click', function () {
       //console.log("wrapper mouseleave");
@@ -1134,10 +1133,7 @@ function close_preview() {
 
 function delay_overlay_mouseout (mythis) {
   setTimeout(function () {
-    //console.log("time out");
     if (!layerOverlapFlag) {
-      //mythis.setOptions({      fillColor: '#969696',      });
-
       document.getElementById('wrapper_preview_id').style.display = "none";
       document.getElementById("wrapper_preview_id").style.zIndex = "initial";
       layerOverlapFlag = false;

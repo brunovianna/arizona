@@ -498,6 +498,7 @@ function initMap() {
 
   google.maps.event.addListener(retirement_overlay, 'mouseout', function (event) {
 
+    console.log("mouse out retiremt");
     if (mouseover_enabled) {
       delay_overlay_mouseout(this);
     }
@@ -556,7 +557,7 @@ function initMap() {
 
 
   document.getElementById('wrapper_preview_id').addEventListener('mouseenter', function () {
-      console.log("wrapper mouseenter");
+      //console.log("wrapper mouseenter");
       layerOverlapFlag = true;
   });
 
@@ -608,6 +609,7 @@ function initMap() {
 
   document.getElementById('full_video_back_arrow_id').addEventListener('click', function () {
 
+    video_full.unload();
       document.getElementById('wrapper_video_full_id').style.display = "none";
   }, true);
 
@@ -799,18 +801,18 @@ var iframe_monitor = setInterval(function(){
 }, 100);
 
 function show_video_content_full_screen (video_id) {
-
-    video_full.loadVideo(video_id).then(function() {
-        // the video successfully loaded
-        //console.log("finally");
-
-        video_full.play();
-
-    }).catch(function(error) {
-  });
-
   document.getElementById("wrapper_video_full_id").style.display = "block";
   document.getElementById("full_video_back_arrow_id").style.display = "block";
+  console.log("element");
+    video_full.loadVideo(video_id).then(function(data) {
+        // the video successfully loaded
+        console.log("loaded");
+
+    }).catch(function(error) {
+      console.log("error");
+  });
+  console.log("show");
+
   //document.getElementById("wrapper_content_id").removeEventListener('mouseleave',  close_display_videos);
 }
 
@@ -951,7 +953,7 @@ var end_fronteira = function () {
 
 function change_video (new_id) {
 
-  video_preview.loadVideo(new_id).then(function() {
+  video_preview.loadVideo(new_id).then(function(data) {
       // the video successfully loaded
       //console.log("finally");
         if (document.getElementById("vimeo_id").style.display == "none") {
@@ -1134,6 +1136,7 @@ function close_preview() {
 
 function delay_overlay_mouseout (mythis) {
   setTimeout(function () {
+
     if (!layerOverlapFlag) {
       document.getElementById('wrapper_preview_id').style.display = "none";
       document.getElementById("wrapper_preview_id").style.zIndex = "initial";
@@ -1265,7 +1268,7 @@ var display_video_keymap = {
   277709314: " Saber sobre influência mexicana em Mesa.",
   277715449: " Ouvir opinião sobre o muro.",
   277708469: " Falar com Vic sobre 2ª emenda.",
-  277692847: " Falar com Ricky sobre armas.",
+  277692846: " Falar com Ricky sobre armas.",
   277698969: " Falar com Brandon sobre transporte em Mesa.",
   225001839: " Assistir jogo de futebol americano.",
   277672983: " Falar com Caruso sobre cultura do atleta.",
@@ -1323,7 +1326,7 @@ var places_display_videos_map = [
   ["gym", [225002003]],
   ["retirementhome", [225002617]],
   ["westernpark", [277671504]],
-  ["shootingrange",[277692847,277707280,277708469]],
+  ["shootingrange",[277692846,277707280,277708469]],
   ["fronteira",[277709314,277715449]]
 ];
 

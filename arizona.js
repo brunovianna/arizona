@@ -110,18 +110,16 @@ function initMap() {
   });
 
   video_preview.setLoop(true);
-
+  video_preview.setAutopause(false);
 
 
   video_preview.on('ended', function(data) {
 
+    // show display videos
+    show_display_videos();
 
-      // show display videos
-      show_display_videos();
-
-      video_preview.setCurrentTime(0);
-      video_preview.pause();
-
+    video_preview.setCurrentTime(0);
+    video_preview.pause();
   });
 
   video_full = new Vimeo.Player(document.getElementById("video_full_id"));
@@ -141,6 +139,7 @@ function initMap() {
     video_full.pause();
   });
 
+  video_full.setAutopause(false);
 
 
 
@@ -801,17 +800,19 @@ var iframe_monitor = setInterval(function(){
 }, 100);
 
 function show_video_content_full_screen (video_id) {
-  document.getElementById("wrapper_video_full_id").style.display = "block";
-  document.getElementById("full_video_back_arrow_id").style.display = "block";
-  console.log("element");
+
+  video_full.unload().then(function () {
     video_full.loadVideo(video_id).then(function(data) {
         // the video successfully loaded
-        console.log("loaded");
+        //console.log("loaded");
+        document.getElementById("wrapper_video_full_id").style.display = "block";
+        document.getElementById("full_video_back_arrow_id").style.display = "block";
 
     }).catch(function(error) {
-      console.log("error");
+      //console.log("error");
+    });
   });
-  console.log("show");
+  //console.log("show");
 
   //document.getElementById("wrapper_content_id").removeEventListener('mouseleave',  close_display_videos);
 }
@@ -828,13 +829,22 @@ function show_preview (r, my_video_id, text) {
   document.getElementById('wrapper_preview_id').style.display = "block";
   document.getElementById("video_title_id").innerHTML = text;
 
-  video_preview.setLoop(true);
 
     if (currentVideoId != my_video_id){
-      document.getElementById("vimeo_id").style.display = "none";
+      //document.getElementById("vimeo_id").style.display = "none";
       currentVideoId = my_video_id;
       change_video(my_video_id);
   }
+
+  video_preview.setLoop(true);
+  // video_preview.setCurrentTime(0);
+  video_preview.play().then(function(result) {
+      // ok
+  }).catch(function(error) {
+    // An error occurred
+    console.log("on playing preview from show_preview an error occurred: "+error)
+  });
+
 
 }
 
@@ -927,6 +937,7 @@ function show_fronteira() {
   //when the movie is finishedm return to main screen
 
   video_status = find_key("fronteira",preview_videos);
+  change_video(video_status);
 
   document.getElementById('wrapper_preview_id').style.display = "block";
 
@@ -952,14 +963,14 @@ var end_fronteira = function () {
 }
 
 function change_video (new_id) {
-
+  video_preview.unload().then (function () {
   video_preview.loadVideo(new_id).then(function(data) {
       // the video successfully loaded
       //console.log("finally");
-        if (document.getElementById("vimeo_id").style.display == "none") {
-          document.getElementById("vimeo_id").style.display="block";
-        }
-      video_preview.play();
+        // if (document.getElementById("vimeo_id").style.display == "none") {
+        //   document.getElementById("vimeo_id").style.display="block";
+        // }
+
 
 
   }).catch(function(error) {
@@ -985,7 +996,7 @@ function change_video (new_id) {
               break;
       }
     });
-
+  });
 }
 
 function preview_fullscreen () {
@@ -1003,9 +1014,15 @@ function preview_fullscreen () {
   document.getElementById("video_arrow_id").style.display = "none";
   document.getElementById("video_wrapper_id").style.width = "100%";
   document.getElementById("video_wrapper_id").style.height = "100%";
-  document.getElementById("video_wrapper_id").style.margintop = "0px";
+  document.getElementById("video_wrapper_id").style.margintop = "0";
 
   video_preview.setLoop(false);
+  video_preview.play().then(function(result) {
+        // ok
+    }).catch(function(error) {
+      // An error occurred
+      console.log("on playing preview from preview_fullscreen an error occurred: "+error)
+    });
 
   //document.getElementById("video_wrapper_id").style.top = "0px";
 
@@ -1085,7 +1102,6 @@ function show_display_videos() {
 
   //put the listenr back in the case it was closed
   //document.getElementById("wrapper_content_id").addEventListener('mouseleave',   close_display_videos);
-
 
 }
 
@@ -1344,7 +1360,8 @@ var places_colors_map = [
   ["casillas","#ece5cd"],
   ["corbin","#ece5cd"],
   ["retirementhome", "#969696"],
-  ["volta","#f0d2b4"]
+  ["volta","#f0d2b4"],
+  ["gym","#ff9100"]
 ];
 
 

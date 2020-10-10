@@ -2,76 +2,41 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Arizona</title>
+<title>Zona Árida</title>
 <link rel="stylesheet" type="text/css" href="css/index.css">
-<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
-
-<script src="form.js"></script>
+<!--<link href="https://fonts.googleapis.com/css2?family=Roboto|Roboto+Mono" rel="stylesheet">-->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@200..900&display=swap');
+</style>
 </head>
 <body>
 
-<form action="map.php" id="form_id" method="post">
-  <input type="hidden" id="question_0" name="question_0" value="-1">
-  <input type="hidden" id="question_1" name="question_1" value="-1">
-  <input type="hidden" id="question_2" name="question_2" value="-1">
-  <input type="hidden" id="question_3" name="question_3" value="-1">
-  <input type="hidden" id="question_4" name="question_4" value="-1">
-  <input type="hidden" id="question_5" name="question_5" value="-1">
-  <input type="hidden" id="question_6" name="question_6" value="-1">
-  <input type="hidden" id="question_7" name="question_7" value="-1">
-  <input type="hidden" id="question_8" name="question_8" value="-1">
-
-  <div class="grid-container">
-    <div class="form-header"> <span class="futura-18-bold">Mesa, </span><span  class="futura-18-bold">ARIZONA</span></div>
-    <div class="form-left" id="form-left-0"><span id="question-count" class="futura-22-bold">1</span>
-      <span class="futura-22-bold ">/ 9</span><br>
-        <span id="question" class="futura-22-bold ">Qual é a sua idade?</span>
-</div>
-    <div class="form-right" id="form-right-0">
-          <input type="checkbox"  id="checkboxG0" class="css-checkbox" onclick="cleanForm(0);" />
-          <label for="checkboxG0" class="css-label" id="label0">Até 25 anos</label>
-    </div>
-    <div class="form-right" id="form-right-1">
-          <input type="checkbox"  id="checkboxG1" class="css-checkbox" onclick="cleanForm(1);" />
-          <label for="checkboxG1" class="css-label" id="label1">de 25 a 40 anos</label>
-    </div>
-    <div class="form-right" id="form-right-2">
-          <input type="checkbox"  id="checkboxG2" class="css-checkbox" onclick="cleanForm(2);" />
-          <label for="checkboxG2" class="css-label" id="label2">de 41 a 55 anos</label>
-    </div>
-    <div class="form-right" id="form-right-3">
-          <input type="checkbox"  id="checkboxG3" class="css-checkbox" onclick="cleanForm(3);" />
-          <label for="checkboxG3" class="css-label" id="label3">Mais de 55 anos</label>
-    </div>
-    <div class="form-right" id="form-right-4" style="display:none">
-          <input type="checkbox"  id="checkboxG4" class="css-checkbox" onclick="cleanForm(4);" />
-          <label for="checkboxG4" class="css-label" id="label4">mais de 55 anos</label>
-    </div>
-    <div class="form-right" id="form-right-5" style="display:none">
-          <input type="checkbox"  id="checkboxG5" class="css-checkbox" onclick="cleanForm(5);" />
-          <label for="checkboxG5" class="css-label" id="label5">mais de 55 anos</label>
-    </div>
-    <div class="form-right" id="form-right-6" style="display:none">
-          <input type="checkbox"  id="checkboxG6" class="css-checkbox" onclick="cleanForm(6);" />
-          <label for="checkboxG6" class="css-label" id="label6">mais de 55 anos</label>
-    </div>
-    <div class="form-right" id="form-right-7" style="display:none">
-          <input type="checkbox"  id="checkboxG7" class="css-checkbox" onclick="cleanForm(7);" />
-          <label for="checkboxG7" class="css-label" id="label7">mais de 55 anos</label>
-    </div>
-    <div class="form-right" id="form-right-8" style="display:none">
-          <input type="checkbox" id="checkboxG8" class="css-checkbox" onclick="cleanForm(8);" />
-          <label for="checkboxG8" class="css-label" id="label8">mais de 55 anooos</label>
-    </div>
 
 
-    <div class="confirma" onclick="confirm();" ><span class="futura-18-bold" id>CONFIRMA >></span>
-    <span class="georgia-14 hidden" id="nothing_selected_id"><br>Por favor selecione ao menos uma opção</span></div>
-     </div>
+  <div class="home-grid-container">
+    <div class="home-header"> <span class="futura-28-bold">Você está entrando em uma Zona Árida</span></div>
+    <div class="home-row">
+      <span class="futura-18">
+      Aqui você poderá visitar a cidade de Mesa, Arizona, considerada a mais conservadora dos Estados Unidos.
+      Antes de entrar, responda a um rápido questionário que resultará em um guia de visita da cidade, de acordo com os seus interesses.
+      <br><br><a class="georgia-18-bold" href="form.html">
+      ENTRE
+      </a>
+      </span>
+    </div>
+    <div class="home-row">
+      <span class="futura-18">
+        Zona Árida é uma experiência interativa, acessada neste site, e também
+        um documentário de longa-metragem, premiado em festivais internacionais e
+        acessível em plataformas de streaming.
+        <br><br><a class="georgia-18-bold" href="http://olhardistrib.com.br/zonaarida/">
+        ASSISTA AO DOCUMENTÁRIO
+        </a>
+        </span>
+    </div>
+  </div>
 
   </div>
 
-
-</form>
 </body>
 </html>

@@ -31,10 +31,45 @@ html, body {
 	right: 0;
 }
 
+.home-grid-container {
+  display: grid;
+  grid-template-rows: 20% 40% 40%;
+  grid-gap: 0;
+  padding: 0;
+	position: absolute;
+	width: 80%;
+	height: 70%;
+	margin: auto;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border: 1px solid #000000;
+}
+
+.home-header {
+  grid-column: 1;
+	display: grid;
+	align-items: center;
+	justify-items: center;
+}
+
+.home-row {
+	display: grid;
+	align-items: center;
+	justify-items: center;
+  grid-column: 1;
+	border-top: 1px solid #000000;
+	padding-right: 20%;
+	padding-left: 20%;
+}
+
+
 .form-header {
   text-align: center;
   grid-column: 1 / span 2;
 	border: 1px solid #000000;
+	padding: 5px;
 }
 
 .form-left {
@@ -75,6 +110,13 @@ span.futura-22-bold {
 	font-size: 22px;
 }
 
+span.futura-28-bold {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 900;
+	font-size: 28px;
+}
+
+
 span.georgia-18 {
 	font-family: 'Roboto Mono', monospace;
 	font-size: 18px;
@@ -91,6 +133,22 @@ span.georgia-18-bold {
 	font-weight: 700;
 
 }
+
+a.georgia-18-bold {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 18px;
+	font-weight: 700;
+	color: black;
+	text-decoration: none;
+	border: 1px solid #000000;
+	padding: 4px;
+}
+
+a:hover.georgia-18-bold {
+	color: gray;
+
+}
+
 
 span.hidden {
 	display: none;

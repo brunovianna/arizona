@@ -26,7 +26,8 @@ div {
 div.title {
 	position: absolute;
 	top: 0px;
-	padding: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 	width: 100%;
 	text-align: center;
 	background-color: #ffcf2f;
@@ -151,17 +152,6 @@ div.fence_mexico {
 }
 
 
-div.wrapper_welcome {
-	background-color: white;
-	position: absolute;
-	height: 550px;
-	width: 650px;
-	left: 50%;
-	top: 50%;
-	padding: 15px;
-	transform: translate(-50%, -50%);
-	overflow: auto;
-}
 
 div.welcome_text {
 	font-size: 12px;
@@ -190,7 +180,7 @@ div.welcome_button {
 div.wrapper_welcome {
 	background-color: white;
 	position: absolute;
-	height: 550px;
+	height: 600px;
 	width: 650px;
 	left: 50%;
 	top: 50%;
@@ -324,6 +314,8 @@ div.video_title {
 	margin: 0;
 	border: 0;
 	text-align: center;
+	display: block;
+	padding-top: 5px;
 }
 
 div.video_wrapper {
@@ -480,9 +472,10 @@ div.wrapper_content {
 	right: 0;
 	bottom: 0;
 	font-size: 40px;
+	line-height: 1.1;
 	font-weight: 700;
 	color: #ffffff;
-	padding: 20px;
+	padding: 0;
 	overflow: auto;
 	/*border: 1px solid blue;*/
 }
@@ -559,7 +552,7 @@ div.back_arrow {
 	position: absolute;
 	display: none;
 	top: 50%;
-	left: 0;
+	left: 20px;
 	transform: translate(0, -50%);
 	cursor: pointer;
 }

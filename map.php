@@ -1,5 +1,5 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -49,8 +49,8 @@ question.push( <?php echo $_POST["question_8"]; ?> );
   <div class="video_title" id="video_title_id">Western Park</div>
   <div class="video_wrapper" id="video_wrapper_id" >
     <iframe
-     src="https://player.vimeo.com/video/280382025?autoplay=1&title=0&byline=0&transparent=0" id="vimeo_id"
-     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
+     src="https://player.vimeo.com/video/280382025?autoplay=1&title=0&byline=0&transparent=0?muted=1&controls=0" id="vimeo_id"
+     frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen allow=autoplay></iframe>
      <div class="back_arrow" id="preview_back_arrow_id">
        <img src="images/arrow_back.png">
      </div>
@@ -59,6 +59,9 @@ question.push( <?php echo $_POST["question_8"]; ?> );
 </div>
 
 <div class="wrapper_navigation">
+  <!-- <div class="nav_info"  onclick="toggle_welcome();">
+    <img src="images/projetor_cinza.png" id="nav_info_img_id">
+  </div> -->
   <div class="nav_info"  onclick="toggle_welcome();">
     <img src="images/info_cinza.png" id="nav_info_img_id">
   </div>
@@ -229,7 +232,7 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
 <div class="wrapper_video_full" id="wrapper_video_full_id">
   <iframe class="video_content_frame"
    src="https://player.vimeo.com/video/280382025?autoplay=1&title=1&byline=0&transparent=0" id="video_full_id"
-   frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ></iframe>
+   frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen  allow=autoplay></iframe>
    <div class="back_arrow" id="full_video_back_arrow_id">
      <img src="images/arrow_back.png">
    </div>

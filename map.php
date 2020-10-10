@@ -241,7 +241,7 @@ width="800" height="340" frameborder="0" webkitallowfullscreen mozallowfullscree
 
 
    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ1BJ5R6eyVAvq0oAyjkCPW46uS4e6MnI&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=##removed##&callback=initMap">
    </script>
 
 
